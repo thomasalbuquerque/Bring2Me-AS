@@ -46,7 +46,7 @@ public class RegisterActivity extends Activity {
 
         inputFullName = (EditText) findViewById(R.id.name);
         inputEmail = (EditText) findViewById(R.id.email);
-        inputPassword = (EditText) findViewById(R.id.password);
+        inputPassword = (EditText) findViewById(R.id.senha);
         btnRegister = (Button) findViewById(R.id.btnRegister);
         btnLinkToLogin = (Button) findViewById(R.id.btnLinkToLoginScreen);
 
@@ -80,7 +80,7 @@ public class RegisterActivity extends Activity {
                     registerUser(name, email, password);
                 } else {
                     Toast.makeText(getApplicationContext(),
-                            "Please enter your details!", Toast.LENGTH_LONG)
+                            "Cadastro incompleto, Por favor insira seus dados!", Toast.LENGTH_LONG)
                             .show();
                 }
             }
@@ -108,7 +108,7 @@ public class RegisterActivity extends Activity {
         // Tag used to cancel the request
         String tag_string_req = "req_register";
 
-        pDialog.setMessage("Registering ...");
+        pDialog.setMessage("Regitrando ...");
         showDialog();
 
         StringRequest strReq = new StringRequest(Method.POST,
@@ -136,7 +136,7 @@ public class RegisterActivity extends Activity {
                         // Inserting row in users table
                         db.addUser(name, email, uid, created_at);
 
-                        Toast.makeText(getApplicationContext(), "User successfully registered. Try login now!", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "Cadastro realizado com sucesso. Faça seu login!", Toast.LENGTH_LONG).show();
 
                         // Launch login activity
                         Intent intent = new Intent(
