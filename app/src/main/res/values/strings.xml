@@ -3,8 +3,11 @@
     <string name="hint_email">Email</string>
     <string name="hint_password">Password</string>
     <string name="hint_name">Nome Completo</string>
+    <string name="hint_origem">Origem</string>
+    <string name="hint_destino">Destino</string>
     <string name="btn_login">LOGIN</string>
     <string name="btn_register">REGISTRAR</string>
+    <string name="btn_buscar">BUSCAR</string>
     <string name="btn_link_to_register">Não se registrou? Registre-se agora.</string>
     <string name="btn_link_to_login">Já tem cadastro! Faça o login.</string>
     <string name="welcome">Bem Vindo!</string>
