@@ -16,26 +16,14 @@
             android:orientation="vertical">
 
             <TabWidget
+                android:id="@android:id/tabs"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"></TabWidget>
+                android:layout_height="wrap_content"></TabWidget>
 
             <FrameLayout
                 android:id="@android:id/tabcontent"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
-
-                <LinearLayout
-                    android:id="@+id/Iniciar"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"></LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/Atividades"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"></LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/Perfil"
@@ -45,8 +33,7 @@
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
                     android:gravity="center"
-                    android:orientation="vertical"
-                    android:layout_gravity="center_horizontal|top">
+                    android:orientation="vertical" >
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -79,6 +66,62 @@
                         android:textColor="@color/white"
                         android:textSize="15dp" />
                 </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/Iniciar"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:orientation="vertical" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="O que você deseja fazer?"
+                        android:id="@+id/txtIniciar"
+                        android:textSize="15dp"
+                        android:textAllCaps="true"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="20dip" />
+
+                    <Button
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="40dip"
+                        android:text="Registrar uma Viagem"
+                        android:id="@+id/btnRegViagem"
+                        android:textSize="15dp"
+                        android:textColor="@color/white"
+                        android:background="@color/material_deep_teal_500" />
+
+                    <Button
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Procurar por um Viajante"
+                        android:id="@+id/btnProcViagem"
+                        android:layout_marginTop="20dip"
+                        android:textSize="15dp"
+                        android:textColor="@color/white"
+                        android:background="@color/material_deep_teal_500"/>
+
+                    <Button
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dip"
+                        android:text="Registrar um Pedido"
+                        android:id="@+id/btnPedido"
+                        android:textSize="15dp"
+                        android:textColor="@color/white"
+                        android:background="@color/material_deep_teal_500" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/Atividades"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"></LinearLayout>
             </FrameLayout>
 
 

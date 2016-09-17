@@ -15,7 +15,12 @@ public class MainActivity extends Activity {
     private TextView txtName;
     private TextView txtEmail;
     private Button btnLogout;
+
     private TabHost tabHost;
+
+    private Button btnRegViagem;
+    private Button btnProcViagem;
+    private Button btnPedido;
 
     private SQLiteHandler db;
     private SessionManager session;
@@ -28,23 +33,8 @@ public class MainActivity extends Activity {
         txtName = (TextView) findViewById(R.id.name);
         txtEmail = (TextView) findViewById(R.id.email);
         btnLogout = (Button) findViewById(R.id.btnLogout);
-        tabHost = (TabHost) findViewById(R.id.tabHost);
-        tabHost.setup();
-
-        TabHost.TabSpec ts = tabHost.newTabSpec("tag1");
-        ts.setContent(R.id.Perfil);
-        ts.setIndicator("Perfil");
-        tabHost.addTab(ts);
-
-        ts = tabHost.newTabSpec("tag2");
-        ts.setContent(R.id.Iniciar);
-        ts.setIndicator("Iniciar");
-        tabHost.addTab(ts);
-
-        ts = tabHost.newTabSpec("tag3");
-        ts.setContent(R.id.Atividades);
-        ts.setIndicator("Atividades");
-        tabHost.addTab(ts);
+        instanciarTabHost();
+        instanciarIniciar();
 
         // SqLite database handler
         db = new SQLiteHandler(getApplicationContext());
@@ -72,6 +62,54 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View v) {
                 logoutUser();
+            }
+        });
+    }
+
+    private void instanciarTabHost(){
+        tabHost = (TabHost) findViewById(R.id.tabHost);
+        tabHost.setup();
+
+        //adicionando tabs no tabHost (é necessário fazer isso mesmo com as tabs no xml)
+        TabHost.TabSpec ts = tabHost.newTabSpec("tag1");
+        ts.setContent(R.id.Perfil);
+        ts.setIndicator("Perfil");
+        tabHost.addTab(ts);
+
+        ts = tabHost.newTabSpec("tag2");
+        ts.setContent(R.id.Iniciar);
+        ts.setIndicator("Iniciar");
+        tabHost.addTab(ts);
+
+        ts = tabHost.newTabSpec("tag3");
+        ts.setContent(R.id.Atividades);
+        ts.setIndicator("Atividades");
+        tabHost.addTab(ts);
+
+        //setar a tab Iniciar (a segunda tab) como a tab inicial do
+        tabHost.setCurrentTab(1);
+    }
+
+    private void instanciarIniciar(){
+        btnRegViagem = (Button)findViewById(R.id.btnRegViagem);
+        btnProcViagem = (Button)findViewById(R.id.btnProcViagem);
+
+        btnRegViagem.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                /*// Launching the login activity
+                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                startActivity(intent);
+                finish();*/
+            }
+        });
+
+        btnProcViagem.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                //logoutUser();
             }
         });
     }
