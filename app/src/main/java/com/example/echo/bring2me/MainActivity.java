@@ -1,8 +1,5 @@
 package com.example.echo.bring2me;
 
-import com.example.echo.bring2me.SQLiteHandler;
-import com.example.echo.bring2me.SessionManager;
-
 import java.util.HashMap;
 
 import android.app.Activity;

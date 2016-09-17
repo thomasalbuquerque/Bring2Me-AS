@@ -1,6 +1,5 @@
 package com.example.echo.bring2me;
 
-import android.support.v7.app.AppCompatActivity;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -23,10 +22,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.example.echo.bring2me.R;
-import com.example.echo.bring2me.AppConfig;
-import com.example.echo.bring2me.AppController;
-import com.example.echo.bring2me.SQLiteHandler;
-import com.example.echo.bring2me.SessionManager;
 
 public class RegisterActivity extends Activity {
     private static final String TAG = RegisterActivity.class.getSimpleName();

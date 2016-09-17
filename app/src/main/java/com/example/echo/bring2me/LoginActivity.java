@@ -22,10 +22,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.example.echo.bring2me.R;
-import com.example.echo.bring2me.AppConfig;
-import com.example.echo.bring2me.AppController;
-import com.example.echo.bring2me.SQLiteHandler;
-import com.example.echo.bring2me.SessionManager;
 
 public class LoginActivity extends Activity {
     private static final String TAG = RegisterActivity.class.getSimpleName();
