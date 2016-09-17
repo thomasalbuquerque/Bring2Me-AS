@@ -13,8 +13,8 @@
     <string name="welcome">Bem Vindo!</string>
     <string name="btn_logout">LOGOUT</string>
     <string name="name">Nome Completo</string>
-    <string name="title_activity_cadastro__viagens">Cadastro_Viagens</string>
-    <string name="btnCadastroViagens">Cadastrar</string>
-    <string name="txtDataRetorno">Data de Retorno</string>
-    <string name="txtValMax">Valor maximo de pedido</string>
+    <string name="title_activity_cadastro_viagens">Cadastro Viagens</string>
+    <string name="btn_cadastro_viagens">Cadastrar</string>
+    <string name="txt_data_retorno">Data de Retorno</string>
+    <string name="txt_val_max">Valor maximo do pedido</string>
 </resources>
