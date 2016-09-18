@@ -13,4 +13,5 @@ public class AppConfig {
 
     public static String URL_IMAGEM = "https://lh4.googleusercontent.com/tmO3t6nytdpy1EG63SnGI2fy07rYXTUjaxQ2ONSmSsA1oHRav0Jbfo9gy-oPnnoXMIdFK6nYkXGsvV4=w1865-h941";
 
+    public static int AvaliacaoPadraoDoViajante = 5;
 }

@@ -1,7 +1,5 @@
 package com.example.echo.bring2me;
 
-import java.util.HashMap;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,6 +7,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TabHost;
 import android.widget.TextView;
+
+import java.util.HashMap;
 
 public class MainActivity extends Activity {
 
@@ -98,8 +98,7 @@ public class MainActivity extends Activity {
 
             @Override
             public void onClick(View v) {
-                // Launching the login activity
-                Intent intent = new Intent(MainActivity.this, CadastroViagens.class);
+                Intent intent = new Intent(MainActivity.this, CadastroViagem.class);
                 startActivity(intent);
                 finish();
             }
@@ -109,7 +108,9 @@ public class MainActivity extends Activity {
 
             @Override
             public void onClick(View v) {
-                //logoutUser();
+                Intent intent = new Intent(MainActivity.this, BuscaViagensActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
     }

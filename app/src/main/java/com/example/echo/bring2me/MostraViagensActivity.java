@@ -4,29 +4,12 @@ package com.example.echo.bring2me;
  * Created by thomas on 17/09/16.
  */
 
-import com.example.echo.bring2me.listview.adapter.CustomListAdapter;
-import com.example.echo.bring2me.AppController;
-import com.example.echo.bring2me.listview.model.Viagem;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -34,6 +17,17 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.example.echo.bring2me.listview.adapter.CustomListAdapter;
+import com.example.echo.bring2me.listview.model.Viagem;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 
 public class MostraViagensActivity extends Activity {
@@ -44,17 +38,14 @@ public class MostraViagensActivity extends Activity {
     private List<Viagem> viagemList = new ArrayList<Viagem>();
     private ListView listView;
     private CustomListAdapter adapter;
-    private EditText inputOrigem;
-    private EditText inputDestino;
+    private SQLiteHandler db;
+    String origem;
+    String destino;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.mostraviagens);
-
-        inputOrigem = (EditText) findViewById(R.id.origem);
-        inputDestino = (EditText) findViewById(R.id.destino);
-
 
         listView = (ListView) findViewById(R.id.list);
         adapter = new CustomListAdapter(this, viagemList);
@@ -62,12 +53,17 @@ public class MostraViagensActivity extends Activity {
 
         pDialog = new ProgressDialog(this);
         // Showing progress dialog before making http request
+        // SQLite database handler
+        db = new SQLiteHandler(getApplicationContext());
+
         pDialog.setMessage("Loading...");
         pDialog.show();
 
-        String origem = inputOrigem.getText().toString().trim();
-        String destino = inputDestino.getText().toString().trim();
-
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            origem = extras.getString("inputOrigem");
+            destino = extras.getString("inputDestino");
+        }
         // Check for empty data in the form
         if (!origem.isEmpty() && !destino.isEmpty()) {
             // busca viagem
