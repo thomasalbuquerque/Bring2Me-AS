@@ -17,28 +17,28 @@ import android.widget.TextView;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
 import com.example.echo.bring2me.AppController;
-import com.example.echo.bring2me.listview.model.Movie;
+import com.example.echo.bring2me.listview.model.Viagem;
 import com.example.echo.bring2me.R;
 
 public class CustomListAdapter extends BaseAdapter {
         private Activity activity;
         private LayoutInflater inflater;
-        private List<Movie> movieItems;
+        private List<Viagem> viagemItems;
         ImageLoader imageLoader = AppController.getInstance().getImageLoader();
 
-        public CustomListAdapter(Activity activity, List<Movie> movieItems) {
+        public CustomListAdapter(Activity activity, List<Viagem> viagemItems) {
                 this.activity = activity;
-                this.movieItems = movieItems;
+                this.viagemItems = viagemItems;
         }
 
         @Override
         public int getCount() {
-                return movieItems.size();
+                return viagemItems.size();
         }
 
         @Override
         public Object getItem(int location) {
-                return movieItems.get(location);
+                return viagemItems.get(location);
         }
 
         @Override
@@ -56,36 +56,30 @@ public class CustomListAdapter extends BaseAdapter {
 
                 if (imageLoader == null)
                         imageLoader = AppController.getInstance().getImageLoader();
-                NetworkImageView thumbNail = (NetworkImageView) convertView
-                        .findViewById(R.id.thumbnail);
-                TextView title = (TextView) convertView.findViewById(R.id.title);
-                TextView rating = (TextView) convertView.findViewById(R.id.rating);
-                TextView genre = (TextView) convertView.findViewById(R.id.genre);
-                TextView year = (TextView) convertView.findViewById(R.id.releaseYear);
+
+                NetworkImageView thumbNail = (NetworkImageView) convertView.findViewById(R.id.thumbnail);
+                TextView origemTV = (TextView) convertView.findViewById(R.id.origem);
+                TextView destinoTV = (TextView) convertView.findViewById(R.id.destino);
+                TextView avaliacaoViajanteTV = (TextView) convertView.findViewById(R.id.avaliacaoViajante);
+                TextView precoBaseTV = (TextView) convertView.findViewById(R.id.precoBase);
 
                 // getting movie data for the row
-                Movie m = movieItems.get(position);
+                Viagem v = viagemItems.get(position);
 
                 // thumbnail image
-                thumbNail.setImageUrl(m.getThumbnailUrl(), imageLoader);
+                thumbNail.setImageUrl(v.getThumbnailUrl(), imageLoader);
 
-                // title
-                title.setText(m.getTitle());
+                // origem
+                origemTV.setText("Origem: " + v.getOrigem());
 
-                // rating
-                rating.setText("Rating: " + String.valueOf(m.getRating()));
+                // destino
+                destinoTV.setText("Destino: " + v.getDestino());
 
-                // genre
-                String genreStr = "";
-                for (String str : m.getGenre()) {
-                        genreStr += str + ", ";
-                }
-                genreStr = genreStr.length() > 0 ? genreStr.substring(0,
-                        genreStr.length() - 2) : genreStr;
-                genre.setText(genreStr);
+                // avaliacaoViajante
+                avaliacaoViajanteTV.setText("Avaliação do viajante: " + v.getAvaliacaoViajante());
 
-                // release year
-                year.setText(String.valueOf(m.getYear()));
+                // preço base
+                precoBaseTV.setText("R$"+v.getPrecoBase()+",00");
 
                 return convertView;
         }
