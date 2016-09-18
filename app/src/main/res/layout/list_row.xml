@@ -13,9 +13,9 @@
         android:layout_alignParentLeft="true"
         android:layout_marginRight="8dp" />
 
-    <!-- Movie Title -->
+    <!-- Origem -->
     <TextView
-        android:id="@+id/title"
+        android:id="@+id/origem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/thumbnail"
@@ -23,22 +23,23 @@
         android:textSize="@dimen/title"
         android:textStyle="bold" />
 
-    <!-- Rating -->
+    <!-- Destino -->
     <TextView
-        android:id="@+id/rating"
+        android:id="@+id/destino"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/title"
+        android:layout_below="@id/origem"
         android:layout_marginTop="1dip"
         android:layout_toRightOf="@+id/thumbnail"
-        android:textSize="@dimen/rating" />
+        android:textSize="17dp"
+        android:textStyle="bold" />
 
-    <!-- Genre -->
+    <!-- Avaliação do viajante -->
     <TextView
-        android:id="@+id/genre"
+        android:id="@+id/avaliacaoViajante"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/rating"
+        android:layout_below="@id/destino"
         android:layout_marginTop="5dp"
         android:layout_toRightOf="@+id/thumbnail"
         android:textColor="@color/genre"
@@ -46,12 +47,12 @@
 
     <!-- Release Year -->
     <TextView
-        android:id="@+id/releaseYear"
+        android:id="@+id/precoBase"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:textColor="@color/year"
-        android:textSize="@dimen/year" />
+        android:textSize="20dp" />
 
 </RelativeLayout>
