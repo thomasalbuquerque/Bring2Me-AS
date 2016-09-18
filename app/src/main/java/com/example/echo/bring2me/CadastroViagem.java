@@ -16,8 +16,8 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-public class CadastroViagens extends AppCompatActivity {
-    private ArrayList paises = new ArrayList();
+public class CadastroViagem extends AppCompatActivity {
+    private ArrayList<String> paises = new ArrayList<String>();
     private Spinner spPaisesOri;
     private Spinner spPaisesDes;
     @Override
@@ -27,7 +27,7 @@ public class CadastroViagens extends AppCompatActivity {
 
         paises.add("Brasil");
         paises.add("Estados Unidos");
-        paises.add("Franças");
+        paises.add("França");
         paises.add("Itália");
         paises.add("Canadá");
         paises.add("Japão");
@@ -35,7 +35,8 @@ public class CadastroViagens extends AppCompatActivity {
 
         spPaisesOri = (Spinner) findViewById(R.id.spOrigem);
         spPaisesDes = (Spinner) findViewById(R.id.spDestino);
-        ArrayAdapter<String> arrayAdapter1 = new ArrayAdapter<String>(this,R.layout.activity_cadastro_viagens, paises);
+        ArrayAdapter<String> arrayAdapter1 = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, paises);
+
         spPaisesOri.setAdapter(arrayAdapter1);
         spPaisesDes.setAdapter(arrayAdapter1);
 
