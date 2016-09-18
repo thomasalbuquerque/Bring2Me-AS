@@ -6,4 +6,7 @@ public class AppConfig {
 
     // Server user register url
     public static String URL_REGISTER = "http://echob2m.esy.es/bd_api/register.php";
+
+    // Server user order url
+    public static String URL_ORDER = "http://echob2m.esy.es/bd_api/pedido.php";
 }
