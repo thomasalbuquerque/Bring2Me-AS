@@ -35,6 +35,16 @@ public class SQLiteHandler extends SQLiteOpenHelper {
     private static final String KEY_UID = "uid";
     private static final String KEY_CREATED_AT = "created_at";
 
+    private static final String TABLE_VIAGEM= "viagens";
+
+    // Table Viagem
+    private static final String KEY_USER_ID = "user_id";
+    private static final String KEY_PAIS_ORIGEM = "paisAtual";
+    private static final String KEY__PAIS_DESTINO = "paisDestino";
+    private static final String KEY_MAX_VALOR = "maxVal";
+    private static final String KEY_RETORNO= "retorno";
+
+
     public SQLiteHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
@@ -92,6 +102,7 @@ public class SQLiteHandler extends SQLiteOpenHelper {
         // Move to first row
         cursor.moveToFirst();
         if (cursor.getCount() > 0) {
+            user.put("id", cursor.getString(0));
             user.put("name", cursor.getString(1));
             user.put("email", cursor.getString(2));
             user.put("uid", cursor.getString(3));
@@ -116,5 +127,23 @@ public class SQLiteHandler extends SQLiteOpenHelper {
 
         Log.d(TAG, "Deleted all user info from sqlite");
     }
+
+    public void addViagem(String user_id, String paisAtual, String paisDestino, String maxVal, String retorno) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(KEY_USER_ID, user_id); // Name
+        values.put(KEY_PAIS_ORIGEM, paisAtual); // Email
+        values.put(KEY__PAIS_DESTINO, paisDestino); // Email
+        values.put(KEY_MAX_VALOR, maxVal); // Created At
+        values.put(KEY_RETORNO, retorno); // Created At
+
+        // Inserting Row
+        long id = db.insert(TABLE_VIAGEM, null, values);
+        db.close(); // Closing database connection
+
+        Log.d(TAG, "New user inserted into sqlite: " + id);
+    }
+
 
 }
