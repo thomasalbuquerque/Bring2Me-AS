@@ -43,7 +43,6 @@ public class MostraViagensActivity extends Activity {
     private List<Viagem> viagemList = new ArrayList<Viagem>();
     private ListView listView;
     private CustomListAdapter adapter;
-    private Button btnBusca;
     private EditText inputOrigem;
     private EditText inputDestino;
 
@@ -54,7 +53,7 @@ public class MostraViagensActivity extends Activity {
 
         inputOrigem = (EditText) findViewById(R.id.origem);
         inputDestino = (EditText) findViewById(R.id.destino);
-        btnBusca = (Button) findViewById(R.id.btnBusca);
+
 
         listView = (ListView) findViewById(R.id.list);
         adapter = new CustomListAdapter(this, viagemList);
@@ -66,30 +65,23 @@ public class MostraViagensActivity extends Activity {
         pDialog.show();
 
         // Login button Click Event
-        btnBusca.setOnClickListener(new View.OnClickListener() {
 
-            public void onClick(View view) {
-                String origem = inputOrigem.getText().toString().trim();
-                String destino = inputDestino.getText().toString().trim();
+        String origem = inputOrigem.getText().toString().trim();
+        String destino = inputDestino.getText().toString().trim();
 
-                // Check for empty data in the form
-                if (!origem.isEmpty() && !destino.isEmpty()) {
-                    // login user
-                    buscar(origem, destino);
-                } else {
-                    // Prompt user to enter credentials
-                    Toast.makeText(getApplicationContext(),
-                            "Insira seu origem e destino!", Toast.LENGTH_LONG)
-                            .show();
-                }
-            }
+        // Check for empty data in the form
+        if (!origem.isEmpty() && !destino.isEmpty()) {
+            // busca viagem
+            buscar(origem, destino);
+        } else {
+            // diga para digitar origem e destino
+            Toast.makeText(getApplicationContext(),
+                    "Insira seu origem e destino!", Toast.LENGTH_LONG).show();
+        }
 
-        });
         // changing action bar color
         getActionBar().setBackgroundDrawable(
                 new ColorDrawable(Color.parseColor("#1b1b1b")));
-
-        //
     }
     public void buscar(String origem, String destino){
         // Creating volley request obj
