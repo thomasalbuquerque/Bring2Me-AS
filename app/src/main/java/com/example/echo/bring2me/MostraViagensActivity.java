@@ -9,7 +9,9 @@ import com.example.echo.bring2me.AppController;
 import com.example.echo.bring2me.listview.model.Viagem;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -33,12 +35,11 @@ import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonArrayRequest;
 
+
 public class MostraViagensActivity extends Activity {
     // Log tag
     private static final String TAG = MainActivity.class.getSimpleName();
 
-    // Movies json url
-    private static final String url = "http://api.androidhive.info/json/movies.json";   //POR AQUI A URL DO PHP DE BUSCA VIAGEM
     private ProgressDialog pDialog;
     private List<Viagem> viagemList = new ArrayList<Viagem>();
     private ListView listView;
@@ -64,8 +65,6 @@ public class MostraViagensActivity extends Activity {
         pDialog.setMessage("Loading...");
         pDialog.show();
 
-        // Login button Click Event
-
         String origem = inputOrigem.getText().toString().trim();
         String destino = inputDestino.getText().toString().trim();
 
@@ -83,9 +82,11 @@ public class MostraViagensActivity extends Activity {
         getActionBar().setBackgroundDrawable(
                 new ColorDrawable(Color.parseColor("#1b1b1b")));
     }
-    public void buscar(String origem, String destino){
+
+
+    public void buscar(final String origem, final String destino){
         // Creating volley request obj
-        JsonArrayRequest viagemReq = new JsonArrayRequest(url,
+        JsonArrayRequest viagemReq = new JsonArrayRequest(AppConfig.URL_BUSCAVIAGENS,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
@@ -104,6 +105,8 @@ public class MostraViagensActivity extends Activity {
                                 viagem.setAvaliacaoViajante(AppConfig.AvaliacaoPadraoDoViajante);
                                 viagem.setPrecoBase(obj.getDouble("precobase"));
 
+                                // adding viagem to viagens array
+                                viagemList.add(viagem);
 
                             } catch (JSONException e) {
                                 e.printStackTrace();
@@ -122,7 +125,19 @@ public class MostraViagensActivity extends Activity {
                 hidePDialog();
 
             }
-        });
+        }){
+
+            @Override
+            protected Map<String, String> getParams() {
+                // Posting parameters to login url
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("origem", origem);
+                params.put("destino", destino);
+
+                return params;
+            }
+
+        };
 
         // Adding request to request queue
         AppController.getInstance().addToRequestQueue(viagemReq);
