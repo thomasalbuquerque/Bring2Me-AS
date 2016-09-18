@@ -6,7 +6,7 @@ package com.example.echo.bring2me;
 
 import com.example.echo.bring2me.listview.adapter.CustomListAdapter;
 import com.example.echo.bring2me.AppController;
-import com.example.echo.bring2me.listview.model.Movie;
+import com.example.echo.bring2me.listview.model.Viagem;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +22,11 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -36,17 +40,24 @@ public class MostraViagensActivity extends Activity {
     // Movies json url
     private static final String url = "http://api.androidhive.info/json/movies.json";   //POR AQUI A URL DO PHP DE BUSCA VIAGEM
     private ProgressDialog pDialog;
-    private List<Movie> movieList = new ArrayList<Movie>();
+    private List<Viagem> viagemList = new ArrayList<Viagem>();
     private ListView listView;
     private CustomListAdapter adapter;
+    private Button btnBusca;
+    private EditText inputOrigem;
+    private EditText inputDestino;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.mostraviagens);
 
+        inputOrigem = (EditText) findViewById(R.id.origem);
+        inputDestino = (EditText) findViewById(R.id.destino);
+        btnBusca = (Button) findViewById(R.id.btnBusca);
+
         listView = (ListView) findViewById(R.id.list);
-        adapter = new CustomListAdapter(this, movieList);
+        adapter = new CustomListAdapter(this, viagemList);
         listView.setAdapter(adapter);
 
         pDialog = new ProgressDialog(this);
@@ -54,12 +65,35 @@ public class MostraViagensActivity extends Activity {
         pDialog.setMessage("Loading...");
         pDialog.show();
 
+        // Login button Click Event
+        btnBusca.setOnClickListener(new View.OnClickListener() {
+
+            public void onClick(View view) {
+                String origem = inputOrigem.getText().toString().trim();
+                String destino = inputDestino.getText().toString().trim();
+
+                // Check for empty data in the form
+                if (!origem.isEmpty() && !destino.isEmpty()) {
+                    // login user
+                    buscar(origem, destino);
+                } else {
+                    // Prompt user to enter credentials
+                    Toast.makeText(getApplicationContext(),
+                            "Insira seu origem e destino!", Toast.LENGTH_LONG)
+                            .show();
+                }
+            }
+
+        });
         // changing action bar color
         getActionBar().setBackgroundDrawable(
                 new ColorDrawable(Color.parseColor("#1b1b1b")));
 
+        //
+    }
+    public void buscar(String origem, String destino){
         // Creating volley request obj
-        JsonArrayRequest movieReq = new JsonArrayRequest(url,
+        JsonArrayRequest viagemReq = new JsonArrayRequest(url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
@@ -71,23 +105,13 @@ public class MostraViagensActivity extends Activity {
                             try {
 
                                 JSONObject obj = response.getJSONObject(i);
-                                Movie movie = new Movie();
-                                movie.setTitle(obj.getString("title"));
-                                movie.setThumbnailUrl(obj.getString("image"));
-                                movie.setRating(((Number) obj.get("rating"))
-                                        .doubleValue());
-                                movie.setYear(obj.getInt("releaseYear"));
+                                Viagem viagem = new Viagem();
+                                viagem.setOrigem(obj.getString("origem"));
+                                viagem.setDestino(obj.getString("destino"));
+                                viagem.setThumbnailUrl(AppConfig.URL_IMAGEM);
+                                viagem.setAvaliacaoViajante(AppConfig.AvaliacaoPadraoDoViajante);
+                                viagem.setPrecoBase(obj.getDouble("precobase"));
 
-                                // Genre is json array
-                                JSONArray genreArry = obj.getJSONArray("genre");
-                                ArrayList<String> genre = new ArrayList<String>();
-                                for (int j = 0; j < genreArry.length(); j++) {
-                                    genre.add((String) genreArry.get(j));
-                                }
-                                movie.setGenre(genre);
-
-                                // adding movie to movies array
-                                movieList.add(movie);
 
                             } catch (JSONException e) {
                                 e.printStackTrace();
@@ -109,9 +133,9 @@ public class MostraViagensActivity extends Activity {
         });
 
         // Adding request to request queue
-        AppController.getInstance().addToRequestQueue(movieReq);
-    }
+        AppController.getInstance().addToRequestQueue(viagemReq);
 
+    }
     @Override
     public void onDestroy() {
         super.onDestroy();
