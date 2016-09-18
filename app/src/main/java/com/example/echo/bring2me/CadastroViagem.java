@@ -16,7 +16,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-public class CadastroViagens extends AppCompatActivity {
+public class CadastroViagem extends AppCompatActivity {
     private ArrayList paises = new ArrayList();
     private Spinner spPaisesOri;
     private Spinner spPaisesDes;
