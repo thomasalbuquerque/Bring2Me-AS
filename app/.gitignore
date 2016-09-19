@@ -1,1 +1,4 @@
 /build
+*.iws
+.idea/
+local.properties

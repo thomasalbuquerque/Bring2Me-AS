@@ -63,7 +63,7 @@ public class CadastroViagem extends Activity{
 
         spPaisesOri = (Spinner) findViewById(R.id.spOrigem);
         spPaisesDes = (Spinner) findViewById(R.id.spDestino);
-        ArrayAdapter<String> arrayAdapter1 = new ArrayAdapter<String>(this,R.layout.activity_cadastro_viagens, paises);
+        ArrayAdapter<String> arrayAdapter1 = new ArrayAdapter<String>(this,R.layout.support_simple_spinner_dropdown_item, paises);
         spPaisesOri.setAdapter(arrayAdapter1);
         spPaisesDes.setAdapter(arrayAdapter1);
 
