@@ -109,7 +109,9 @@ public class MainActivity extends Activity {
 
             @Override
             public void onClick(View v) {
-                //logoutUser();
+                Intent intent = new Intent(MainActivity.this, BuscaViagensActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
     }

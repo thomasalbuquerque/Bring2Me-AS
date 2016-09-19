@@ -74,9 +74,7 @@ public class MostraViagensActivity extends Activity {
                     "Insira seu origem e destino!", Toast.LENGTH_LONG).show();
         }
 
-        // changing action bar color
-        getActionBar().setBackgroundDrawable(
-                new ColorDrawable(Color.parseColor("#1b1b1b")));
+
     }
 
 
