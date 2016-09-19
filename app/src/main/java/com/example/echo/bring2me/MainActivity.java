@@ -48,6 +48,7 @@ public class MainActivity extends Activity {
 
         // Fetching user details from sqlite
         HashMap<String, String> user = db.getUserDetails();
+
         String name = user.get("name");
         String email = user.get("email");
 
@@ -98,7 +99,7 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View v) {
                 // Launching the login activity
-                Intent intent = new Intent(MainActivity.this, CadastroViagem.class);
+                Intent intent = new Intent(MainActivity.this, CadastroViagens.class);
                 startActivity(intent);
                 finish();
             }
