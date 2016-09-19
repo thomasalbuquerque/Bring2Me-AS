@@ -41,13 +41,12 @@
             android:singleLine="true"
             android:textColor="@color/input_register"
             android:textColorHint="@color/input_register_hint"
-            android:layout_weight="1" />
+            android:layout_weight="1"/>
 
 
         <EditText
 
             android:id="@+id/txtValor"
-            android:text="@string/txt_val_max"
             android:layout_width="fill_parent"
             android:layout_height="0dp"
             android:layout_marginBottom="10dp"
@@ -56,13 +55,27 @@
             android:singleLine="true"
             android:textColor="@color/input_register"
             android:textColorHint="@color/input_register_hint"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:hint="@string/txt_val_max" />
+
+
+        <EditText
+            android:id="@+id/txtMinTax"
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_marginBottom="10dp"
+            android:background="@color/input_register_bg"
+            android:padding="10dp"
+            android:singleLine="true"
+            android:textColor="@color/input_register"
+            android:textColorHint="@color/input_register_hint"
+            android:layout_weight="1"
+            android:hint="@string/minTax" />
 
 
         <EditText
 
             android:id="@+id/txtData"
-            android:text="@string/txt_data_retorno"
             android:layout_width="fill_parent"
             android:layout_height="0dp"
             android:layout_marginBottom="10dp"
@@ -71,7 +84,8 @@
             android:singleLine="true"
             android:textColor="@color/input_register"
             android:textColorHint="@color/input_register_hint"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:hint="@string/txt_data_retorno" />
 
 
         <Button

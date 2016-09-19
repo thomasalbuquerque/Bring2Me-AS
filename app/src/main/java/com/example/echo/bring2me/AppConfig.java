@@ -9,4 +9,9 @@ public class AppConfig {
 
     // Server user order url
     public static String URL_ORDER = "http://echob2m.esy.es/bd_api/pedido.php";
+
+    public static String URL_VIAGENS = "http://echob2m.esy.es/bd_api/CadastraViagem.php";
+
+    public static String URL_BUSCAVIAGENS = "http://echob2m.esy.es/bd_api/buscaviagens.php";
+
 }

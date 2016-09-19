@@ -17,4 +17,5 @@
     <string name="btn_cadastro_viagens">Cadastrar</string>
     <string name="txt_data_retorno">Data de Retorno</string>
     <string name="txt_val_max">Valor maximo do pedido</string>
+    <string name="minTax">Taxa Minima</string>
 </resources>

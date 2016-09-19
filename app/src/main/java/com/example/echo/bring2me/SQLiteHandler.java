@@ -39,10 +39,12 @@ public class SQLiteHandler extends SQLiteOpenHelper {
 
     // Table Viagem
     private static final String KEY_USER_ID = "user_id";
-    private static final String KEY_PAIS_ORIGEM = "paisAtual";
-    private static final String KEY__PAIS_DESTINO = "paisDestino";
-    private static final String KEY_MAX_VALOR = "maxVal";
+    private static final String KEY_PAIS_ORIGEM = "paisAt";
+    private static final String KEY_PAIS_DESTINO = "paisDest";
+    private static final String KEY_MIN_TAXA = "mintax";
+    private static final String KEY_MAX_VALOR = "maxval";
     private static final String KEY_RETORNO= "retorno";
+
 
 
     public SQLiteHandler(Context context) {
@@ -128,21 +130,22 @@ public class SQLiteHandler extends SQLiteOpenHelper {
         Log.d(TAG, "Deleted all user info from sqlite");
     }
 
-    public void addViagem(String user_id, String paisAtual, String paisDestino, String maxVal, String retorno) {
+    public void addViagem(String user_id, String paisAtual, String paisDestino, String maxVal, String mintax, String retorno) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put(KEY_USER_ID, user_id); // Name
-        values.put(KEY_PAIS_ORIGEM, paisAtual); // Email
-        values.put(KEY__PAIS_DESTINO, paisDestino); // Email
-        values.put(KEY_MAX_VALOR, maxVal); // Created At
-        values.put(KEY_RETORNO, retorno); // Created At
+        values.put(KEY_USER_ID, user_id);
+        values.put(KEY_PAIS_ORIGEM, paisAtual);
+        values.put(KEY_PAIS_DESTINO, paisDestino);
+        values.put(KEY_MAX_VALOR, maxVal);
+        values.put(KEY_MIN_TAXA, mintax);
+        values.put(KEY_RETORNO, retorno);
 
         // Inserting Row
-        long id = db.insert(TABLE_VIAGEM, null, values);
+        db.insert(TABLE_VIAGEM, null, values);
         db.close(); // Closing database connection
 
-        Log.d(TAG, "New user inserted into sqlite: " + id);
+        Log.d(TAG, "Nova viagem inserida ");
     }
 
 

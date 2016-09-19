@@ -99,7 +99,7 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View v) {
                 // Launching the login activity
-                Intent intent = new Intent(MainActivity.this, CadastroViagens.class);
+                Intent intent = new Intent(MainActivity.this, CadastroViagem.class);
                 startActivity(intent);
                 finish();
             }

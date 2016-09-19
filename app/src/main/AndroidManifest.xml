@@ -39,7 +39,9 @@
             android:name=".MainActivity"
             android:label="@string/app_name"
             android:launchMode="singleTop" />
-        <activity android:name=".CadastroViagens"></activity>
+        <activity android:name=".CadastroViagem"
+
+            ></activity>
     </application>
 
 </manifest>
