@@ -76,14 +76,14 @@
 
         <Button
 
-            android:id="@+id/button"
+            android:id="@+id/btnRegistrarViagem"
             android:layout_width="fill_parent"
             android:layout_height="0dp"
             android:layout_marginTop="20dip"
             android:background="#ea4c88"
             android:textColor="@color/white"
             android:layout_weight="1"
-            android:text="@string/btn_cadastro_viagens" />
+            android:text="@string/btn_register" />
 
 
     </LinearLayout>

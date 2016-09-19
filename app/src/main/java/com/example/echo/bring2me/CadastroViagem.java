@@ -3,20 +3,14 @@ package com.example.echo.bring2me;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.app.Activity;
-import android.os.Bundle;
-import android.util.ArraySet;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup.LayoutParams;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -32,7 +26,7 @@ import java.util.HashMap;
 
 public class CadastroViagem extends Activity{
     private static final String TAG = CadastroViagem.class.getSimpleName();
-    private ArrayList paises = new ArrayList();
+    private ArrayList<String> paises = new ArrayList<String>();
     private Spinner spPaisesOri;
     private Spinner spPaisesDes;
     private Button btnRegister;
@@ -47,8 +41,8 @@ public class CadastroViagem extends Activity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro_viagens);
 
-        HashMap<String, String> user = db.getUserDetails();
-        final String id = user.get("id");
+//        HashMap<String, String> user = db.getUserDetails();
+        final String id = "1";
 
         pDialog = new ProgressDialog(this);
         pDialog.setCancelable(false);
@@ -61,7 +55,7 @@ public class CadastroViagem extends Activity{
 
         paises.add("Brasil");
         paises.add("Estados Unidos");
-        paises.add("Franças");
+        paises.add("França");
         paises.add("Itália");
         paises.add("Canadá");
         paises.add("Japão");
@@ -76,8 +70,8 @@ public class CadastroViagem extends Activity{
 
         btnRegister.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                String paisOrigem = spPaisesOri.getOnItemSelectedListener().toString();
-                String paisDestino = spPaisesDes.getOnItemSelectedListener().toString();
+                String paisOrigem = spPaisesOri.getSelectedItem().toString();
+                String paisDestino = spPaisesDes.getSelectedItem().toString();
                 String maxValor = maxVal.getText().toString().trim();
                 String data = retorno.getText().toString().trim();
 

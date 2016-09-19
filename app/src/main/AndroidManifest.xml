@@ -8,9 +8,9 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
 
-    <android:uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <android:uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <android:uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <auses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:name=".AppController"
@@ -39,7 +39,10 @@
             android:name=".MainActivity"
             android:label="@string/app_name"
             android:launchMode="singleTop" />
-        <activity android:name=".CadastroViagens"></activity>
+        <activity
+            android:name=".CadastroViagem"
+            android:label="@string/app_name"
+            android:launchMode="singleTop" />
     </application>
 
 </manifest>
