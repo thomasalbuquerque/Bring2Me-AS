@@ -23,6 +23,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 public class CadastroViagem extends Activity{
     private static final String TAG = CadastroViagem.class.getSimpleName();
@@ -63,7 +64,7 @@ public class CadastroViagem extends Activity{
 
         spPaisesOri = (Spinner) findViewById(R.id.spOrigem);
         spPaisesDes = (Spinner) findViewById(R.id.spDestino);
-        ArrayAdapter<String> arrayAdapter1 = new ArrayAdapter<String>(this,R.layout.activity_cadastro_viagens, paises);
+        ArrayAdapter<String> arrayAdapter1 = new ArrayAdapter<String>(this,R.layout.support_simple_spinner_dropdown_item, paises);
         spPaisesOri.setAdapter(arrayAdapter1);
         spPaisesDes.setAdapter(arrayAdapter1);
 
@@ -77,7 +78,7 @@ public class CadastroViagem extends Activity{
 
 
                 if (!paisOrigem.isEmpty() && !paisDestino.isEmpty() && !maxValor.isEmpty() && !data.isEmpty()) {
-                    registrarViagem(id, paisOrigem, paisDestino, maxValor, data);
+                    registrarViagem("1", paisOrigem, paisDestino, maxValor, data);
                 } else {
                     Toast.makeText(getApplicationContext(),
                             "Cadastro incompleto, Por favor insira seus dados!", Toast.LENGTH_LONG)
@@ -90,7 +91,7 @@ public class CadastroViagem extends Activity{
     }
 
 
-    private void registrarViagem(final String id, final String paisOrigem, final String paisDestino, final String maxVal, final String data) {
+    private void registrarViagem(final String id, final String paisOrigem, final String paisDestino, final String maxVal, final String retorno) {
         // Tag used to cancel the request
         String tag_string_req = "req_register";
 
@@ -112,6 +113,7 @@ public class CadastroViagem extends Activity{
                     if (!error) {
                         // User successfully stored in MySQL
                         // Now store the user in sqlite
+                        String id = jObj.getString("user_id");
                         String paisOrigem = jObj.getString("paisAtual");
                         String paisDestino = jObj.getString("paisDestino");
                         String maxVal = jObj.getString("maxVal");
@@ -121,7 +123,7 @@ public class CadastroViagem extends Activity{
                         // Inserting row in users table
                         db.addViagem(id, paisOrigem, paisDestino, maxVal, data);
 
-                        Toast.makeText(getApplicationContext(), "Cadastro realizado com sucesso. Faça seu login!", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "Cadastro realizado com sucesso.", Toast.LENGTH_LONG).show();
 
                         // Launch login activity
                         Intent intent = new Intent(
@@ -143,9 +145,25 @@ public class CadastroViagem extends Activity{
                             error.getMessage(), Toast.LENGTH_LONG).show();
                     hideDialog();
                 }
-        });
+        })
+        {
+        @Override
+        protected Map<String, String> getParams() {
+            // Posting params to order url
+            Map<String, String> params = new HashMap<String, String>();
+            params.put("user_id", id);
+            params.put("paisAtual", paisOrigem);
+            params.put("paisDestino", paisDestino);
+            params.put("maxVal", maxVal);
+            params.put("retorno", retorno);
 
-        AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
+            return params;
+        }
+
+    };
+
+
+    AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
     }
 
                 private void showDialog() {
