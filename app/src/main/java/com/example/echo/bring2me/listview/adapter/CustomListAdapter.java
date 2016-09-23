@@ -58,29 +58,30 @@ public class CustomListAdapter extends BaseAdapter {
                         imageLoader = AppController.getInstance().getImageLoader();
 
                 NetworkImageView thumbNail = (NetworkImageView) convertView.findViewById(R.id.thumbnail);
-                TextView origemTV = (TextView) convertView.findViewById(R.id.origem);
-                TextView destinoTV = (TextView) convertView.findViewById(R.id.destino);
+                TextView origemTV = (TextView) convertView.findViewById(R.id.mostraorigem);
+                TextView destinoTV = (TextView) convertView.findViewById(R.id.mostradestino);
                 TextView avaliacaoViajanteTV = (TextView) convertView.findViewById(R.id.avaliacaoViajante);
                 TextView precoBaseTV = (TextView) convertView.findViewById(R.id.precoBase);
 
                 // getting movie data for the row
                 Viagem v = viagemItems.get(position);
 
-                // thumbnail image
-                thumbNail.setImageUrl(v.getThumbnailUrl(), imageLoader);
+                if(v != null) {
+                        // thumbnail image
+                        thumbNail.setImageUrl(v.getThumbnailUrl(), imageLoader);
 
-                // origem
-                origemTV.setText("Origem: " + v.getOrigem());
+                        // origem
+                        origemTV.setText("Origem: " + v.getOrigem());
 
-                // destino
-                destinoTV.setText("Destino: " + v.getDestino());
+                        // destino
+                        destinoTV.setText("Destino: " + v.getDestino());
 
-                // avaliacaoViajante
-                avaliacaoViajanteTV.setText("Avaliação do viajante: " + v.getAvaliacaoViajante());
+                        // avaliacaoViajante
+                        avaliacaoViajanteTV.setText("Avaliação do viajante: " + v.getAvaliacaoViajante());
 
-                // preço base
-                precoBaseTV.setText("R$"+v.getPrecoBase()+",00");
-
+                        // preço base
+                        precoBaseTV.setText("R$" + v.getPrecoBase() + ",00");
+                }
                 return convertView;
         }
 

@@ -44,20 +44,6 @@ public class MostraViagensActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.mostraviagens);
-
-        listView = (ListView) findViewById(R.id.list);
-        adapter = new CustomListAdapter(this, viagemList);
-        listView.setAdapter(adapter);
-
-        pDialog = new ProgressDialog(this);
-        // Showing progress dialog before making http request
-        // SQLite database handler
-        db = new SQLiteHandler(getApplicationContext());
-
-        pDialog.setMessage("Loading...");
-        pDialog.show();
-
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             origem = extras.getString("inputOrigem");
@@ -72,6 +58,20 @@ public class MostraViagensActivity extends Activity {
             Toast.makeText(getApplicationContext(),
                     "Insira seu origem e destino!", Toast.LENGTH_LONG).show();
         }
+        setContentView(R.layout.mostraviagens);
+
+        listView = (ListView) findViewById(R.id.list);
+        adapter = new CustomListAdapter(this, viagemList);
+        listView.setAdapter(adapter);
+
+        pDialog = new ProgressDialog(this);
+        // Showing progress dialog before making http request
+        // SQLite database handler
+        db = new SQLiteHandler(getApplicationContext());
+
+        pDialog.setMessage("Loading...");
+        pDialog.show();
+
 
 
     }
@@ -83,18 +83,20 @@ public class MostraViagensActivity extends Activity {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        Log.d(TAG, response.toString());
+                        Log.d(TAG, response);
                         hidePDialog();
+                        try {
+                            JSONObject res = new JSONObject(response);
+                            // Parsing json
 
-                        // Parsing json
-                        for (int i = 0; i < response.length(); i++) {
-                            try {
+                        for (int i = 0; i < res.length()-1; i++) {
 
-                                JSONArray array = new JSONArray(response);
-                                JSONObject obj = new JSONObject((String) array.get(i));
+
+                                JSONObject array = new JSONObject(response);
+                                JSONObject obj = (JSONObject) array.get(Integer.toString(i));
                                 Viagem viagem = new Viagem();
-                                viagem.setOrigem(obj.getString("origem"));
-                                viagem.setDestino(obj.getString("destino"));
+                                viagem.setOrigem(obj.getString("cidadeorigem"));
+                                viagem.setDestino(obj.getString("cidadedestino"));
                                 viagem.setThumbnailUrl(AppConfig.URL_IMAGEM);
                                 viagem.setAvaliacaoViajante(AppConfig.AvaliacaoPadraoDoViajante);
                                 viagem.setPrecoBase(obj.getDouble("precobase"));
@@ -102,10 +104,10 @@ public class MostraViagensActivity extends Activity {
                                 // adding viagem to viagens array
                                 viagemList.add(viagem);
 
-                            } catch (JSONException e) {
-                                e.printStackTrace();
                             }
 
+                        }catch (JSONException e) {
+                            e.printStackTrace();
                         }
 
                         // notifying list adapter about data changes

@@ -116,9 +116,9 @@ public class CadastroViagem extends Activity{
                     if (!error) {
                         // User successfully stored in MySQL
                         // Now store the user in sqlite
-                        String user_id= jObj.getString("user_id");
-                        String paisOrigem = jObj.getString("paisAt");
-                        String paisDestino = jObj.getString("paisDest");
+                        String user_id= jObj.getString("id");
+                        String paisOrigem = jObj.getString("paisAtual");
+                        String paisDestino = jObj.getString("paisDestino");
                         String maxVal = jObj.getString("maxval");
                         String mintax = jObj.getString("mintax");
                         String retorno  = jObj.getString("retorno");
