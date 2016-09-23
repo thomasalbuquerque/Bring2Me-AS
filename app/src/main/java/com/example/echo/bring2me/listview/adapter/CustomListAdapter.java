@@ -6,6 +6,7 @@ package com.example.echo.bring2me.listview.adapter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,6 +30,7 @@ public class CustomListAdapter extends BaseAdapter {
         public CustomListAdapter(Activity activity, List<Viagem> viagemItems) {
                 this.activity = activity;
                 this.viagemItems = viagemItems;
+                this.inflater = ( LayoutInflater )activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         }
 
         @Override
@@ -49,26 +51,23 @@ public class CustomListAdapter extends BaseAdapter {
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
 
-                if (inflater == null)
-                        inflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                if (convertView == null)
-                        convertView = inflater.inflate(R.layout.list_row, null);
+                View rowView = inflater.inflate(R.layout.list_row,null);
 
                 if (imageLoader == null)
                         imageLoader = AppController.getInstance().getImageLoader();
 
-                NetworkImageView thumbNail = (NetworkImageView) convertView.findViewById(R.id.thumbnail);
-                TextView origemTV = (TextView) convertView.findViewById(R.id.mostraorigem);
-                TextView destinoTV = (TextView) convertView.findViewById(R.id.mostradestino);
-                TextView avaliacaoViajanteTV = (TextView) convertView.findViewById(R.id.avaliacaoViajante);
-                TextView precoBaseTV = (TextView) convertView.findViewById(R.id.precoBase);
+                NetworkImageView thumbNail = (NetworkImageView) rowView.findViewById(R.id.thumbnail);
+                TextView origemTV = (TextView) rowView.findViewById(R.id.mostraorigem);
+                TextView destinoTV = (TextView) rowView.findViewById(R.id.mostradestino);
+                TextView avaliacaoViajanteTV = (TextView) rowView.findViewById(R.id.avaliacaoViajante);
+                TextView precoBaseTV = (TextView) rowView.findViewById(R.id.precoBase);
 
                 // getting movie data for the row
                 Viagem v = viagemItems.get(position);
+                // thumbnail image
+                thumbNail.setImageUrl(v.getThumbnailUrl(), imageLoader);
 
-                if(v != null) {
-                        // thumbnail image
-                        thumbNail.setImageUrl(v.getThumbnailUrl(), imageLoader);
+            if(v != null) {
 
                         // origem
                         origemTV.setText("Origem: " + v.getOrigem());
@@ -82,7 +81,7 @@ public class CustomListAdapter extends BaseAdapter {
                         // preço base
                         precoBaseTV.setText("R$" + v.getPrecoBase() + ",00");
                 }
-                return convertView;
+                return rowView;
         }
 
 }
