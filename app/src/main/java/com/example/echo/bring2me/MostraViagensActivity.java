@@ -6,17 +6,16 @@ package com.example.echo.bring2me;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
-import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.example.echo.bring2me.listview.adapter.CustomListAdapter;
 import com.example.echo.bring2me.listview.model.Viagem;
 
@@ -80,10 +79,10 @@ public class MostraViagensActivity extends Activity {
 
     public void buscar(final String origem, final String destino){
         // Creating volley request obj
-        JsonArrayRequest viagemReq = new JsonArrayRequest(AppConfig.URL_BUSCAVIAGENS,
-                new Response.Listener<JSONArray>() {
+        StringRequest viagemReq = new StringRequest(Request.Method.POST,AppConfig.URL_BUSCAVIAGENS,
+                new Response.Listener<String>() {
                     @Override
-                    public void onResponse(JSONArray response) {
+                    public void onResponse(String response) {
                         Log.d(TAG, response.toString());
                         hidePDialog();
 
@@ -91,7 +90,8 @@ public class MostraViagensActivity extends Activity {
                         for (int i = 0; i < response.length(); i++) {
                             try {
 
-                                JSONObject obj = response.getJSONObject(i);
+                                JSONArray array = new JSONArray(response);
+                                JSONObject obj = new JSONObject((String) array.get(i));
                                 Viagem viagem = new Viagem();
                                 viagem.setOrigem(obj.getString("origem"));
                                 viagem.setDestino(obj.getString("destino"));
