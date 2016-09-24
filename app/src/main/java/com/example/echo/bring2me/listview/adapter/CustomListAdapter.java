@@ -6,7 +6,6 @@ package com.example.echo.bring2me.listview.adapter;
 
 import android.app.Activity;
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -79,7 +78,7 @@ public class CustomListAdapter extends BaseAdapter {
                         avaliacaoViajanteTV.setText("Avaliação do viajante: " + v.getAvaliacaoViajante());
 
                         // preço base
-                        precoBaseTV.setText("R$" + v.getPrecoBase() + ",00");
+                        precoBaseTV.setText("R$" + v.getPrecoBase());
                 }
                 return rowView;
         }
