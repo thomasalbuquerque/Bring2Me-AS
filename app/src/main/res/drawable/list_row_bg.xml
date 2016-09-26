@@ -5,4 +5,5 @@
         android:startColor="@color/list_row_start_color"
         android:endColor="@color/list_row_end_color"
         android:angle="270" />
+    <corners android:radius="7dp" />
 </shape>

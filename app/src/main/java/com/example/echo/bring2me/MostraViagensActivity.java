@@ -6,17 +6,16 @@ package com.example.echo.bring2me;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
-import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.example.echo.bring2me.listview.adapter.CustomListAdapter;
 import com.example.echo.bring2me.listview.model.Viagem;
 
@@ -45,20 +44,6 @@ public class MostraViagensActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.mostraviagens);
-
-        listView = (ListView) findViewById(R.id.list);
-        adapter = new CustomListAdapter(this, viagemList);
-        listView.setAdapter(adapter);
-
-        pDialog = new ProgressDialog(this);
-        // Showing progress dialog before making http request
-        // SQLite database handler
-        db = new SQLiteHandler(getApplicationContext());
-
-        pDialog.setMessage("Loading...");
-        pDialog.show();
-
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             origem = extras.getString("inputOrigem");
@@ -73,6 +58,20 @@ public class MostraViagensActivity extends Activity {
             Toast.makeText(getApplicationContext(),
                     "Insira seu origem e destino!", Toast.LENGTH_LONG).show();
         }
+        setContentView(R.layout.mostraviagens);
+
+        listView = (ListView) findViewById(R.id.list);
+        adapter = new CustomListAdapter(this, viagemList);
+        listView.setAdapter(adapter);
+
+        pDialog = new ProgressDialog(this);
+        // Showing progress dialog before making http request
+        // SQLite database handler
+        db = new SQLiteHandler(getApplicationContext());
+
+        pDialog.setMessage("Loading...");
+        pDialog.show();
+
 
 
     }
@@ -80,21 +79,24 @@ public class MostraViagensActivity extends Activity {
 
     public void buscar(final String origem, final String destino){
         // Creating volley request obj
-        JsonArrayRequest viagemReq = new JsonArrayRequest(AppConfig.URL_BUSCAVIAGENS,
-                new Response.Listener<JSONArray>() {
+        StringRequest viagemReq = new StringRequest(Request.Method.POST,AppConfig.URL_BUSCAVIAGENS,
+                new Response.Listener<String>() {
                     @Override
-                    public void onResponse(JSONArray response) {
-                        Log.d(TAG, response.toString());
+                    public void onResponse(String response) {
+                        Log.d(TAG, response);
                         hidePDialog();
+                        try {
+                            JSONObject res = new JSONObject(response);
+                            // Parsing json
 
-                        // Parsing json
-                        for (int i = 0; i < response.length(); i++) {
-                            try {
+                        for (int i = 0; i < res.length()-1; i++) {
 
-                                JSONObject obj = response.getJSONObject(i);
+
+                                JSONObject array = new JSONObject(response);
+                                JSONObject obj = (JSONObject) array.get(Integer.toString(i));
                                 Viagem viagem = new Viagem();
-                                viagem.setOrigem(obj.getString("origem"));
-                                viagem.setDestino(obj.getString("destino"));
+                                viagem.setOrigem(obj.getString("cidadeorigem"));
+                                viagem.setDestino(obj.getString("cidadedestino"));
                                 viagem.setThumbnailUrl(AppConfig.URL_IMAGEM);
                                 viagem.setAvaliacaoViajante(AppConfig.AvaliacaoPadraoDoViajante);
                                 viagem.setPrecoBase(obj.getDouble("precobase"));
@@ -102,10 +104,10 @@ public class MostraViagensActivity extends Activity {
                                 // adding viagem to viagens array
                                 viagemList.add(viagem);
 
-                            } catch (JSONException e) {
-                                e.printStackTrace();
                             }
 
+                        }catch (JSONException e) {
+                            e.printStackTrace();
                         }
 
                         // notifying list adapter about data changes
