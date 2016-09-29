@@ -100,6 +100,7 @@ public class MostraViagensActivity extends Activity {
                                 viagem.setThumbnailUrl(AppConfig.URL_IMAGEM);
                                 viagem.setAvaliacaoViajante(AppConfig.AvaliacaoPadraoDoViajante);
                                 viagem.setPrecoBase(obj.getDouble("precobase"));
+                                viagem.setId(obj.getString("id"));
 
                                 // adding viagem to viagens array
                                 viagemList.add(viagem);

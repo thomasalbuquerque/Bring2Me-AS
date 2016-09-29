@@ -37,6 +37,7 @@ public class OrderActivity extends Activity {
     private ProgressDialog pDialog;
     private SessionManager session;
     private SQLiteHandler db;
+    private String id_viagem;
 
 
     public void onCreate(Bundle savedInstanceState) {
@@ -68,8 +69,9 @@ public class OrderActivity extends Activity {
 
         //Pegando o id da viagem do intent anterior
         Bundle extras = getIntent().getExtras();
-        final String id_viagem = extras.getString("id_viagem");
-
+        if(extras!=null) {
+            id_viagem = extras.getString("id_viagem");
+        }
 
         // Order Button Click event
         btnOrder.setOnClickListener(new View.OnClickListener() {
