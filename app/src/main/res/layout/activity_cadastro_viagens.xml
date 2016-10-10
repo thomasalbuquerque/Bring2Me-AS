@@ -23,12 +23,14 @@
             android:layout_width="fill_parent"
             android:layout_height="0dp"
             android:layout_marginBottom="10dp"
-            android:background="@color/input_register_bg"
+            android:background="@color/white"
             android:padding="10dp"
             android:singleLine="true"
-            android:textColor="@color/input_register"
+            android:textColor="@color/input_register_hint"
             android:textColorHint="@color/input_register_hint"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:backgroundTint="@color/white"
+            android:spinnerMode="dropdown" />
 
         <Spinner
 
@@ -36,12 +38,13 @@
             android:layout_width="fill_parent"
             android:layout_height="0dp"
             android:layout_marginBottom="10dp"
-            android:background="@color/input_register_bg"
+            android:background="@color/white"
             android:padding="10dp"
             android:singleLine="true"
             android:textColor="@color/input_register"
             android:textColorHint="@color/input_register_hint"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:spinnerMode="dropdown" />
 
 
         <EditText
@@ -56,7 +59,8 @@
             android:textColor="@color/input_register"
             android:textColorHint="@color/input_register_hint"
             android:layout_weight="1"
-            android:hint="@string/txt_val_max" />
+            android:hint="@string/txt_val_max"
+            android:inputType="numberDecimal" />
 
 
         <EditText
@@ -70,7 +74,8 @@
             android:textColor="@color/input_register"
             android:textColorHint="@color/input_register_hint"
             android:layout_weight="1"
-            android:hint="@string/minTax" />
+            android:hint="@string/minTax"
+            android:inputType="numberDecimal" />
 
 
         <EditText
@@ -85,7 +90,8 @@
             android:textColor="@color/input_register"
             android:textColorHint="@color/input_register_hint"
             android:layout_weight="1"
-            android:hint="@string/txt_data_retorno" />
+            android:hint="@string/txt_data_retorno"
+            android:inputType="date" />
 
 
         <Button

@@ -52,18 +52,10 @@ public class CadastroViagem extends Activity{
         maxVal = (EditText) findViewById(R.id.txtValor) ;
         mintax = (EditText) findViewById(R.id.txtMinTax) ;
         retorno = (EditText) findViewById(R.id.txtData) ;
-
+        retorno.addTextChangedListener(Mask.insert("####-##-##", retorno));
         db = new SQLiteHandler(getApplicationContext());
 
-
-        paises.add("Brasil");
-        paises.add("Estados Unidos");
-        paises.add("França");
-        paises.add("Itália");
-        paises.add("Canadá");
-        paises.add("Japão");
-        paises.add("Canadá");
-
+        PopulateArray.populatePaises(paises);
         spPaisesOri = (Spinner) findViewById(R.id.spOrigem);
         spPaisesDes = (Spinner) findViewById(R.id.spDestino);
         ArrayAdapter<String> arrayAdapter1 = new ArrayAdapter<String>(this,R.layout.support_simple_spinner_dropdown_item, paises);
@@ -81,8 +73,14 @@ public class CadastroViagem extends Activity{
 
 
                 if (!paisOrigem.isEmpty() && !paisDestino.isEmpty() && !maxValor.isEmpty() && !data.isEmpty()) {
-                    registrarViagem(id, paisOrigem, paisDestino, maxValor, minTax, data);
-                } else {
+                    if(Integer.parseInt(data.substring(5,7))>12 || Integer.parseInt(data.substring(5,7))<1)
+                        Toast.makeText(getApplicationContext(),
+                                "Data Invalida!", Toast.LENGTH_LONG)
+                                .show();
+                    else
+                        registrarViagem(id, paisOrigem, paisDestino, maxValor, minTax, data);
+                }
+                 else {
                     Toast.makeText(getApplicationContext(),
                             "Cadastro incompleto, Por favor insira seus dados!", Toast.LENGTH_LONG)
                             .show();
