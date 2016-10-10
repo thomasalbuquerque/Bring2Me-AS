@@ -81,7 +81,7 @@ public class OrderActivity extends Activity {
                 String product = inputProduct.getText().toString().trim();
 
                 if (!valor.isEmpty() && !product.isEmpty()) {
-                    Order(product, valor, link ,email, id_viagem);
+                    Order( valor, link , product, email, id_viagem);
                 } else {
                     Toast.makeText(getApplicationContext(),
                             "Não foi possível iniciar uma negociação. Verifique se os campos estão preenchidos!", Toast.LENGTH_LONG)
@@ -111,6 +111,8 @@ public class OrderActivity extends Activity {
                     boolean error = jObj.getBoolean("error");
                     if (!error) {
                         // User successfully stored in MySQL
+                        JSONObject pedido = jObj.getJSONObject("order");
+                        int id_p = pedido.getInt("id_pedido");
 
                         // inserir no SQLITE AQUI (precisa criar uma tabela de pedidos no SQLiteHandler)
 
