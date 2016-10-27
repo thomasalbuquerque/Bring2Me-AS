@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/RowViagemCadastrada"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/list_row_selector"
+    android:padding="4dp" >
+
+    <!-- Origem -->
+    <TextView
+        android:id="@+id/mostraorigemDasCadastradas"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:textSize="@dimen/title"
+        android:textColor="@color/colorMostraOrigem"
+        android:textStyle="normal"
+        android:layout_marginRight="2dp"/>
+
+    <!-- Destino -->
+    <TextView
+        android:id="@+id/mostradestinoDasCadastradas"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1dip"
+        android:layout_toRightOf="@+id/mostraorigemDasCadastradas"
+        android:textSize="@dimen/title"
+        android:textColor="@color/colorMostraDestino"
+        android:textStyle="normal" />
+
+    <!-- Preço Base -->
+    <TextView
+        android:id="@+id/precoBaseDasCadastradas"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/mostradestinoDasCadastradas"
+        android:textColor="@color/btn_logut_bg"
+        android:textSize="2dp" />
+    <Button
+        android:id="@+id/botaoViagemCadastrada"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+</RelativeLayout>
