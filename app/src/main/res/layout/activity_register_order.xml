@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.echo.bring2me.OrderActivity"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+<LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingBottom="@dimen/activity_vertical_margin"
@@ -9,8 +17,8 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:layout_marginLeft="20dp"
     android:layout_marginRight="20dp"
-    tools:context="com.example.echo.bring2me.OrderActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:weightSum="1">
 
     <TextView
         android:layout_width="fill_parent"
@@ -63,6 +71,142 @@
         android:layout_height="wrap_content"
         android:id="@+id/link" />
 
+    <RadioGroup
+        android:layout_width="wrap_content"
+        android:id="@+id/radioGroup"
+        android:layout_marginTop="40dip"
+        android:layout_height="wrap_content">
+
+        <com.example.echo.bring2me.ToggleableRadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Trazer Produto Fora Da Embalagem *"
+            android:id="@+id/radioButton"
+            android:checked="true" />
+    </RadioGroup>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textSize="12dp"
+        android:layout_marginTop="5dip"
+        android:text="O produto pode não ser taxado fora da embalagem."/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="CEP *"
+        android:textColor="@color/corazul"
+        android:textSize="15dp"
+        android:layout_marginTop="40dip"
+        android:id="@+id/textView8" />
+
+    <EditText
+        android:layout_width="140dp"
+        android:layout_height="wrap_content"
+        android:maxLength="8"
+        android:inputType="number"
+        android:id="@+id/cep" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="96dp"
+        android:layout_height="34dp"
+        android:text="Buscar"
+        android:id="@+id/buscarcep"
+        android:layout_gravity="right"
+        android:layout_weight="0.12" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Logradouro *"
+        android:textColor="@color/corazul"
+        android:textSize="15dp"
+        android:layout_marginTop="10dip"
+        android:id="@+id/logradouro" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:maxLength="80"
+        android:id="@+id/logradouroview" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Bairro *"
+        android:textColor="@color/corazul"
+        android:textSize="15dp"
+        android:layout_marginTop="10dip"
+        android:id="@+id/bairro" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:maxLength="40"
+        android:id="@+id/bairroview" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Estado *"
+        android:textColor="@color/corazul"
+        android:textSize="15dp"
+        android:layout_marginTop="10dip"
+        android:id="@+id/uf" />
+
+    <EditText
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:maxLength="2"
+        android:capitalize="characters"
+        android:id="@+id/ufview" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cidade *"
+        android:textColor="@color/corazul"
+        android:textSize="15dp"
+        android:layout_marginTop="10dip"
+        android:id="@+id/localidade" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:maxLength="40"
+        android:id="@+id/localidadeview" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Número Da Residência *"
+        android:textColor="@color/corazul"
+        android:textSize="15dp"
+        android:layout_marginTop="10dip"
+        android:id="@+id/numresidencia" />
+    <EditText
+        android:layout_width="140dp"
+        android:layout_height="wrap_content"
+        android:maxLength="10"
+        android:inputType="number"
+        android:id="@+id/numresidenciaedit" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Complemento"
+        android:textColor="@color/corazul"
+        android:textSize="15dp"
+        android:layout_marginTop="10dip"
+        android:id="@+id/complemento" />
+    <EditText
+        android:layout_width="140dp"
+        android:layout_height="wrap_content"
+        android:maxLength="20"
+        android:id="@+id/complementoedit" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -71,6 +215,7 @@
         android:layout_marginTop="20dip"
         android:text="Campos com * são de preenchimento obrigatório. "
         android:id="@+id/textView6" />
+
 
     <Button
         android:layout_width="wrap_content"
@@ -81,3 +226,5 @@
         android:layout_gravity="center_horizontal" />
 
 </LinearLayout>
+
+</ScrollView>
