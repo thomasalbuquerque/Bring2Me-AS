@@ -1,7 +1,5 @@
 package com.example.echo.bring2me;
 
-import java.util.HashMap;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,6 +7,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TabHost;
 import android.widget.TextView;
+
+import java.util.HashMap;
 
 public class MainActivity extends Activity {
 
@@ -21,6 +21,7 @@ public class MainActivity extends Activity {
     private Button btnRegViagem;
     private Button btnProcViagem;
     private Button btnPedido;
+    private Button btnDelViagem;
 
     private SQLiteHandler db;
     private SessionManager session;
@@ -35,6 +36,7 @@ public class MainActivity extends Activity {
         btnLogout = (Button) findViewById(R.id.btnLogout);
         instanciarTabHost();
         instanciarIniciar();
+        instanciarAtividades();
 
         // SqLite database handler
         db = new SQLiteHandler(getApplicationContext());
@@ -115,6 +117,21 @@ public class MainActivity extends Activity {
             }
         });
     }
+    private void instanciarAtividades(){
+        btnDelViagem = (Button)findViewById(R.id.btnDelViagem);
+
+        btnDelViagem.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                // Launching the login activity
+                Intent intent = new Intent(MainActivity.this, ViagensCadastradasActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+    }
+
 
     /**
      * Logging out the user. Will set isLoggedIn flag to false in shared
