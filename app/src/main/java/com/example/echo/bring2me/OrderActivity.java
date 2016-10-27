@@ -117,17 +117,18 @@ public class OrderActivity extends Activity {
                 String complemento= inputcomplemento.getText().toString().trim();
                 String caixa;
                 if(lC1.isChecked()){
-                    caixa = "true";
+                    caixa = "1";
                 }
-                else caixa = "false";
+                else caixa = "0";
                 String bairro = bairroview.getText().toString().trim();
-                String logradouro = bairroview.getText().toString().trim();
-                String uf = bairroview.getText().toString().trim();
-                String localidade = bairroview.getText().toString().trim();
+                String logradouro = logradouroview.getText().toString().trim();
+                String uf = ufview.getText().toString().trim();
+                String localidade = localidadeview.getText().toString().trim();
+                String endereco = cep + ", " + logradouro + ", " +  bairro +
+                        ", "  + uf + ", "  + localidade + ", " + numresid + ", " + complemento;
                 if (!valor.isEmpty() && !product.isEmpty() && !cep.isEmpty() && !bairro.isEmpty() &&
                         !logradouro.isEmpty() && !uf.isEmpty() && !localidade.isEmpty() && !numresid.isEmpty()) {
-                    Order( valor, link , product, email, id_viagem, caixa, cep,
-                            bairro, logradouro, uf, localidade, numresid, complemento);
+                    Order( valor, link , product, email, id_viagem, caixa, endereco);
                 } else {
                     Toast.makeText(getApplicationContext(),
                             "Não foi possível iniciar uma negociação. Verifique se os campos estão preenchidos!", Toast.LENGTH_LONG)
@@ -138,8 +139,7 @@ public class OrderActivity extends Activity {
     }
 
     private void Order(final String valor, final String link, final String product, final String email, final String id_viagem,
-                       final String caixa, final String cep, final String bairro, final String logradouro, final String uf,
-                       final String localidade, final String numresid, final String complemento) {
+                       final String caixa, final String endereco) {
         // Tag used to cancel the request
         String tag_string_req = "req_order";
 
@@ -151,7 +151,7 @@ public class OrderActivity extends Activity {
 
             @Override
             public void onResponse(String response) {
-                Log.d(TAG, "Order Response: " + response.toString());
+                Log.d(TAG, "Order Response: " + response);
                 hideDialog();
 
                 try {
@@ -199,20 +199,14 @@ public class OrderActivity extends Activity {
             @Override
             protected Map<String, String> getParams() {
                 // Posting params to order url
-                Map<String, String> params = new HashMap<String, String>();
+                Map<String, String> params = new HashMap<>();
                 params.put("valor", valor);
                 params.put("link", link);
                 params.put("product", product);
                 params.put("email", email);
                 params.put("id_viagem", id_viagem);
-                params.put("caixa", caixa);
-                params.put("cep", cep);
-                params.put("bairro", bairro);
-                params.put("logradouro", logradouro);
-                params.put("uf", uf);
-                params.put("localidade", localidade);
-                params.put("numresid", numresid);
-                params.put("complemento", complemento);
+                params.put("unpack", caixa);
+                params.put("adress", endereco);
 
                 return params;
             }
