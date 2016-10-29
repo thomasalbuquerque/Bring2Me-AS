@@ -56,7 +56,7 @@ public class MostraViagensActivity extends Activity {
         } else {
             // diga para digitar origem e destino
             Toast.makeText(getApplicationContext(),
-                    "Insira seu origem e destino!", Toast.LENGTH_LONG).show();
+                    "Insira sua origem e destino!", Toast.LENGTH_LONG).show();
         }
         setContentView(R.layout.mostraviagens);
 

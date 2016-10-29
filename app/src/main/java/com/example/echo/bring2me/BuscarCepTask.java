@@ -12,6 +12,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -26,10 +27,11 @@ import java.net.URL;
 public class BuscarCepTask extends AsyncTask<String, Void, String> {
     URL url = null;
     HttpURLConnection httpURLConnection = null;
-    private TextView bairroview;
-    private TextView logradouroview;
-    private TextView ufview;
-    private TextView localidadeview;
+    private EditText bairroview;
+    private EditText logradouroview;
+    private EditText ufview;
+    private EditText localidadeview;
+    private Context context;
 
     private String bairro;
     private String logradouro;
@@ -37,7 +39,8 @@ public class BuscarCepTask extends AsyncTask<String, Void, String> {
     private String localidade;
 
 
-    public BuscarCepTask(EditText bairroview, EditText logradouroview, EditText ufview, EditText localidadeview) {
+    public BuscarCepTask(Context c, EditText bairroview, EditText logradouroview, EditText ufview, EditText localidadeview) {
+        this.context = c;
         this.bairroview = bairroview;
         this.logradouroview = logradouroview;
         this.ufview = ufview;
@@ -79,7 +82,7 @@ public class BuscarCepTask extends AsyncTask<String, Void, String> {
             }
         }
         Log.d("buscacep", "Order Response: " + result.toString());
-        return (result != null) ? result.toString() : null;
+        return(result != null) ? result.toString() : null;
     }
 
     @Override
@@ -89,14 +92,18 @@ public class BuscarCepTask extends AsyncTask<String, Void, String> {
         try {
             JSONObject object = new JSONObject(s);
             //object.
-            bairro = object.getString("bairro");
-            logradouro = object.getString("logradouro");
-            uf = object.getString("uf");
-            localidade = object.getString("localidade");
-            bairroview.setText(bairro);
-            logradouroview.setText(logradouro);
-            ufview.setText(uf);
-            localidadeview.setText(localidade);
+            if(!object.isNull("erro"))
+            Toast.makeText(context,"CEP inválido ou não encontrado.",Toast.LENGTH_LONG).show();
+            else {
+                bairro = object.getString("bairro");
+                logradouro = object.getString("logradouro");
+                uf = object.getString("uf");
+                localidade = object.getString("localidade");
+                bairroview.setText(bairro);
+                logradouroview.setText(logradouro);
+                ufview.setText(uf);
+                localidadeview.setText(localidade);
+            }
         } catch (JSONException e) {
             e.printStackTrace();
         }

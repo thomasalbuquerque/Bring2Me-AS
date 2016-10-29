@@ -103,7 +103,7 @@ public class MainActivity extends Activity {
                 // Launching the login activity
                 Intent intent = new Intent(MainActivity.this, CadastroViagem.class);
                 startActivity(intent);
-                finish();
+                //finish();
             }
         });
 
@@ -113,7 +113,7 @@ public class MainActivity extends Activity {
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, BuscaViagensActivity.class);
                 startActivity(intent);
-                finish();
+                //finish();
             }
         });
     }
@@ -127,7 +127,7 @@ public class MainActivity extends Activity {
                 // Launching the login activity
                 Intent intent = new Intent(MainActivity.this, ViagensCadastradasActivity.class);
                 startActivity(intent);
-                finish();
+                //finish();
             }
         });
     }

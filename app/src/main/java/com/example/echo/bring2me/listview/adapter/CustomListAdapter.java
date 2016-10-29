@@ -78,7 +78,7 @@ public class CustomListAdapter extends BaseAdapter {
                                 Intent i = new Intent(activity.getApplicationContext(), OrderActivity.class);
                                 i.putExtra("id_viagem", v.getId());
                                 activity.startActivity(i);
-                                activity.finish();
+                                //activity.finish();
                         }
                 });
 

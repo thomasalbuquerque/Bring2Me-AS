@@ -38,7 +38,7 @@ public class BuscaViagensActivity extends Activity {
                 i.putExtra("inputOrigem", inputOrigem.getText().toString().trim());
                 i.putExtra("inputDestino", inputDestino.getText().toString().trim());
                 startActivity(i);
-                finish();
+                //finish();
             }
         });
     }

@@ -94,7 +94,7 @@ public class OrderActivity extends Activity {
         buscacep.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 String cep = inputCep.getText().toString().trim();
-                BuscarCepTask buscarCep = new BuscarCepTask(bairroview, logradouroview, ufview, localidadeview);
+                BuscarCepTask buscarCep = new BuscarCepTask(getApplicationContext(),bairroview, logradouroview, ufview, localidadeview);
                 buscarCep.execute(cep);
 
                 }
