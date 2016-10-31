@@ -18,7 +18,7 @@ public class AppConfig {
 
     public static String URL_BUSCAVIAGENSCadastradas = "http://echob2m.esy.es/bd_api/buscaViagemByUser.php";
 
-    public static String URL_REMOVEVIAGEMCadastrada = "http://echob2m.esy.es/bd_api/deletaViagem";
+    public static String URL_REMOVEVIAGEMCadastrada = "http://echob2m.esy.es/bd_api/deletaViagem.php";
 
     public static String URL_IMAGEM = "http://echob2m.esy.es/verviagem.png";
 

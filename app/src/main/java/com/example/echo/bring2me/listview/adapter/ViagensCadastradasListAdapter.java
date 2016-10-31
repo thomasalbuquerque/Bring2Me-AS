@@ -21,9 +21,12 @@ import com.example.echo.bring2me.RemoveViagemCadastradaActivity;
 import com.example.echo.bring2me.SQLiteHandler;
 import com.example.echo.bring2me.listview.model.Viagem;
 
+import java.util.HashMap;
 import java.util.List;
 
 public class ViagensCadastradasListAdapter extends BaseAdapter {
+
+    private SQLiteHandler db;
     private Activity activity;
     private LayoutInflater inflater;
     private List<Viagem> viagemItems;
@@ -52,7 +55,9 @@ public class ViagensCadastradasListAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-
+        db = new SQLiteHandler(activity.getApplicationContext());
+        HashMap<String, String> user = db.getUserDetails();
+        final String userViagemID = user.get("uid");
         View rowView = inflater.inflate(R.layout.list_row_viagens_cadastradas,null);
 
         if (imageLoader == null)
@@ -70,7 +75,7 @@ public class ViagensCadastradasListAdapter extends BaseAdapter {
 
             public void onClick(View view) {
                 Intent i = new Intent(activity.getApplicationContext(), RemoveViagemCadastradaActivity.class);
-                i.putExtra("user_id", SQLiteHandler.getUserID());
+                i.putExtra("user_id", userViagemID);
                 i.putExtra("paisAtual", v.getOrigem());
                 i.putExtra("paisDestino",v.getDestino());
                 activity.startActivity(i);

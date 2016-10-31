@@ -40,33 +40,50 @@ public class RemoveViagemCadastradaActivity extends Activity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Bundle extras = getIntent().getExtras();
-        if (extras != null) {
-            userIDfromAnterior = extras.getString("user_id");
-            paisAtual = extras.getString("paisAtual");
-            paisDestino = extras.getString("paisDestino");
-        }
+        setContentView(R.layout.confirmacao_de_remocao_da_viagem);
+
+
 
         pDialog = new ProgressDialog(this);
-        setContentView(R.layout.confirmacao_de_remocao_da_viagem);
+
+        // SQLite database handler
+        db = new SQLiteHandler(getApplicationContext());
+
         btn_remove = (Button) findViewById(R.id.btnRemove);
+
+        /*// Check for empty data in the form
+        if (!userIDfromAnterior.isEmpty() && !paisAtual.isEmpty() && !paisDestino.isEmpty()) {
+            // busca viagem
+            buscar(origem, destino);
+        } else {
+            // diga para digitar origem e destino
+            Toast.makeText(getApplicationContext(),
+                    "Insira sua origem e destino!", Toast.LENGTH_LONG).show();
+        }*/
 
         btn_remove.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View view) {
-                StringRequest viagemReq = new StringRequest(Request.Method.POST,AppConfig.URL_REMOVEVIAGEMCadastrada,
+                pDialog.setMessage("Loading...");
+                pDialog.show();
+                Bundle extras = getIntent().getExtras();
+                if (extras != null) {
+                    userIDfromAnterior = extras.getString("user_id");
+                    paisAtual = extras.getString("paisAtual");
+                    paisDestino = extras.getString("paisDestino");
+                }
+                StringRequest viagemReq = new StringRequest(Request.Method.POST, AppConfig.URL_REMOVEVIAGEMCadastrada,
                         new Response.Listener<String>() {
-
 
                             @Override
                             public void onResponse(String response) {
                                 Log.d(TAG, response);
-                                //hidePDialog();
+                                hidePDialog();
                                 try {
                                     JSONObject res = new JSONObject(response);
 
                                     boolean error = res.getBoolean("error");
-                                    if(!error){
+                                    if (!error) {
                                         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                                         startActivity(intent);
                                         finish();
@@ -79,7 +96,7 @@ public class RemoveViagemCadastradaActivity extends Activity{
                                     }
 
 
-                                }catch (JSONException e) {
+                                } catch (JSONException e) {
                                     e.printStackTrace();
                                 }
                             }
@@ -87,10 +104,10 @@ public class RemoveViagemCadastradaActivity extends Activity{
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         VolleyLog.d(TAG, "Error: " + error.getMessage());
-                        //hidePDialog();
+                        hidePDialog();
 
                     }
-                }){
+                }) {
 
                     @Override
                     protected Map<String, String> getParams() {
@@ -103,16 +120,23 @@ public class RemoveViagemCadastradaActivity extends Activity{
                     }
 
                 };
+                // Adding request to request queue
+                AppController.getInstance().addToRequestQueue(viagemReq);
             }
         });
-        pDialog = new ProgressDialog(this);
-        // Showing progress dialog before making http request
-        // SQLite database handler
-        db = new SQLiteHandler(getApplicationContext());
-
-        pDialog.setMessage("Loading...");
-        pDialog.show();
-
-
     }
+
+    public void onDestroy() {
+        super.onDestroy();
+        hidePDialog();
+    }
+
+    private void hidePDialog() {
+        if (pDialog != null) {
+            pDialog.dismiss();
+            pDialog = null;
+        }
+    }
+
 }
+

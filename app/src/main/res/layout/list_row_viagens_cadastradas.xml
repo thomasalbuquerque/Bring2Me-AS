@@ -6,6 +6,7 @@
     android:background="@drawable/list_row_selector"
     android:padding="4dp" >
 
+
     <!-- Origem -->
     <TextView
         android:id="@+id/mostraorigemDasCadastradas"
@@ -39,6 +40,14 @@
     <Button
         android:id="@+id/botaoViagemCadastrada"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dip"
+        android:text="Deletar viagem"
+        android:textSize="13dp"
+
+        android:textColor="@color/white"
+        android:background="@color/material_deep_teal_500"/>
+
+
 
 </RelativeLayout>

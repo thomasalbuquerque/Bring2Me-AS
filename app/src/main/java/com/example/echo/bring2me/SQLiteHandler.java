@@ -45,8 +45,6 @@ public class SQLiteHandler extends SQLiteOpenHelper {
     private static final String KEY_MAX_VALOR = "maxval";
     private static final String KEY_RETORNO= "retorno";
 
-    private static String userID;
-
     public SQLiteHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
@@ -85,7 +83,6 @@ public class SQLiteHandler extends SQLiteOpenHelper {
         values.put(KEY_UID, uid); // Email
         values.put(KEY_CREATED_AT, created_at); // Created At
 
-        userID=uid;
 
         // Inserting Row
         long id = db.insert(TABLE_USER, null, values);
@@ -148,10 +145,6 @@ public class SQLiteHandler extends SQLiteOpenHelper {
         db.close(); // Closing database connection
 
         Log.d(TAG, "Nova viagem inserida ");
-    }
-
-    public static String getUserID() {
-        return userID;
     }
 
 }

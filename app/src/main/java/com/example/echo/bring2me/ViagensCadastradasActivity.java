@@ -40,22 +40,24 @@ public class ViagensCadastradasActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        String userID = SQLiteHandler.getUserID();
-        buscar(userID);
-
         setContentView(R.layout.list_view_deleta_viagem);
+
+        db = new SQLiteHandler(getApplicationContext());
+        HashMap<String, String> user = db.getUserDetails();
+        final String userViagemID = user.get("uid");
 
         listView = (ListView) findViewById(R.id.deletaViagens);
         adapter = new ViagensCadastradasListAdapter(this, viagemList);
         listView.setAdapter(adapter);
 
-        pDialog = new ProgressDialog(this);
         // Showing progress dialog before making http request
+        pDialog = new ProgressDialog(this);
+        pDialog.setMessage("Loading...");
+        pDialog.show();
         // SQLite database handler
         db = new SQLiteHandler(getApplicationContext());
 
-        pDialog.setMessage("Loading...");
-        pDialog.show();
+        buscar(userViagemID);
 
     }
 
