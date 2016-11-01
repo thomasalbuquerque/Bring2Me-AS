@@ -4,8 +4,6 @@ package com.example.echo.bring2me.listview.model;
  * Created by thomas on 16/09/16.
  */
 
-import java.util.ArrayList;
-
 public class Viagem {
     private String origem;
     private String destino;

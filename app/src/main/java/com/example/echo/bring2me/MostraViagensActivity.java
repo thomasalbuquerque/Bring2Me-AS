@@ -19,7 +19,6 @@ import com.android.volley.toolbox.StringRequest;
 import com.example.echo.bring2me.listview.adapter.CustomListAdapter;
 import com.example.echo.bring2me.listview.model.Viagem;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 

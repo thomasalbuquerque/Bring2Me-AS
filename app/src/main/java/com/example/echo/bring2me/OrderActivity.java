@@ -1,6 +1,5 @@
 package com.example.echo.bring2me;
 
-import android.support.v7.app.AppCompatActivity;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -9,9 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request.Method;
@@ -24,12 +21,6 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
-
-import com.example.echo.bring2me.R;
-import com.example.echo.bring2me.AppConfig;
-import com.example.echo.bring2me.AppController;
-import com.example.echo.bring2me.SQLiteHandler;
-import com.example.echo.bring2me.SessionManager;
 
 public class OrderActivity extends Activity {
     private static final String TAG = OrderActivity.class.getSimpleName();
