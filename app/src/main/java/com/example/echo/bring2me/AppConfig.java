@@ -16,7 +16,11 @@ public class AppConfig {
     // Server user search trip url
     public static String URL_BUSCAVIAGENS = "http://echob2m.esy.es/bd_api/buscaviagens.php";
 
-    public static String URL_IMAGEM = "https://lh4.googleusercontent.com/tmO3t6nytdpy1EG63SnGI2fy07rYXTUjaxQ2ONSmSsA1oHRav0Jbfo9gy-oPnnoXMIdFK6nYkXGsvV4=w1865-h941";
+    public static String URL_BUSCAVIAGENSCadastradas = "http://echob2m.esy.es/bd_api/buscaViagemByUser.php";
+
+    public static String URL_REMOVEVIAGEMCadastrada = "http://echob2m.esy.es/bd_api/deletaViagem.php";
+
+    public static String URL_IMAGEM = "http://echob2m.esy.es/verviagem.png";
 
     public static int AvaliacaoPadraoDoViajante = 5;
 }

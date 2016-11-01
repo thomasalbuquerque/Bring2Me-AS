@@ -6,15 +6,18 @@ package com.example.echo.bring2me.listview.adapter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.android.volley.toolbox.ImageLoader;
-import com.android.volley.toolbox.NetworkImageView;
 import com.example.echo.bring2me.AppController;
+import com.example.echo.bring2me.OrderActivity;
 import com.example.echo.bring2me.R;
 import com.example.echo.bring2me.listview.model.Viagem;
 
@@ -29,6 +32,7 @@ public class CustomListAdapter extends BaseAdapter {
         public CustomListAdapter(Activity activity, List<Viagem> viagemItems) {
                 this.activity = activity;
                 this.viagemItems = viagemItems;
+                this.inflater = ( LayoutInflater )activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         }
 
         @Override
@@ -49,39 +53,48 @@ public class CustomListAdapter extends BaseAdapter {
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
 
-                if (inflater == null)
-                        inflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                if (convertView == null)
-                        convertView = inflater.inflate(R.layout.list_row, null);
+                View rowView = inflater.inflate(R.layout.list_row,null);
 
                 if (imageLoader == null)
                         imageLoader = AppController.getInstance().getImageLoader();
 
-                NetworkImageView thumbNail = (NetworkImageView) convertView.findViewById(R.id.thumbnail);
-                TextView origemTV = (TextView) convertView.findViewById(R.id.origem);
-                TextView destinoTV = (TextView) convertView.findViewById(R.id.destino);
-                TextView avaliacaoViajanteTV = (TextView) convertView.findViewById(R.id.avaliacaoViajante);
-                TextView precoBaseTV = (TextView) convertView.findViewById(R.id.precoBase);
+                ImageButton thumbNail = (ImageButton) rowView.findViewById(R.id.thumbnail);
+                TextView origemTV = (TextView) rowView.findViewById(R.id.mostraorigem);
+                TextView destinoTV = (TextView) rowView.findViewById(R.id.mostradestino);
+                TextView avaliacaoViajanteTV = (TextView) rowView.findViewById(R.id.avaliacaoViajante);
+                TextView precoBaseTV = (TextView) rowView.findViewById(R.id.precoBase);
 
                 // getting movie data for the row
-                Viagem v = viagemItems.get(position);
-
+                final Viagem v = viagemItems.get(position);
                 // thumbnail image
-                thumbNail.setImageUrl(v.getThumbnailUrl(), imageLoader);
+                Bitmap bitmap = BitmapFromURL.getBitmapFromURL(v.getThumbnailUrl());
+                thumbNail.setImageBitmap(bitmap);
 
-                // origem
-                origemTV.setText("Origem: " + v.getOrigem());
+                thumbNail.setOnClickListener(new View.OnClickListener() {
 
-                // destino
-                destinoTV.setText("Destino: " + v.getDestino());
+                        public void onClick(View view) {
+                                Intent i = new Intent(activity.getApplicationContext(), OrderActivity.class);
+                                i.putExtra("id_viagem", v.getId());
+                                activity.startActivity(i);
+                                //activity.finish();
+                        }
+                });
 
-                // avaliacaoViajante
-                avaliacaoViajanteTV.setText("Avaliação do viajante: " + v.getAvaliacaoViajante());
+            if(v != null) {
 
-                // preço base
-                precoBaseTV.setText("R$"+v.getPrecoBase()+",00");
+                        // origem
+                        origemTV.setText("Origem: " + v.getOrigem());
 
-                return convertView;
+                        // destino
+                        destinoTV.setText("Destino: " + v.getDestino());
+
+                        // avaliacaoViajante
+                        avaliacaoViajanteTV.setText("Avaliação do viajante: " + v.getAvaliacaoViajante());
+
+                        // preço base
+                        precoBaseTV.setText("R$" + v.getPrecoBase());
+                }
+                return rowView;
         }
 
 }

@@ -16,12 +16,14 @@
     <color name="btn_login_bg">#eceef1</color>
     <color name="lbl_name">#333333</color>
     <color name="btn_logut_bg">#ff6861</color>
-    <color name="genre">#666666</color>
-    <color name="year">#888888</color>
     <color name="list_divider">#d9d9d9</color>
     <color name="list_row_start_color">#ffffff</color>
     <color name="list_row_end_color">#ffffff</color>
-    <color name="list_row_hover_start_color">#ebeef0</color>
+    <color name="list_row_hover_start_color">#e8f3fa</color>
     <color name="list_row_hover_end_color">#ebeef0</color>
+    <color name="colorMostraAvaliacaoViajante">#00b2ff</color>
+    <color name="colorMostraDestino">#383573</color>
+    <color name="colorMostraOrigem">#00428e</color>
+    <color name="corazul">#0000FF</color>
 
 </resources>
