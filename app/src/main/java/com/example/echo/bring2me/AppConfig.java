@@ -1,5 +1,5 @@
 package com.example.echo.bring2me;
-
+//branchAVALIACAO
 public class AppConfig {
     // Server user login url
     public static String URL_LOGIN = "http://echob2m.esy.es/bd_api/login.php";
