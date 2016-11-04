@@ -78,8 +78,12 @@ public class OrderActivity extends Activity {
         final String email = user.get("email");
 
         final RadioGroup radioGroup1 = (RadioGroup)findViewById(R.id.radioGroup);
-        final ToggleableRadioButton lC1 = (ToggleableRadioButton)findViewById(R.id.radioButton);
-        lC1.toggle();
+        final ToggleableRadioButton lC1Embalagem = (ToggleableRadioButton)findViewById(R.id.toggleableRadioButtonEmbalagem);
+        lC1Embalagem.toggle();
+        final ToggleableRadioButton lC2Correio = (ToggleableRadioButton)findViewById(R.id.toggleableRadioButtonCorreio);
+        lC2Correio.toggle();
+        final ToggleableRadioButton lC3Pessoalmente = (ToggleableRadioButton)findViewById(R.id.toggleableRadioButtonPessoalmente);
+        lC3Pessoalmente.toggle();
 
 
         buscacep.setOnClickListener(new View.OnClickListener() {
@@ -106,11 +110,19 @@ public class OrderActivity extends Activity {
                 String cep = inputCep.getText().toString().trim();
                 String numresid = inputnumresid.getText().toString().trim();
                 String complemento= inputcomplemento.getText().toString().trim();
-                String caixa;
-                if(lC1.isChecked()){
+                String caixa, entrega;
+                if(lC1Embalagem.isChecked()){
                     caixa = "1";
                 }
                 else caixa = "0";
+                if(lC2Correio.isChecked()){
+                    entrega = "0";
+                }
+                else if(lC3Pessoalmente.isChecked()){
+                    entrega = "1";
+                }
+                else entrega="0";
+
                 String bairro = bairroview.getText().toString().trim();
                 String logradouro = logradouroview.getText().toString().trim();
                 String uf = ufview.getText().toString().trim();
@@ -119,7 +131,7 @@ public class OrderActivity extends Activity {
                         ", "  + uf + ", "  + localidade + ", " + numresid + ", " + complemento;
                 if (!valor.isEmpty() && !product.isEmpty() && !cep.isEmpty() && !bairro.isEmpty() &&
                         !logradouro.isEmpty() && !uf.isEmpty() && !localidade.isEmpty() && !numresid.isEmpty()) {
-                    Order( valor, link , product, email, id_viagem, caixa, endereco);
+                    Order( valor, link , product, email, id_viagem, caixa, endereco, entrega);
                 } else {
                     Toast.makeText(getApplicationContext(),
                             "Não foi possível iniciar uma negociação. Verifique se os campos estão preenchidos!", Toast.LENGTH_LONG)
@@ -130,7 +142,7 @@ public class OrderActivity extends Activity {
     }
 
     private void Order(final String valor, final String link, final String product, final String email, final String id_viagem,
-                       final String caixa, final String endereco) {
+                       final String caixa, final String endereco, final String entrega) {
         // Tag used to cancel the request
         String tag_string_req = "req_order";
 
@@ -198,7 +210,7 @@ public class OrderActivity extends Activity {
                 params.put("id_viagem", id_viagem);
                 params.put("unpack", caixa);
                 params.put("adress", endereco);
-
+                params.put("entrega", entrega);
                 return params;
             }
 

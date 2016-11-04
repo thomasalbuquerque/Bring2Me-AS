@@ -73,6 +73,36 @@
 
     <RadioGroup
         android:layout_width="wrap_content"
+        android:id="@+id/radioGroup2"
+        android:layout_marginTop="40dip"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:text="Tipo de Entrega"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView9"
+            android:layout_weight="1"
+            android:textColor="@color/lbl_name" />
+
+        <com.example.echo.bring2me.ToggleableRadioButton
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Pelo correio "
+        android:id="@+id/toggleableRadioButtonCorreio"
+        android:checked="true"
+        android:layout_alignParentBottom="true"/>
+
+    <com.example.echo.bring2me.ToggleableRadioButton
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Pessoalmente "
+        android:id="@+id/toggleableRadioButtonPessoalmente"
+        android:checked="true"
+        android:layout_alignParentBottom="true" />
+    </RadioGroup>
+    <RadioGroup
+        android:layout_width="wrap_content"
         android:id="@+id/radioGroup"
         android:layout_marginTop="40dip"
         android:layout_height="wrap_content">
@@ -81,8 +111,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Trazer Produto Fora Da Embalagem *"
-            android:id="@+id/radioButton"
-            android:checked="true" />
+            android:id="@+id/toggleableRadioButtonEmbalagem"
+            android:checked="true"
+            android:layout_weight="1" />
     </RadioGroup>
     <TextView
         android:layout_width="wrap_content"
