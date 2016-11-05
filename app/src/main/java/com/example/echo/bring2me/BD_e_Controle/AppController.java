@@ -1,14 +1,12 @@
-package com.example.echo.bring2me;
-
-import com.example.echo.bring2me.listview.util.LruBitmapCache;
+package com.example.echo.bring2me.BD_e_Controle;
 
 import android.app.Application;
 import android.text.TextUtils;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.toolbox.Volley;
 import com.android.volley.toolbox.ImageLoader;
+import com.android.volley.toolbox.Volley;
 
 public class AppController extends Application {
 

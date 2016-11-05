@@ -1,4 +1,4 @@
-package com.example.echo.bring2me;
+package com.example.echo.bring2me.ControleDeSessao;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -15,14 +15,17 @@ import com.android.volley.Request.Method;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.example.echo.bring2me.BD_e_Controle.AppConfig;
+import com.example.echo.bring2me.BD_e_Controle.AppController;
+import com.example.echo.bring2me.MainActivity;
+import com.example.echo.bring2me.R;
+import com.example.echo.bring2me.BD_e_Controle.SQLiteHandler;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
-
-import com.example.echo.bring2me.R;
 
 public class LoginActivity extends Activity {
     private static final String TAG = RegisterActivity.class.getSimpleName();

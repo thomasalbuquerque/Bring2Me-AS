@@ -1,4 +1,4 @@
-package com.example.echo.bring2me;
+package com.example.echo.bring2me.MostraViajensDeOutrosViajantes;
 
 /**
  * Created by thomas on 17/09/16.
@@ -9,14 +9,20 @@ import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.StringRequest;
-import com.example.echo.bring2me.listview.adapter.ViagensCadastradasListAdapter;
-import com.example.echo.bring2me.listview.model.Viagem;
+import com.example.echo.bring2me.BD_e_Controle.AppConfig;
+import com.example.echo.bring2me.BD_e_Controle.AppController;
+import com.example.echo.bring2me.MainActivity;
+import com.example.echo.bring2me.R;
+import com.example.echo.bring2me.BD_e_Controle.SQLiteHandler;
+import com.example.echo.bring2me.Adapters.CustomListAdapter;
+import com.example.echo.bring2me.Viagem;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -27,43 +33,57 @@ import java.util.List;
 import java.util.Map;
 
 
-public class ViagensCadastradasActivity extends Activity {
+public class MostraViagensActivity extends Activity {
     // Log tag
     private static final String TAG = MainActivity.class.getSimpleName();
 
     private ProgressDialog pDialog;
     private List<Viagem> viagemList = new ArrayList<Viagem>();
     private ListView listView;
-    private ViagensCadastradasListAdapter adapter;
+    private CustomListAdapter adapter;
     private SQLiteHandler db;
+    String origem;
+    String destino;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.list_view_deleta_viagem);
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            origem = extras.getString("inputOrigem");
+            destino = extras.getString("inputDestino");
+        }
+        // Check for empty data in the form
+        if (!origem.isEmpty() && !destino.isEmpty()) {
+            // busca viagem
+            buscar(origem, destino);
+        } else {
+            // diga para digitar origem e destino
+            Toast.makeText(getApplicationContext(),
+                    "Insira sua origem e destino!", Toast.LENGTH_LONG).show();
+        }
+        setContentView(R.layout.mostraviagens);
 
-        db = new SQLiteHandler(getApplicationContext());
-        HashMap<String, String> user = db.getUserDetails();
-        final String userViagemID = user.get("uid");
-
-        listView = (ListView) findViewById(R.id.deletaViagens);
-        adapter = new ViagensCadastradasListAdapter(this, viagemList);
+        listView = (ListView) findViewById(R.id.list);
+        adapter = new CustomListAdapter(this, viagemList);
         listView.setAdapter(adapter);
 
-        // Showing progress dialog before making http request
         pDialog = new ProgressDialog(this);
-        pDialog.setMessage("Loading...");
-        pDialog.show();
+        // Showing progress dialog before making http request
         // SQLite database handler
         db = new SQLiteHandler(getApplicationContext());
 
-        buscar(userViagemID);
+        pDialog.setMessage("Loading...");
+        pDialog.show();
+
+
 
     }
 
-    public void buscar(final String userID){
+
+    public void buscar(final String origem, final String destino){
         // Creating volley request obj
-        StringRequest viagemReq = new StringRequest(Request.Method.POST,AppConfig.URL_BUSCAVIAGENSCadastradas,
+        StringRequest viagemReq = new StringRequest(Request.Method.POST, AppConfig.URL_BUSCAVIAGENS,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -73,7 +93,7 @@ public class ViagensCadastradasActivity extends Activity {
                             JSONObject res = new JSONObject(response);
                             // Parsing json
 
-                            for (int i = 0; i < res.length()-1; i++) {
+                        for (int i = 0; i < res.length()-1; i++) {
 
 
                                 JSONObject array = new JSONObject(response);
@@ -81,11 +101,14 @@ public class ViagensCadastradasActivity extends Activity {
                                 Viagem viagem = new Viagem();
                                 viagem.setOrigem(obj.getString("cidadeorigem"));
                                 viagem.setDestino(obj.getString("cidadedestino"));
+                                viagem.setThumbnailUrl(AppConfig.URL_IMAGEM);
+                                viagem.setAvaliacaoViajante(AppConfig.AvaliacaoPadraoDoViajante);
                                 viagem.setPrecoBase(obj.getDouble("precobase"));
                                 viagem.setId(obj.getString("id"));
 
                                 // adding viagem to viagens array
                                 viagemList.add(viagem);
+
                             }
 
                         }catch (JSONException e) {
@@ -109,7 +132,8 @@ public class ViagensCadastradasActivity extends Activity {
             protected Map<String, String> getParams() {
                 // Posting parameters to login url
                 Map<String, String> params = new HashMap<String, String>();
-                params.put("user_id", userID);
+                params.put("origem", origem);
+                params.put("destino", destino);
 
                 return params;
             }

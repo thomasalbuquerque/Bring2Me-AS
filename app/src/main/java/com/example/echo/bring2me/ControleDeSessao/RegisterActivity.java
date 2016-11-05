@@ -1,4 +1,4 @@
-package com.example.echo.bring2me;
+package com.example.echo.bring2me.ControleDeSessao;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -21,7 +21,11 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.example.echo.bring2me.BD_e_Controle.AppConfig;
+import com.example.echo.bring2me.BD_e_Controle.AppController;
+import com.example.echo.bring2me.MainActivity;
 import com.example.echo.bring2me.R;
+import com.example.echo.bring2me.BD_e_Controle.SQLiteHandler;
 
 public class RegisterActivity extends Activity {
     private static final String TAG = RegisterActivity.class.getSimpleName();

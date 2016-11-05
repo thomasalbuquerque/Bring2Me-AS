@@ -1,4 +1,4 @@
-package com.example.echo.bring2me.listview.model;
+package com.example.echo.bring2me;
 
 /**
  * Created by thomas on 16/09/16.

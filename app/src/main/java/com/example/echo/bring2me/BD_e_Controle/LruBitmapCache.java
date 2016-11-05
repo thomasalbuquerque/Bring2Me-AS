@@ -1,13 +1,13 @@
-package com.example.echo.bring2me.listview.util;
+package com.example.echo.bring2me.BD_e_Controle;
 
 /**
  * Created by thomas on 16/09/16.
  */
 
-import com.android.volley.toolbox.ImageLoader.ImageCache;
-
 import android.graphics.Bitmap;
 import android.support.v4.util.LruCache;
+
+import com.android.volley.toolbox.ImageLoader.ImageCache;
 
 public class LruBitmapCache extends LruCache<String, Bitmap> implements
         ImageCache {

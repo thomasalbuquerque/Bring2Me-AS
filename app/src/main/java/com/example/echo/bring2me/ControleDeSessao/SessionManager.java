@@ -1,4 +1,4 @@
-package com.example.echo.bring2me;
+package com.example.echo.bring2me.ControleDeSessao;
 
 import android.content.Context;
 import android.content.SharedPreferences;

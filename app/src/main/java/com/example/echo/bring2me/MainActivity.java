@@ -8,6 +8,13 @@ import android.widget.Button;
 import android.widget.TabHost;
 import android.widget.TextView;
 
+import com.example.echo.bring2me.BD_e_Controle.SQLiteHandler;
+import com.example.echo.bring2me.MostraViajensDeOutrosViajantes.BuscaViagensActivity;
+import com.example.echo.bring2me.ControleDeSessao.LoginActivity;
+import com.example.echo.bring2me.ControleDeSessao.SessionManager;
+import com.example.echo.bring2me.MinhasViagensCadastradas.CadastroViagem;
+import com.example.echo.bring2me.MinhasViagensCadastradas.MinhasViagensCadastradasActivity;
+
 import java.util.HashMap;
 
 public class MainActivity extends Activity {
@@ -125,7 +132,7 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View v) {
                 // Launching the login activity
-                Intent intent = new Intent(MainActivity.this, ViagensCadastradasActivity.class);
+                Intent intent = new Intent(MainActivity.this, MinhasViagensCadastradasActivity.class);
                 startActivity(intent);
                 //finish();
             }

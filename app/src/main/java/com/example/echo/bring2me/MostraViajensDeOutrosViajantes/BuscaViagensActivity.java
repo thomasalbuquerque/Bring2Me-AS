@@ -1,4 +1,4 @@
-package com.example.echo.bring2me;
+package com.example.echo.bring2me.MostraViajensDeOutrosViajantes;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -8,6 +8,10 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
+
+import com.example.echo.bring2me.BD_e_Controle.PopulateArray;
+import com.example.echo.bring2me.R;
+import com.example.echo.bring2me.BD_e_Controle.SQLiteHandler;
 
 import java.util.ArrayList;
 

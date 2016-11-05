@@ -1,17 +1,9 @@
-package com.example.echo.bring2me;
+package com.example.echo.bring2me.RegistrarPedido;
 
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.EditText;
-import android.widget.TextView;
-
-import android.app.Activity;
-import android.app.ProgressDialog;
-import android.content.Intent;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
 import android.widget.Toast;
 
 import org.json.JSONException;
@@ -21,7 +13,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-
 import java.net.URL;
 
 public class BuscarCepTask extends AsyncTask<String, Void, String> {

@@ -1,4 +1,4 @@
-package com.example.echo.bring2me;
+package com.example.echo.bring2me.MinhasViagensCadastradas;
 
 import android.text.Editable;
 import android.text.TextWatcher;
