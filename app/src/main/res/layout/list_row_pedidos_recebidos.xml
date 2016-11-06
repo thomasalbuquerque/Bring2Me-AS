@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/RowViagemCadastrada"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/list_row_selector"
+    android:padding="4dp" >
+
+
+    <!-- Nome -->
+    <TextView
+        android:id="@+id/nomePedidoRecebido"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:textSize="@dimen/title"
+        android:textColor="@color/colorMostraOrigem"
+        android:textStyle="normal"
+        android:layout_marginRight="2dp"/>
+
+    <!-- Valor -->
+    <TextView
+        android:id="@+id/valorPedidoRecebido"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1dip"
+        android:layout_above="@+id/btn_detalhesPedidoRecebido"
+        android:textSize="@dimen/title"
+        android:textColor="@color/colorMostraDestino"
+        android:textStyle="normal" />
+
+    <!-- Empacotado -->
+    <TextView
+        android:id="@+id/empacotadoPedidoRecebido"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/btn_detalhesPedidoRecebido"
+        android:textColor="@color/btn_logut_bg"
+        android:textSize="2dp" />
+
+    <!-- Correio ou pessoal -->
+    <TextView
+        android:id="@+id/correioOuPessoalPedidoRecebido"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/btn_detalhesPedidoRecebido"
+        android:textColor="@color/btn_logut_bg"
+        android:textSize="2dp" />
+
+    <!-- Referente à viagem -->
+
+    <TextView
+        android:id="@+id/pedidoReferenteAViagem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/btn_detalhesPedidoRecebido"
+        android:textColor="@color/btn_logut_bg"
+        android:textSize="2dp" />
+
+    <Button
+        android:id="@+id/btn_detalhesPedidoRecebido"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dip"
+        android:text="Ver detalhes do pedido recebido"
+        android:textSize="11dp"
+
+        android:textColor="@color/white"
+        android:background="@color/material_deep_teal_500"/>
+
+
+
+</RelativeLayout>

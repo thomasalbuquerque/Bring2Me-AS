@@ -1,8 +1,4 @@
-package com.example.echo.bring2me.MinhasViagensCadastradas;
-
-/**
- * Created by thomas on 17/09/16.
- */
+package com.example.echo.bring2me.PedidosRecebidos;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -15,12 +11,12 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.StringRequest;
-import com.example.echo.bring2me.Adapters.ViagensCadastradasListAdapter;
+import com.example.echo.bring2me.Adapters.PedidosRecebidosListAdapter;
 import com.example.echo.bring2me.BD_e_Controle.AppConfig;
 import com.example.echo.bring2me.BD_e_Controle.AppController;
 import com.example.echo.bring2me.BD_e_Controle.SQLiteHandler;
+import com.example.echo.bring2me.Pedido;
 import com.example.echo.bring2me.R;
-import com.example.echo.bring2me.Viagem;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -30,29 +26,30 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
-public class MinhasViagensCadastradasActivity extends Activity {
+/**
+ * Created by thomas on 06/11/16.
+ */
+public class PedidosRecebidosActivity extends Activity{
     // Log tag
-    private static final String TAG = MinhasViagensCadastradasActivity.class.getSimpleName();
+    private static final String TAG = PedidosRecebidosActivity.class.getSimpleName();
 
     private ProgressDialog pDialog;
-    private List<Viagem> viagemList = new ArrayList<Viagem>();
-    private ListView listView;
-    private ViagensCadastradasListAdapter adapter;
+    private List<Pedido> viagemListPedidosRecebidos = new ArrayList<Pedido>();
+    private ListView listViewPedidosRecebidos;
+    private PedidosRecebidosListAdapter adapter;
     private SQLiteHandler db;
 
-    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.list_view_viagens_cadastradas);
+        setContentView(R.layout.list_view_pedidos_recebidos);
 
         db = new SQLiteHandler(getApplicationContext());
         HashMap<String, String> user = db.getUserDetails();
-        final String userViagemID = user.get("uid");
 
-        listView = (ListView) findViewById(R.id.deletaViagens);
-        adapter = new ViagensCadastradasListAdapter(this, viagemList);
-        listView.setAdapter(adapter);
+
+        listViewPedidosRecebidos = (ListView) findViewById(R.id.pedidosRecebidosListView);
+        adapter = new PedidosRecebidosListAdapter(this, viagemListPedidosRecebidos);
+        listViewPedidosRecebidos.setAdapter(adapter);
 
         // Showing progress dialog before making http request
         pDialog = new ProgressDialog(this);
@@ -61,13 +58,14 @@ public class MinhasViagensCadastradasActivity extends Activity {
         // SQLite database handler
         db = new SQLiteHandler(getApplicationContext());
 
-        buscar(userViagemID);
+        final String userViagemID = user.get("uid");
+        buscarPedidosRecebidos(userViagemID);
 
     }
 
-    public void buscar(final String userID){
+    public void buscarPedidosRecebidos(final String userID){
         // Creating volley request obj
-        StringRequest viagemReq = new StringRequest(Request.Method.POST, AppConfig.URL_BUSCAVIAGENSCadastradas,
+        StringRequest pedidoRecebidoReq = new StringRequest(Request.Method.POST, AppConfig.URL_PEDIDOSRecebidos,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -82,16 +80,23 @@ public class MinhasViagensCadastradasActivity extends Activity {
 
                                 JSONObject array = new JSONObject(response);
                                 JSONObject obj = (JSONObject) array.get(Integer.toString(i));
-                                Viagem viagem = new Viagem();
-                                viagem.setOrigem(obj.getString("cidadeorigem"));
-                                viagem.setDestino(obj.getString("cidadedestino"));
-                                viagem.setRecompensaMin(obj.getDouble("recompMin"));
-                                viagem.setPrecoMaxProduto(obj.getDouble("precoBaseProduto"));
-                                viagem.setData(obj.getString("date"));
-                                viagem.setId(obj.getString("id"));
+                                Pedido pedido = new Pedido();
+
+                                pedido.setNomePedido(obj.getString("nome_produto"));
+                                pedido.setValorPedido((float) obj.getDouble("valor"));          //POSSIVEL PROBLEMA: NO SQL valor ESTÁ COMO FLOAT
+                                pedido.setLinkPedido(obj.getString("link"));
+                                pedido.setEmailUsuarioPedidoi(obj.getString("email_usuario"));
+                                pedido.setIdPedido(obj.getInt("id_pedido"));
+                                pedido.setEmpacotadoPedido(obj.getInt("empacotado"));
+                                pedido.setCorreioOuPessoalPedido(obj.getInt("entrega"));
+                                pedido.setEnderecoPedido(obj.getString("Adress"));
+                                pedido.setIdViagem(obj.getString("id_viagem"));
+                                if(pedido.getIdViagem() != userID){
+                                    Log.d(TAG, "userID Viagem meu é diferente do userID viagem da tabela Pedidos do banco");
+                                }
 
                                 // adding viagem to viagens array
-                                viagemList.add(viagem);
+                                viagemListPedidosRecebidos.add(pedido);
                             }
 
                         }catch (JSONException e) {
@@ -123,7 +128,7 @@ public class MinhasViagensCadastradasActivity extends Activity {
         };
 
         // Adding request to request queue
-        AppController.getInstance().addToRequestQueue(viagemReq);
+        AppController.getInstance().addToRequestQueue(pedidoRecebidoReq);
 
     }
     @Override
@@ -138,6 +143,8 @@ public class MinhasViagensCadastradasActivity extends Activity {
             pDialog = null;
         }
     }
+
+
 /*
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

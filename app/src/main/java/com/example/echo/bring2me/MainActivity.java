@@ -14,6 +14,7 @@ import com.example.echo.bring2me.ControleDeSessao.LoginActivity;
 import com.example.echo.bring2me.ControleDeSessao.SessionManager;
 import com.example.echo.bring2me.MinhasViagensCadastradas.CadastroViagem;
 import com.example.echo.bring2me.MinhasViagensCadastradas.MinhasViagensCadastradasActivity;
+import com.example.echo.bring2me.PedidosRecebidos.PedidosRecebidosActivity;
 
 import java.util.HashMap;
 
@@ -28,7 +29,8 @@ public class MainActivity extends Activity {
     private Button btnRegViagem;
     private Button btnProcViagem;
     private Button btnPedido;
-    private Button btnDelViagem;
+    private Button btnMinhasViagens;
+    private Button btnPedidosRecebidos;
 
     private SQLiteHandler db;
     private SessionManager session;
@@ -125,14 +127,27 @@ public class MainActivity extends Activity {
         });
     }
     private void instanciarAtividades(){
-        btnDelViagem = (Button)findViewById(R.id.btnDelViagem);
+        btnMinhasViagens = (Button)findViewById(R.id.btnMinhasViagens);
 
-        btnDelViagem.setOnClickListener(new View.OnClickListener() {
+        btnMinhasViagens.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
                 // Launching the login activity
                 Intent intent = new Intent(MainActivity.this, MinhasViagensCadastradasActivity.class);
+                startActivity(intent);
+                //finish();
+            }
+        });
+
+        btnPedidosRecebidos = (Button)findViewById(R.id.btnPedidosRecebidos);
+
+        btnPedidosRecebidos.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                // Launching the login activity
+                Intent intent = new Intent(MainActivity.this, PedidosRecebidosActivity.class);
                 startActivity(intent);
                 //finish();
             }

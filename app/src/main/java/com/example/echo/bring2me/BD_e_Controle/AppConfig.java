@@ -23,4 +23,8 @@ public class AppConfig {
     public static String URL_IMAGEM = "http://echob2m.esy.es/verviagem.png";
 
     public static int AvaliacaoPadraoDoViajante = 5;
+
+    public static String URL_PEDIDOSRecebidos = "";
+
+    public static String URL_AVALIAPedido = "";
 }
