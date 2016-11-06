@@ -71,12 +71,24 @@
                 android:textSize="15dp"
                 android:textColor="@color/input_login"/>
 
-            <Button
-                android:text="Sim"
-                android:layout_marginTop="2dp"
-                android:layout_width="75dp"
-                android:layout_height="37dp"
-                android:id="@+id/btnRemove"/>
+            <LinearLayout
+                android:orientation="horizontal" android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <Button
+                    android:text="Sim"
+                    android:layout_marginTop="2dp"
+                    android:layout_width="75dp"
+                    android:layout_height="37dp"
+                    android:id="@+id/btnRemove"/>
+
+                <Button
+                    android:text="Não"
+                    android:layout_marginTop="2dp"
+                    android:layout_width="73dp"
+                    android:layout_height="37dp"
+                    android:id="@+id/btnNAORemove"/>
+                    android:id="@+id/button" />
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 </ScrollView>

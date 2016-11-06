@@ -42,6 +42,7 @@ public class DetalhesViagemCadastradaActivity extends Activity{
     private String paisDestino;
 
     private Button btn_remove;
+    private Button btn_NAOremove;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +73,7 @@ public class DetalhesViagemCadastradaActivity extends Activity{
         db = new SQLiteHandler(getApplicationContext());
 
         btn_remove = (Button) findViewById(R.id.btnRemove);
+        btn_NAOremove = (Button) findViewById(R.id.btnNAORemove);
 
         /*// Check for empty data in the form
         if (!userIDfromAnterior.isEmpty() && !paisAtual.isEmpty() && !paisDestino.isEmpty()) {
@@ -147,7 +149,17 @@ public class DetalhesViagemCadastradaActivity extends Activity{
                 AppController.getInstance().addToRequestQueue(viagemReq);
             }
         });
+
+        btn_NAOremove.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), MinhasViagensCadastradasActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
     }
+
 
     public void onDestroy() {
         super.onDestroy();
