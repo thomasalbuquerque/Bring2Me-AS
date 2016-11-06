@@ -17,7 +17,7 @@ import android.widget.TextView;
 import com.android.volley.toolbox.ImageLoader;
 import com.example.echo.bring2me.BD_e_Controle.AppController;
 import com.example.echo.bring2me.BD_e_Controle.SQLiteHandler;
-import com.example.echo.bring2me.MinhasViagensCadastradas.RemoveViagemCadastradaActivity;
+import com.example.echo.bring2me.MinhasViagensCadastradas.DetalhesViagemCadastradaActivity;
 import com.example.echo.bring2me.R;
 import com.example.echo.bring2me.Viagem;
 
@@ -65,7 +65,9 @@ public class ViagensCadastradasListAdapter extends BaseAdapter {
 
         TextView origemTV = (TextView) rowView.findViewById(R.id.mostraorigemDasCadastradas);
         TextView destinoTV = (TextView) rowView.findViewById(R.id.mostradestinoDasCadastradas);
-        TextView precoBaseTV = (TextView) rowView.findViewById(R.id.precoBaseDasCadastradas);
+        TextView precoRecompTV = (TextView) rowView.findViewById(R.id.recompensaMinimaCadastradas);
+        TextView precoMaxProdutoTV = (TextView) rowView.findViewById(R.id.precoMaxProdutoCadastradas);
+
         Button botaoViagemCadastrada = (Button) rowView.findViewById(R.id.botaoViagemCadastrada);
 
         // getting movie data for the row
@@ -74,11 +76,15 @@ public class ViagensCadastradasListAdapter extends BaseAdapter {
         botaoViagemCadastrada.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View view) {
-                Intent i = new Intent(activity.getApplicationContext(), RemoveViagemCadastradaActivity.class);
+                Intent i = new Intent(activity.getApplicationContext(), DetalhesViagemCadastradaActivity.class);
                 i.putExtra("user_id", userViagemID);
                 i.putExtra("paisAtual", v.getOrigem());
                 i.putExtra("paisDestino",v.getDestino());
+                i.putExtra("precoRecomp",v.getRecompensaMinima());
+                i.putExtra("precoMaxProduto",v.getPrecoMaxProduto());
+                i.putExtra("data",v.getData());
                 activity.startActivity(i);
+                activity.finish();
             }
         });
 
@@ -90,8 +96,10 @@ public class ViagensCadastradasListAdapter extends BaseAdapter {
             // destino
             destinoTV.setText("Destino: " + v.getDestino());
 
+            precoRecompTV.setText("Recompensa mínima do viajante: " + v.getRecompensaMinima());
+
             // preço base
-            precoBaseTV.setText("R$" + v.getPrecoBase());
+            precoMaxProdutoTV.setText("R$" + v.getPrecoMaxProduto());
         }
         return rowView;
     }

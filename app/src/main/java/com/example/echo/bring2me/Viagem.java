@@ -10,7 +10,10 @@ public class Viagem {
     private String thumbnailUrl;
     private String id;
     private int avaliacaoViajante;
-    private double precoBase;
+    private double recompensaMin;
+    private String data;
+
+    private double precoMaxProduto;
 
     public Viagem() {
     }
@@ -21,7 +24,7 @@ public class Viagem {
         this.destino = destino;
         this.thumbnailUrl = thumbnailUrl;
         this.avaliacaoViajante = avaliacaoViajante;
-        this.precoBase = precoBase;
+        this.recompensaMin = precoBase;
         this.id = id;
     }
 
@@ -59,16 +62,29 @@ public class Viagem {
         this.avaliacaoViajante = avaliacaoViajante;
     }
 
-    public double getPrecoBase() {
-        return precoBase;
+    public double getRecompensaMinima() {
+        return recompensaMin;
     }
 
-    public void setPrecoBase(double precoBase) {
-        this.precoBase = precoBase;
+    public void setRecompensaMin(double precoBase) {
+        this.recompensaMin = precoBase;
     }
 
     public String getId() {return id;}
 
     public void setId(String id) {this.id = id;}
 
+
+    public double getPrecoMaxProduto() { return this.precoMaxProduto; }
+
+    public void setPrecoMaxProduto(double precoMaxProduto) {this.precoMaxProduto = precoMaxProduto; }
+
+
+    public String getData() {
+        return data;
+    }
+
+    public void setData(String data) {
+        this.data = data;
+    }
 }

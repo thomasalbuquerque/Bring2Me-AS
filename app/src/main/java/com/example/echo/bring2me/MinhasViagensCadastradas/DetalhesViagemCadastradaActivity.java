@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -16,9 +17,9 @@ import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.StringRequest;
 import com.example.echo.bring2me.BD_e_Controle.AppConfig;
 import com.example.echo.bring2me.BD_e_Controle.AppController;
+import com.example.echo.bring2me.BD_e_Controle.SQLiteHandler;
 import com.example.echo.bring2me.MainActivity;
 import com.example.echo.bring2me.R;
-import com.example.echo.bring2me.BD_e_Controle.SQLiteHandler;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -30,9 +31,9 @@ import java.util.Map;
  * Created by thomas on 27/10/16.
  */
 
-public class RemoveViagemCadastradaActivity extends Activity{
+public class DetalhesViagemCadastradaActivity extends Activity{
     // Log tag
-    private static final String TAG = MainActivity.class.getSimpleName();
+    private static final String TAG = DetalhesViagemCadastradaActivity.class.getSimpleName();
 
     private ProgressDialog pDialog;
     private SQLiteHandler db;
@@ -45,9 +46,25 @@ public class RemoveViagemCadastradaActivity extends Activity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.confirmacao_de_remocao_da_viagem);
+        setContentView(R.layout.detalhes_da_viagem_cadastrada);
 
+        TextView origemDetalhes = (TextView) findViewById(R.id.detalhesOrigem);
+        TextView destinoDetalhes = (TextView) findViewById(R.id.detalhesDestino);
+        TextView valMaxPedidoDetalhes = (TextView) findViewById(R.id.detalhesValMaxPedido);
+        TextView recompMinDetalhes = (TextView) findViewById(R.id.detalhesRecompensaMinima);
+        TextView dataChegadaDestinoDetalhes = (TextView) findViewById(R.id.detalhesDataChegadaDestino);
 
+        final Bundle extras = getIntent().getExtras();
+
+        if(extras != null){
+            origemDetalhes.setText("Origem: " + extras.getString("paisAtual"));
+            destinoDetalhes.setText("Destino: " + extras.getString("paisDestino"));
+            valMaxPedidoDetalhes.setText("Valor máximo de pedido: R$" + extras.getDouble("precoMaxProduto"));
+            recompMinDetalhes.setText("Recompensa mínima do viajante: R$" + extras.getDouble("precoRecomp"));
+            dataChegadaDestinoDetalhes.setText("Data de chegada: " + extras.getString("data"));
+        }
+        else
+            Log.d(TAG, "erro no extra");
 
         pDialog = new ProgressDialog(this);
 
@@ -71,11 +88,12 @@ public class RemoveViagemCadastradaActivity extends Activity{
             public void onClick(View view) {
                 pDialog.setMessage("Loading...");
                 pDialog.show();
-                Bundle extras = getIntent().getExtras();
-                if (extras != null) {
-                    userIDfromAnterior = extras.getString("user_id");
-                    paisAtual = extras.getString("paisAtual");
-                    paisDestino = extras.getString("paisDestino");
+                final Bundle extrasBotao = getIntent().getExtras();
+                if (extrasBotao != null) {
+                    userIDfromAnterior = extrasBotao.getString("user_id");
+                    paisAtual = extrasBotao.getString("paisAtual");
+                    paisDestino = extrasBotao.getString("paisDestino");
+
                 }
                 StringRequest viagemReq = new StringRequest(Request.Method.POST, AppConfig.URL_REMOVEVIAGEMCadastrada,
                         new Response.Listener<String>() {

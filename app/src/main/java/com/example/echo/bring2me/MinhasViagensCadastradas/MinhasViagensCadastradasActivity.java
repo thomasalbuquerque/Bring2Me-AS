@@ -86,7 +86,9 @@ public class MinhasViagensCadastradasActivity extends Activity {
                                 Viagem viagem = new Viagem();
                                 viagem.setOrigem(obj.getString("cidadeorigem"));
                                 viagem.setDestino(obj.getString("cidadedestino"));
-                                viagem.setPrecoBase(obj.getDouble("precobase"));
+                                viagem.setRecompensaMin(obj.getDouble("recompMin"));
+                                viagem.setPrecoMaxProduto(obj.getDouble("precoBaseProduto"));
+                                viagem.setData(obj.getString("date"));
                                 viagem.setId(obj.getString("id"));
 
                                 // adding viagem to viagens array

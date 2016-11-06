@@ -15,7 +15,7 @@
     <string name="name">Nome Completo</string>
     <string name="title_activity_cadastro_viagens">Cadastro Viagens</string>
     <string name="btn_cadastro_viagens">Cadastrar</string>
-    <string name="txt_data_retorno">Data de Retorno</string>
-    <string name="txt_val_max">Valor maximo do pedido</string>
-    <string name="minTax">Taxa Minima</string>
+    <string name="txt_data_retorno">Data de chegada no destino</string>
+    <string name="txt_val_max">Valor máximo do pedido</string>
+    <string name="minTax">Taxa de recompensa mínima</string>
 </resources>

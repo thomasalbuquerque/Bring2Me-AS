@@ -62,7 +62,7 @@ public class CustomListAdapter extends BaseAdapter {
                 TextView origemTV = (TextView) rowView.findViewById(R.id.mostraorigem);
                 TextView destinoTV = (TextView) rowView.findViewById(R.id.mostradestino);
                 TextView avaliacaoViajanteTV = (TextView) rowView.findViewById(R.id.avaliacaoViajante);
-                TextView precoBaseTV = (TextView) rowView.findViewById(R.id.precoBase);
+                TextView recompensaMinimaTV = (TextView) rowView.findViewById(R.id.recompensaMinima);
 
                 // getting movie data for the row
                 final Viagem v = viagemItems.get(position);
@@ -92,7 +92,7 @@ public class CustomListAdapter extends BaseAdapter {
                         avaliacaoViajanteTV.setText("Avaliação do viajante: " + v.getAvaliacaoViajante());
 
                         // preço base
-                        precoBaseTV.setText("R$" + v.getPrecoBase());
+                        recompensaMinimaTV.setText("R$" + v.getRecompensaMinima());
                 }
                 return rowView;
         }
