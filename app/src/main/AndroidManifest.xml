@@ -13,14 +13,14 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
-        android:name=".AppController"
+        android:name=".BD_e_Controle.AppController"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".LoginActivity"
+            android:name=".ControleDeSessao.LoginActivity"
             android:label="@string/app_name"
             android:launchMode="singleTop"
             android:windowSoftInputMode="adjustPan">
@@ -31,7 +31,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".RegisterActivity"
+            android:name=".ControleDeSessao.RegisterActivity"
             android:label="@string/app_name"
             android:launchMode="singleTop"
             android:windowSoftInputMode="adjustPan" />
@@ -40,32 +40,32 @@
             android:label="@string/app_name"
             android:launchMode="singleTop" />
         <activity
-            android:name=".CadastroViagem"
+            android:name=".MinhasViagensCadastradas.CadastroViagem"
             android:label="@string/app_name"
             android:launchMode="singleTop"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".BuscaViagensActivity"
+            android:name=".MostraViajensDeOutrosViajantes.BuscaViagensActivity"
             android:label="@string/app_name"
             android:launchMode="singleTop"
             android:windowSoftInputMode="adjustPan"/>
         <activity
-            android:name=".MostraViagensActivity"
+            android:name=".MostraViajensDeOutrosViajantes.MostraViagensActivity"
             android:label="@string/app_name"
             android:launchMode="singleTop"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".OrderActivity"
+            android:name=".RegistrarPedido.OrderActivity"
             android:label="@string/app_name"
             android:launchMode="singleTop"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".RemoveViagemCadastradaActivity"
+            android:name=".MinhasViagensCadastradas.DetalhesViagemCadastradaActivity"
             android:label="@string/app_name"
             android:launchMode="singleTop"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".ViagensCadastradasActivity"
+            android:name=".MinhasViagensCadastradas.MinhasViagensCadastradasActivity"
             android:label="@string/app_name"
             android:launchMode="singleTop"
             android:windowSoftInputMode="adjustPan" />
