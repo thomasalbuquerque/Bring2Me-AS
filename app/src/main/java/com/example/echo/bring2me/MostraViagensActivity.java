@@ -19,7 +19,6 @@ import com.android.volley.toolbox.StringRequest;
 import com.example.echo.bring2me.listview.adapter.CustomListAdapter;
 import com.example.echo.bring2me.listview.model.Viagem;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -56,7 +55,7 @@ public class MostraViagensActivity extends Activity {
         } else {
             // diga para digitar origem e destino
             Toast.makeText(getApplicationContext(),
-                    "Insira seu origem e destino!", Toast.LENGTH_LONG).show();
+                    "Insira sua origem e destino!", Toast.LENGTH_LONG).show();
         }
         setContentView(R.layout.mostraviagens);
 
@@ -100,6 +99,7 @@ public class MostraViagensActivity extends Activity {
                                 viagem.setThumbnailUrl(AppConfig.URL_IMAGEM);
                                 viagem.setAvaliacaoViajante(AppConfig.AvaliacaoPadraoDoViajante);
                                 viagem.setPrecoBase(obj.getDouble("precobase"));
+                                viagem.setId(obj.getString("id"));
 
                                 // adding viagem to viagens array
                                 viagemList.add(viagem);

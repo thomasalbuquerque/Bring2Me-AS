@@ -6,15 +6,18 @@ package com.example.echo.bring2me.listview.adapter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.android.volley.toolbox.ImageLoader;
-import com.android.volley.toolbox.NetworkImageView;
 import com.example.echo.bring2me.AppController;
+import com.example.echo.bring2me.OrderActivity;
 import com.example.echo.bring2me.R;
 import com.example.echo.bring2me.listview.model.Viagem;
 
@@ -55,16 +58,27 @@ public class CustomListAdapter extends BaseAdapter {
                 if (imageLoader == null)
                         imageLoader = AppController.getInstance().getImageLoader();
 
-                NetworkImageView thumbNail = (NetworkImageView) rowView.findViewById(R.id.thumbnail);
+                ImageButton thumbNail = (ImageButton) rowView.findViewById(R.id.thumbnail);
                 TextView origemTV = (TextView) rowView.findViewById(R.id.mostraorigem);
                 TextView destinoTV = (TextView) rowView.findViewById(R.id.mostradestino);
                 TextView avaliacaoViajanteTV = (TextView) rowView.findViewById(R.id.avaliacaoViajante);
                 TextView precoBaseTV = (TextView) rowView.findViewById(R.id.precoBase);
 
                 // getting movie data for the row
-                Viagem v = viagemItems.get(position);
+                final Viagem v = viagemItems.get(position);
                 // thumbnail image
-                thumbNail.setImageUrl(v.getThumbnailUrl(), imageLoader);
+                Bitmap bitmap = BitmapFromURL.getBitmapFromURL(v.getThumbnailUrl());
+                thumbNail.setImageBitmap(bitmap);
+
+                thumbNail.setOnClickListener(new View.OnClickListener() {
+
+                        public void onClick(View view) {
+                                Intent i = new Intent(activity.getApplicationContext(), OrderActivity.class);
+                                i.putExtra("id_viagem", v.getId());
+                                activity.startActivity(i);
+                                //activity.finish();
+                        }
+                });
 
             if(v != null) {
 

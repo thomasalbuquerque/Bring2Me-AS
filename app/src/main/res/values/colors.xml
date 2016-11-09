@@ -24,5 +24,6 @@
     <color name="colorMostraAvaliacaoViajante">#00b2ff</color>
     <color name="colorMostraDestino">#383573</color>
     <color name="colorMostraOrigem">#00428e</color>
+    <color name="corazul">#0000FF</color>
 
 </resources>

@@ -1,6 +1,5 @@
 package com.example.echo.bring2me;
 
-import android.support.v7.app.AppCompatActivity;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -9,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.android.volley.Request.Method;
@@ -22,21 +22,24 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.example.echo.bring2me.R;
-import com.example.echo.bring2me.AppConfig;
-import com.example.echo.bring2me.AppController;
-import com.example.echo.bring2me.SQLiteHandler;
-import com.example.echo.bring2me.SessionManager;
-
 public class OrderActivity extends Activity {
     private static final String TAG = OrderActivity.class.getSimpleName();
     private EditText inputValor;
     private EditText inputLink;
     private EditText inputProduct;
+    private EditText inputCep;
+    private EditText inputnumresid;
+    private EditText inputcomplemento;
+    private EditText bairroview;
+    private EditText logradouroview;
+    private EditText ufview;
+    private EditText localidadeview;
     private Button btnOrder;
+    private Button buscacep;
     private ProgressDialog pDialog;
     private SessionManager session;
     private SQLiteHandler db;
+    private String id_viagem;
 
 
     public void onCreate(Bundle savedInstanceState) {
@@ -46,7 +49,15 @@ public class OrderActivity extends Activity {
         inputValor = (EditText) findViewById(R.id.valor);
         inputLink = (EditText) findViewById(R.id.link);
         inputProduct = (EditText) findViewById(R.id.produto);
+        inputCep = (EditText) findViewById(R.id.cep);
+        inputnumresid = (EditText) findViewById(R.id.numresidenciaedit);
+        inputcomplemento = (EditText) findViewById(R.id.complementoedit);
         btnOrder = (Button) findViewById(R.id.btnOrder);
+        buscacep = (Button) findViewById(R.id.buscarcep);
+        bairroview = (EditText) findViewById(R.id.bairroview);
+        logradouroview = (EditText) findViewById(R.id.logradouroview);
+        ufview = (EditText) findViewById(R.id.ufview);
+        localidadeview = (EditText) findViewById(R.id.localidadeview);
 
         // Progress dialog
         pDialog = new ProgressDialog(this);
@@ -66,20 +77,61 @@ public class OrderActivity extends Activity {
 
         final String email = user.get("email");
 
+        final RadioGroup radioGroup1 = (RadioGroup)findViewById(R.id.radioGroup);
+        final ToggleableRadioButton lC1Embalagem = (ToggleableRadioButton)findViewById(R.id.toggleableRadioButtonEmbalagem);
+        lC1Embalagem.toggle();
+        final ToggleableRadioButton lC2Correio = (ToggleableRadioButton)findViewById(R.id.toggleableRadioButtonCorreio);
+        lC2Correio.toggle();
+        final ToggleableRadioButton lC3Pessoalmente = (ToggleableRadioButton)findViewById(R.id.toggleableRadioButtonPessoalmente);
+        lC3Pessoalmente.toggle();
+
+
+        buscacep.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                String cep = inputCep.getText().toString().trim();
+                BuscarCepTask buscarCep = new BuscarCepTask(getApplicationContext(),bairroview, logradouroview, ufview, localidadeview);
+                buscarCep.execute(cep);
+
+                }
+        });
+
+
         //Pegando o id da viagem do intent anterior
         Bundle extras = getIntent().getExtras();
-        final String id_viagem = extras.getString("id_viagem");
+        if(extras!=null) {
+            id_viagem = extras.getString("id_viagem");
+        }
 
-
-        // Order Button Click event
         btnOrder.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 String valor = inputValor.getText().toString().trim();
                 String link = inputLink.getText().toString().trim();
                 String product = inputProduct.getText().toString().trim();
+                String cep = inputCep.getText().toString().trim();
+                String numresid = inputnumresid.getText().toString().trim();
+                String complemento= inputcomplemento.getText().toString().trim();
+                String caixa, entrega;
+                if(lC1Embalagem.isChecked()){
+                    caixa = "1";
+                }
+                else caixa = "0";
+                if(lC2Correio.isChecked()){
+                    entrega = "0";
+                }
+                else if(lC3Pessoalmente.isChecked()){
+                    entrega = "1";
+                }
+                else entrega="0";
 
-                if (!valor.isEmpty() && !product.isEmpty()) {
-                    Order(product, valor, link ,email, id_viagem);
+                String bairro = bairroview.getText().toString().trim();
+                String logradouro = logradouroview.getText().toString().trim();
+                String uf = ufview.getText().toString().trim();
+                String localidade = localidadeview.getText().toString().trim();
+                String endereco = cep + ", " + logradouro + ", " +  bairro +
+                        ", "  + uf + ", "  + localidade + ", " + numresid + ", " + complemento;
+                if (!valor.isEmpty() && !product.isEmpty() && !cep.isEmpty() && !bairro.isEmpty() &&
+                        !logradouro.isEmpty() && !uf.isEmpty() && !localidade.isEmpty() && !numresid.isEmpty()) {
+                    Order( valor, link , product, email, id_viagem, caixa, endereco, entrega);
                 } else {
                     Toast.makeText(getApplicationContext(),
                             "Não foi possível iniciar uma negociação. Verifique se os campos estão preenchidos!", Toast.LENGTH_LONG)
@@ -89,7 +141,8 @@ public class OrderActivity extends Activity {
         });
     }
 
-    private void Order(final String valor, final String link, final String product, final String email, final String id_viagem) {
+    private void Order(final String valor, final String link, final String product, final String email, final String id_viagem,
+                       final String caixa, final String endereco, final String entrega) {
         // Tag used to cancel the request
         String tag_string_req = "req_order";
 
@@ -101,7 +154,7 @@ public class OrderActivity extends Activity {
 
             @Override
             public void onResponse(String response) {
-                Log.d(TAG, "Order Response: " + response.toString());
+                Log.d(TAG, "Order Response: " + response);
                 hideDialog();
 
                 try {
@@ -109,6 +162,8 @@ public class OrderActivity extends Activity {
                     boolean error = jObj.getBoolean("error");
                     if (!error) {
                         // User successfully stored in MySQL
+                        JSONObject pedido = jObj.getJSONObject("order");
+                        int id_p = pedido.getInt("id_pedido");
 
                         // inserir no SQLITE AQUI (precisa criar uma tabela de pedidos no SQLiteHandler)
 
@@ -147,13 +202,15 @@ public class OrderActivity extends Activity {
             @Override
             protected Map<String, String> getParams() {
                 // Posting params to order url
-                Map<String, String> params = new HashMap<String, String>();
+                Map<String, String> params = new HashMap<>();
                 params.put("valor", valor);
                 params.put("link", link);
                 params.put("product", product);
                 params.put("email", email);
                 params.put("id_viagem", id_viagem);
-
+                params.put("unpack", caixa);
+                params.put("adress", endereco);
+                params.put("entrega", entrega);
                 return params;
             }
 

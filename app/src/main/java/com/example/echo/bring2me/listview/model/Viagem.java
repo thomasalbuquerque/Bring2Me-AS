@@ -4,10 +4,11 @@ package com.example.echo.bring2me.listview.model;
  * Created by thomas on 16/09/16.
  */
 
-import java.util.ArrayList;
-
 public class Viagem {
-    private String origem, destino, thumbnailUrl;
+    private String origem;
+    private String destino;
+    private String thumbnailUrl;
+    private String id;
     private int avaliacaoViajante;
     private double precoBase;
 
@@ -15,12 +16,13 @@ public class Viagem {
     }
 
     public Viagem(String origem, String destino, String thumbnailUrl, int avaliacaoViajante,
-                 double precoBase) {
+                 double precoBase, String id) {
         this.origem = origem;
         this.destino = destino;
         this.thumbnailUrl = thumbnailUrl;
         this.avaliacaoViajante = avaliacaoViajante;
         this.precoBase = precoBase;
+        this.id = id;
     }
 
     public String getOrigem() {
@@ -64,5 +66,9 @@ public class Viagem {
     public void setPrecoBase(double precoBase) {
         this.precoBase = precoBase;
     }
+
+    public String getId() {return id;}
+
+    public void setId(String id) {this.id = id;}
 
 }

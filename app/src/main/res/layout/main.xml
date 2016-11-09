@@ -121,7 +121,28 @@
                     android:id="@+id/Atividades"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="vertical"></LinearLayout>
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="O que você deseja fazer?"
+                        android:id="@+id/txtAtividades"
+                        android:textSize="15dp"
+                        android:textAllCaps="true"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="20dip" />
+
+                    <Button
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="40dip"
+                        android:text="Ver viagens que cadastrei"
+                        android:id="@+id/btnDelViagem"
+                        android:textSize="15dp"
+                        android:textColor="@color/white"
+                        android:background="@color/material_deep_teal_500" />
+
+                </LinearLayout>
             </FrameLayout>
 
 
