@@ -119,7 +119,7 @@ public class OrderActivity extends Activity {
                 String complemento= inputcomplemento.getText().toString().trim();
                 String caixa, entrega;
                 if(lC1Embalagem.isChecked()){
-                    caixa = "0";
+                    caixa = "1";
                 }
                 else caixa = "0";
                 if(lC2Correio.isChecked()){

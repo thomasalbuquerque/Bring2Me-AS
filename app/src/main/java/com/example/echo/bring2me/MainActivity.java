@@ -14,6 +14,7 @@ import com.example.echo.bring2me.ControleDeSessao.SessionManager;
 import com.example.echo.bring2me.MinhasViagensCadastradas.CadastroViagem;
 import com.example.echo.bring2me.MinhasViagensCadastradas.MinhasViagensCadastradasActivity;
 import com.example.echo.bring2me.MostraViajensDeOutrosViajantes.BuscaViagensActivity;
+import com.example.echo.bring2me.PedidosFeitos.PedidosFeitosActivity;
 import com.example.echo.bring2me.PedidosRecebidos.PedidosRecebidosActivity;
 
 import java.util.HashMap;
@@ -31,6 +32,7 @@ public class MainActivity extends Activity {
     private Button btnPedido;
     private Button btnMinhasViagens;
     private Button btnPedidosRecebidos;
+    private Button btnPedidosFeitos;
 
     private SQLiteHandler db;
     private SessionManager session;
@@ -149,6 +151,19 @@ public class MainActivity extends Activity {
             public void onClick(View v) {
                 // Launching the login activity
                 Intent intent = new Intent(MainActivity.this, PedidosRecebidosActivity.class);
+                startActivity(intent);
+                //finish();
+            }
+        });
+
+        btnPedidosFeitos = (Button)findViewById(R.id.btnPedidosFeitos);
+
+        btnPedidosFeitos.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                // Launching the login activity
+                Intent intent = new Intent(MainActivity.this, PedidosFeitosActivity.class);
                 startActivity(intent);
                 //finish();
             }

@@ -11,6 +11,8 @@ public class Pedido {
     private String idViagem;
     private int idPedido;
     private int empacotadoPedido;
+    private int Avaliado;
+    private int Aceito;
     private int correioOuPessoalPedido;
     private String emailUsuarioPedidoi;
     private String enderecoPedido;
@@ -100,5 +102,14 @@ public class Pedido {
     public void setNomePedido(String nomePedido) {
         this.nomePedido = nomePedido;
     }
+
+    public int getAvaliado() {return Avaliado;}
+
+    public void setAvaliado(int avaliado) {Avaliado = avaliado;}
+
+    public int getAceito() {return Aceito;}
+
+    public void setAceito(int aceito) {Aceito = aceito;}
+
 
 }
