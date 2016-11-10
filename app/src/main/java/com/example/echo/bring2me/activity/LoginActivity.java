@@ -1,10 +1,11 @@
-package com.example.echo.bring2me;
+package com.example.echo.bring2me.activity;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -15,14 +16,17 @@ import com.android.volley.Request.Method;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.example.echo.bring2me.data.RequestSender;
+import com.example.echo.bring2me.R;
+import com.example.echo.bring2me.data.SQLiteHandler;
+import com.example.echo.bring2me.SessionManager;
+import com.example.echo.bring2me.model.User;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
-
-import com.example.echo.bring2me.R;
 
 public class LoginActivity extends Activity {
     private static final String TAG = RegisterActivity.class.getSimpleName();
@@ -37,7 +41,7 @@ public class LoginActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.login);
+        setContentView(R.layout.activity_login);
         if (android.os.Build.VERSION.SDK_INT > 9)
         {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
@@ -61,7 +65,7 @@ public class LoginActivity extends Activity {
 
         // Check if user is already logged in or not
         if (session.isLoggedIn()) {
-            // User is already logged in. Take him to main activity
+            // User is already logged in. Take him to activity_main activity
             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
             startActivity(intent);
             finish();
@@ -76,12 +80,12 @@ public class LoginActivity extends Activity {
 
                 // Check for empty data in the form
                 if (!email.isEmpty() && !password.isEmpty()) {
-                    // login user
+                    // activity_login user
                     checkLogin(email, password);
                 } else {
                     // Prompt user to enter credentials
                     Toast.makeText(getApplicationContext(),
-                            "Insira seu login e senha!", Toast.LENGTH_LONG)
+                            "Insira seu activity_login e senha!", Toast.LENGTH_LONG)
                             .show();
                 }
             }
@@ -102,7 +106,7 @@ public class LoginActivity extends Activity {
     }
 
     /**
-     * function to verify login details in mysql db
+     * function to verify activity_login details in mysql db
      * */
     private void checkLogin(final String email, final String password) {
         // Tag used to cancel the request
@@ -111,8 +115,16 @@ public class LoginActivity extends Activity {
         pDialog.setMessage("Fazendo Login ...");
         showDialog();
 
-        StringRequest strReq = new StringRequest(Method.POST,
-                AppConfig.URL_LOGIN, new Response.Listener<String>() {
+        StringRequest strReq = getStringRequest(email, password);
+
+        // Adding request to request queue
+        RequestSender.getInstance().addToRequestQueue(strReq, tag_string_req);
+    }
+
+    @NonNull
+    private StringRequest getStringRequest(final String email, final String password) {
+        return new StringRequest(Method.POST,
+                URLRequests.URL_LOGIN, new Response.Listener<String>() {
 
             @Override
             public void onResponse(String response) {
@@ -127,7 +139,7 @@ public class LoginActivity extends Activity {
                     // Check for error node in json
                     if (!error) {
                         // user successfully logged in
-                        // Create login session
+                        // Create activity_login session
                         session.setLogin(true);
 
                         // Now store the user in SQLite
@@ -140,15 +152,15 @@ public class LoginActivity extends Activity {
                                 .getString("created_at");
 
                         // Inserting row in users table
-                        db.addUser(name, email, uid, created_at);
+                        db.addUser(new User(name, email, uid, created_at));
 
-                        // Launch main activity
+                        // Launch activity_main activity
                         Intent intent = new Intent(LoginActivity.this,
                                 MainActivity.class);
                         startActivity(intent);
                         finish();
                     } else {
-                        // Error in login. Get the error message
+                        // Error in activity_login. Get the error message
                         String errorMsg = jObj.getString("error_msg");
                         Toast.makeText(getApplicationContext(),
                                 errorMsg, Toast.LENGTH_LONG).show();
@@ -173,7 +185,7 @@ public class LoginActivity extends Activity {
 
             @Override
             protected Map<String, String> getParams() {
-                // Posting parameters to login url
+                // Posting parameters to activity_login url
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("email", email);
                 params.put("password", password);
@@ -182,9 +194,6 @@ public class LoginActivity extends Activity {
             }
 
         };
-
-        // Adding request to request queue
-        AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
     }
 
     private void showDialog() {

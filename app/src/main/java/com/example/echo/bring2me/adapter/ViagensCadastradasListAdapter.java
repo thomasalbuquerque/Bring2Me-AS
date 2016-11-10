@@ -1,4 +1,4 @@
-package com.example.echo.bring2me.listview.adapter;
+package com.example.echo.bring2me.adapter;
 
 /**
  * Created by thomas on 16/09/16.
@@ -15,11 +15,11 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.android.volley.toolbox.ImageLoader;
-import com.example.echo.bring2me.AppController;
+import com.example.echo.bring2me.data.RequestSender;
 import com.example.echo.bring2me.R;
-import com.example.echo.bring2me.RemoveViagemCadastradaActivity;
-import com.example.echo.bring2me.SQLiteHandler;
-import com.example.echo.bring2me.listview.model.Viagem;
+import com.example.echo.bring2me.activity.RemoveViagemCadastradaActivity;
+import com.example.echo.bring2me.data.SQLiteHandler;
+import com.example.echo.bring2me.model.Viagem;
 
 import java.util.HashMap;
 import java.util.List;
@@ -30,7 +30,7 @@ public class ViagensCadastradasListAdapter extends BaseAdapter {
     private Activity activity;
     private LayoutInflater inflater;
     private List<Viagem> viagemItems;
-    ImageLoader imageLoader = AppController.getInstance().getImageLoader();
+    ImageLoader imageLoader = RequestSender.getInstance().getImageLoader();
 
     public ViagensCadastradasListAdapter(Activity activity, List<Viagem> viagemItems) {
         this.activity = activity;
@@ -61,7 +61,7 @@ public class ViagensCadastradasListAdapter extends BaseAdapter {
         View rowView = inflater.inflate(R.layout.list_row_viagens_cadastradas,null);
 
         if (imageLoader == null)
-            imageLoader = AppController.getInstance().getImageLoader();
+            imageLoader = RequestSender.getInstance().getImageLoader();
 
         TextView origemTV = (TextView) rowView.findViewById(R.id.mostraorigemDasCadastradas);
         TextView destinoTV = (TextView) rowView.findViewById(R.id.mostradestinoDasCadastradas);

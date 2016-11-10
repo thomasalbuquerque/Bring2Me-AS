@@ -1,4 +1,4 @@
-package com.example.echo.bring2me.listview.util;
+package com.example.echo.bring2me.util;
 
 /**
  * Created by thomas on 16/09/16.

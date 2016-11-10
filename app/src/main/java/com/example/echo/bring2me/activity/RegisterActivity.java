@@ -1,4 +1,4 @@
-package com.example.echo.bring2me;
+package com.example.echo.bring2me.activity;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -21,7 +21,11 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.example.echo.bring2me.data.RequestSender;
 import com.example.echo.bring2me.R;
+import com.example.echo.bring2me.data.SQLiteHandler;
+import com.example.echo.bring2me.SessionManager;
+import com.example.echo.bring2me.model.User;
 
 public class RegisterActivity extends Activity {
     private static final String TAG = RegisterActivity.class.getSimpleName();
@@ -57,7 +61,7 @@ public class RegisterActivity extends Activity {
 
         // Check if user is already logged in or not
         if (session.isLoggedIn()) {
-            // User is already logged in. Take him to main activity
+            // User is already logged in. Take him to activity_main activity
             Intent intent = new Intent(RegisterActivity.this,
                     MainActivity.class);
             startActivity(intent);
@@ -107,7 +111,7 @@ public class RegisterActivity extends Activity {
         showDialog();
 
         StringRequest strReq = new StringRequest(Method.POST,
-                AppConfig.URL_REGISTER, new Response.Listener<String>() {
+                URLRequests.URL_REGISTER, new Response.Listener<String>() {
 
             @Override
             public void onResponse(String response) {
@@ -129,11 +133,11 @@ public class RegisterActivity extends Activity {
                                 .getString("created_at");
 
                         // Inserting row in users table
-                        db.addUser(name, email, uid, created_at);
+                        db.addUser(new User(name, email, uid, created_at));
 
-                        Toast.makeText(getApplicationContext(), "Cadastro realizado com sucesso. Faça seu login!", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "Cadastro realizado com sucesso. Faça seu activity_login!", Toast.LENGTH_LONG).show();
 
-                        // Launch login activity
+                        // Launch activity_login activity
                         Intent intent = new Intent(
                                 RegisterActivity.this,
                                 LoginActivity.class);
@@ -177,7 +181,7 @@ public class RegisterActivity extends Activity {
         };
 
         // Adding request to request queue
-        AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
+        RequestSender.getInstance().addToRequestQueue(strReq, tag_string_req);
     }
 
     private void showDialog() {

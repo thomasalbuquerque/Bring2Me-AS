@@ -1,4 +1,4 @@
-package com.example.echo.bring2me.listview.adapter;
+package com.example.echo.bring2me.util;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
