@@ -1,9 +1,11 @@
-package com.example.echo.bring2me;
+package com.example.echo.bring2me.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Switch;
 import android.widget.TextView;
+
+import com.example.echo.bring2me.R;
 
 public class SentRequestActivity extends AppCompatActivity {
 
