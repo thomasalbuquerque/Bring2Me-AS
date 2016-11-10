@@ -24,7 +24,7 @@ public class AppConfig {
 
     public static int AvaliacaoPadraoDoViajante = 5;
 
-    public static String URL_PEDIDOSRecebidos = "";
+    public static String URL_PEDIDOSRecebidos = "http://echob2m.esy.es/bd_api/buscaPedidos.php";
 
-    public static String URL_AVALIAPedido = "";
+    public static String URL_AVALIAPedido = "http://echob2m.esy.es/avaliado.php";
 }

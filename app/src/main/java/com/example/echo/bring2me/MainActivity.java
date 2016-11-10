@@ -3,6 +3,7 @@ package com.example.echo.bring2me;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TabHost;
@@ -34,6 +35,7 @@ public class MainActivity extends Activity {
 
     private SQLiteHandler db;
     private SessionManager session;
+    private static final String TAG = MainActivity.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -149,6 +151,7 @@ public class MainActivity extends Activity {
                 // Launching the login activity
                 Intent intent = new Intent(MainActivity.this, PedidosRecebidosActivity.class);
                 startActivity(intent);
+                Log.d(TAG, "erro btn pedidos recebidos");
                 //finish();
             }
         });

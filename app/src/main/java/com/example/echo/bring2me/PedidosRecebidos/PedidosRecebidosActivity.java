@@ -120,7 +120,7 @@ public class PedidosRecebidosActivity extends Activity{
             protected Map<String, String> getParams() {
                 // Posting parameters to login url
                 Map<String, String> params = new HashMap<String, String>();
-                params.put("user_id", userID);
+                params.put("viagem", userID);
 
                 return params;
             }
