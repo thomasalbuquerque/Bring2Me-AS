@@ -15,11 +15,10 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.StringRequest;
-import com.example.echo.bring2me.AppController;
+import com.example.echo.bring2me.data.RequestSender;
 import com.example.echo.bring2me.R;
-import com.example.echo.bring2me.SQLiteHandler;
+import com.example.echo.bring2me.data.SQLiteHandler;
 import com.example.echo.bring2me.adapter.ViagensCadastradasListAdapter;
-import com.example.echo.bring2me.data.AppConfig;
 import com.example.echo.bring2me.model.Viagem;
 
 import org.json.JSONException;
@@ -67,7 +66,7 @@ public class ViagensCadastradasActivity extends Activity {
 
     public void buscar(final String userID){
         // Creating volley request obj
-        StringRequest viagemReq = new StringRequest(Request.Method.POST, AppConfig.URL_BUSCAVIAGENSCadastradas,
+        StringRequest viagemReq = new StringRequest(Request.Method.POST, URLRequests.URL_BUSCAVIAGENSCadastradas,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -121,7 +120,7 @@ public class ViagensCadastradasActivity extends Activity {
         };
 
         // Adding request to request queue
-        AppController.getInstance().addToRequestQueue(viagemReq);
+        RequestSender.getInstance().addToRequestQueue(viagemReq);
 
     }
     @Override

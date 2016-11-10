@@ -16,11 +16,10 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.StringRequest;
-import com.example.echo.bring2me.AppController;
+import com.example.echo.bring2me.data.RequestSender;
 import com.example.echo.bring2me.R;
-import com.example.echo.bring2me.SQLiteHandler;
+import com.example.echo.bring2me.data.SQLiteHandler;
 import com.example.echo.bring2me.adapter.CustomListAdapter;
-import com.example.echo.bring2me.data.AppConfig;
 import com.example.echo.bring2me.model.Viagem;
 
 import org.json.JSONException;
@@ -82,7 +81,7 @@ public class MostraViagensActivity extends Activity {
 
     public void buscar(final String origem, final String destino){
         // Creating volley request obj
-        StringRequest viagemReq = new StringRequest(Request.Method.POST, AppConfig.URL_BUSCAVIAGENS,
+        StringRequest viagemReq = new StringRequest(Request.Method.POST, URLRequests.URL_BUSCAVIAGENS,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -100,8 +99,8 @@ public class MostraViagensActivity extends Activity {
                                 Viagem viagem = new Viagem();
                                 viagem.setOrigem(obj.getString("cidadeorigem"));
                                 viagem.setDestino(obj.getString("cidadedestino"));
-                                viagem.setThumbnailUrl(AppConfig.URL_IMAGEM);
-                                viagem.setAvaliacaoViajante(AppConfig.AvaliacaoPadraoDoViajante);
+                                viagem.setThumbnailUrl(URLRequests.URL_IMAGEM);
+                                viagem.setAvaliacaoViajante(URLRequests.AvaliacaoPadraoDoViajante);
                                 viagem.setPrecoBase(obj.getDouble("precobase"));
                                 viagem.setId(obj.getString("id"));
 
@@ -140,7 +139,7 @@ public class MostraViagensActivity extends Activity {
         };
 
         // Adding request to request queue
-        AppController.getInstance().addToRequestQueue(viagemReq);
+        RequestSender.getInstance().addToRequestQueue(viagemReq);
 
     }
     @Override

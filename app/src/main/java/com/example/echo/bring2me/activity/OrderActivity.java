@@ -15,11 +15,10 @@ import com.android.volley.Request.Method;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.example.echo.bring2me.AppController;
-import com.example.echo.bring2me.data.AppConfig;
+import com.example.echo.bring2me.data.RequestSender;
 import com.example.echo.bring2me.util.BuscarCepTask;
 import com.example.echo.bring2me.R;
-import com.example.echo.bring2me.SQLiteHandler;
+import com.example.echo.bring2me.data.SQLiteHandler;
 import com.example.echo.bring2me.SessionManager;
 import com.example.echo.bring2me.util.ToggleableRadioButton;
 
@@ -157,7 +156,7 @@ public class OrderActivity extends Activity {
         showDialog();
 
         StringRequest strReq = new StringRequest(Method.POST,
-                AppConfig.URL_ORDER, new Response.Listener<String>() {
+                URLRequests.URL_ORDER, new Response.Listener<String>() {
 
             @Override
             public void onResponse(String response) {
@@ -224,7 +223,7 @@ public class OrderActivity extends Activity {
         };
 
         // Adding request to request queue
-        AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
+        RequestSender.getInstance().addToRequestQueue(strReq, tag_string_req);
     }
 
     private void showDialog() {

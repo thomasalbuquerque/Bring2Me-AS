@@ -17,12 +17,11 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.example.echo.bring2me.AppController;
-import com.example.echo.bring2me.data.AppConfig;
+import com.example.echo.bring2me.data.RequestSender;
 import com.example.echo.bring2me.util.DateMask;
 import com.example.echo.bring2me.util.PopulateArray;
 import com.example.echo.bring2me.R;
-import com.example.echo.bring2me.SQLiteHandler;
+import com.example.echo.bring2me.data.SQLiteHandler;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -106,7 +105,7 @@ public class CadastroViagemActivity extends Activity{
         showDialog();
 
         StringRequest strReq = new StringRequest(Request.Method.POST,
-                AppConfig.URL_VIAGENS, new Response.Listener<String>() {
+                URLRequests.URL_VIAGENS, new Response.Listener<String>() {
 
             @Override
             public void onResponse(String response) {
@@ -171,7 +170,7 @@ public class CadastroViagemActivity extends Activity{
 
     };
 
-        AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
+        RequestSender.getInstance().addToRequestQueue(strReq, tag_string_req);
     }
 
     private void showDialog() {

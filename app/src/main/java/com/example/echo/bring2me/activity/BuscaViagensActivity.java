@@ -11,7 +11,7 @@ import android.widget.Spinner;
 
 import com.example.echo.bring2me.util.PopulateArray;
 import com.example.echo.bring2me.R;
-import com.example.echo.bring2me.SQLiteHandler;
+import com.example.echo.bring2me.data.SQLiteHandler;
 
 import java.util.ArrayList;
 

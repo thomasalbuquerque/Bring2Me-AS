@@ -21,11 +21,11 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.example.echo.bring2me.AppController;
+import com.example.echo.bring2me.data.RequestSender;
 import com.example.echo.bring2me.R;
-import com.example.echo.bring2me.SQLiteHandler;
+import com.example.echo.bring2me.data.SQLiteHandler;
 import com.example.echo.bring2me.SessionManager;
-import com.example.echo.bring2me.data.AppConfig;
+import com.example.echo.bring2me.model.User;
 
 public class RegisterActivity extends Activity {
     private static final String TAG = RegisterActivity.class.getSimpleName();
@@ -111,7 +111,7 @@ public class RegisterActivity extends Activity {
         showDialog();
 
         StringRequest strReq = new StringRequest(Method.POST,
-                AppConfig.URL_REGISTER, new Response.Listener<String>() {
+                URLRequests.URL_REGISTER, new Response.Listener<String>() {
 
             @Override
             public void onResponse(String response) {
@@ -133,7 +133,7 @@ public class RegisterActivity extends Activity {
                                 .getString("created_at");
 
                         // Inserting row in users table
-                        db.addUser(name, email, uid, created_at);
+                        db.addUser(new User(name, email, uid, created_at));
 
                         Toast.makeText(getApplicationContext(), "Cadastro realizado com sucesso. Faça seu activity_login!", Toast.LENGTH_LONG).show();
 
@@ -181,7 +181,7 @@ public class RegisterActivity extends Activity {
         };
 
         // Adding request to request queue
-        AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
+        RequestSender.getInstance().addToRequestQueue(strReq, tag_string_req);
     }
 
     private void showDialog() {

@@ -9,7 +9,7 @@ import android.widget.TabHost;
 import android.widget.TextView;
 
 import com.example.echo.bring2me.R;
-import com.example.echo.bring2me.SQLiteHandler;
+import com.example.echo.bring2me.data.SQLiteHandler;
 import com.example.echo.bring2me.SessionManager;
 
 import java.util.HashMap;

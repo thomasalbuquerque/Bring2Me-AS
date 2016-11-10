@@ -14,10 +14,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.StringRequest;
-import com.example.echo.bring2me.AppController;
+import com.example.echo.bring2me.data.RequestSender;
 import com.example.echo.bring2me.R;
-import com.example.echo.bring2me.SQLiteHandler;
-import com.example.echo.bring2me.data.AppConfig;
+import com.example.echo.bring2me.data.SQLiteHandler;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -76,7 +75,7 @@ public class RemoveViagemCadastradaActivity extends Activity{
                     paisAtual = extras.getString("paisAtual");
                     paisDestino = extras.getString("paisDestino");
                 }
-                StringRequest viagemReq = new StringRequest(Request.Method.POST, AppConfig.URL_REMOVEVIAGEMCadastrada,
+                StringRequest viagemReq = new StringRequest(Request.Method.POST, URLRequests.URL_REMOVEVIAGEMCadastrada,
                         new Response.Listener<String>() {
 
                             @Override
@@ -125,7 +124,7 @@ public class RemoveViagemCadastradaActivity extends Activity{
 
                 };
                 // Adding request to request queue
-                AppController.getInstance().addToRequestQueue(viagemReq);
+                RequestSender.getInstance().addToRequestQueue(viagemReq);
             }
         });
     }
