@@ -3,6 +3,7 @@ package com.example.echo.bring2me.Adapters;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 import com.example.echo.bring2me.BD_e_Controle.SQLiteHandler;
 import com.example.echo.bring2me.PedidosRecebidos.DetalhesPedidoRecebidoActivity;
 import com.example.echo.bring2me.Pedido;
+import com.example.echo.bring2me.PedidosRecebidos.PedidosRecebidosActivity;
 import com.example.echo.bring2me.R;
 
 import java.util.HashMap;
@@ -26,6 +28,7 @@ public class PedidosRecebidosListAdapter extends BaseAdapter{
     private Activity activity;
     private LayoutInflater inflater;
     private List<Pedido> pedidoItens;
+    private static final String TAG = PedidosRecebidosActivity.class.getSimpleName();
                                                                                         //TIREI AQUELE IMAGE LOADER (PODE DAR BUG?)
     public PedidosRecebidosListAdapter(Activity activity, List<Pedido> pedidoItens) {
         this.activity = activity;
@@ -51,6 +54,7 @@ public class PedidosRecebidosListAdapter extends BaseAdapter{
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         db = new SQLiteHandler(activity.getApplicationContext());
+
         HashMap<String, String> user = db.getUserDetails();
         final String userViagemID = user.get("uid");
 
@@ -70,11 +74,18 @@ public class PedidosRecebidosListAdapter extends BaseAdapter{
 
             public void onClick(View view) {
                 Intent i = new Intent(activity.getApplicationContext(), DetalhesPedidoRecebidoActivity.class);
-                i.putExtra("id_viagem", p.getIdViagem());
+                i.putExtra("id_viagem", ""+p.getIdViagem());
                 i.putExtra("nomeProdutoPedido",p.getNomePedido());
-                i.putExtra("valorProdutoPedido", p.getValorPedido());
-                i.putExtra("linkProdutoPedido",p.getLinkPedido());
-                i.putExtra("emailClienteProdutoPedido",p.getEmailUsuarioPedido());
+
+                i.putExtra("valorProdutoPedido", ""+p.getValorPedido());
+                Log.d(TAG,"valor do pedido Adapter: " + p.getValorPedido());
+
+                i.putExtra("linkProdutoPedido",""+p.getLinkPedido());
+                Log.d(TAG,"link do pedido Adapter: " + p.getLinkPedido());
+
+                i.putExtra("emailClienteProdutoPedido",""+p.getEmailUsuarioPedido());
+                Log.d(TAG,"email do pedido Adapter: " + p.getEmailUsuarioPedido());
+
                 i.putExtra("id_pedido",p.getIdPedido());
                 i.putExtra("empacotadoProdutoPedido",p.getEmpacotadoPedido());
                 i.putExtra("entregaProdutoPedido",p.getCorreioOuPessoalPedido());

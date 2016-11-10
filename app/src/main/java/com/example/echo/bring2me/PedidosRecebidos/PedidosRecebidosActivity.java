@@ -83,18 +83,21 @@ public class PedidosRecebidosActivity extends Activity{
                                 Pedido pedido = new Pedido();
 
                                 pedido.setNomePedido(obj.getString("nome_produto"));
-                                pedido.setValorPedido((float) obj.getDouble("valor"));          //POSSIVEL PROBLEMA: NO SQL valor ESTÁ COMO FLOAT
+                                pedido.setValorPedido(obj.getString("valor"));          //POSSIVEL PROBLEMA: NO SQL valor ESTÁ COMO FLOAT
+                                Log.d(TAG,"valor do pedido vindo do banco"+pedido.getValorPedido());
                                 pedido.setLinkPedido(obj.getString("link"));
+                                Log.d(TAG,"link do pedido vindo do banco"+pedido.getLinkPedido());
                                 pedido.setEmailUsuarioPedidoi(obj.getString("email_usuario"));
+                                Log.d(TAG,"email do usuario vindo do banco"+pedido.getEmailUsuarioPedido());
                                 pedido.setIdPedido(obj.getInt("id_pedido"));
                                 pedido.setEmpacotadoPedido(obj.getInt("empacotado"));
                                 pedido.setCorreioOuPessoalPedido(obj.getInt("entrega"));
                                 pedido.setEnderecoPedido(obj.getString("Adress"));
                                 pedido.setIdViagem(obj.getString("id_viagem"));
-                                if(pedido.getIdViagem() != userID){
+                                /*if(pedido.getIdViagem() != userID){
                                     Log.d(TAG, "userID Viagem meu é diferente do userID viagem da tabela Pedidos do banco");
                                     Log.d(TAG, "userID Viagem meu: " + userID + ", userID da tabela: " + pedido.getIdViagem());
-                                }
+                                }*/
 
                                 // adding viagem to viagens array
                                 viagemListPedidosRecebidos.add(pedido);

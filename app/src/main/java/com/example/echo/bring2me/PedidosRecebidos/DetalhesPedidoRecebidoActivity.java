@@ -40,7 +40,7 @@ public class DetalhesPedidoRecebidoActivity extends Activity{
     private String id_pedido;
 
     private int avaliado;
-    private int aceito;
+    private String aceito;
 
     private Button btn_Aceitar;
     private Button btn_Recusar;
@@ -74,8 +74,8 @@ public class DetalhesPedidoRecebidoActivity extends Activity{
         if(extras != null){
             nomeProdutoPedido.setText("Produto: " + extras.getString("nomeProdutoPedido"));
             valorProdutoPedido.setText("Valor: " + extras.getString("valorProdutoPedido"));
-            linkProdutoPedido.setText("Link do produto: " + extras.getDouble("linkProdutoPedido"));
-            emailClienteProdutoPedido.setText("Email do Cliente: " + extras.getDouble("emailClienteProdutoPedido"));
+            linkProdutoPedido.setText("Link do produto: " + extras.getString("linkProdutoPedido"));
+            emailClienteProdutoPedido.setText("Email do Cliente: " + extras.getString("emailClienteProdutoPedido"));
 
             // produto Empacotado
             if(extras.getInt("empacotadoProdutoPedido") == 1){
@@ -121,14 +121,16 @@ public class DetalhesPedidoRecebidoActivity extends Activity{
 
             public void onClick(View view) {
 
-                aceito=1;
+                aceito="1";
 
                 pDialog.setMessage("Loading...");
                 pDialog.show();
                 final Bundle extrasBotao = getIntent().getExtras();
                 if (extrasBotao != null) {
                     id_viagem = extrasBotao.getString("id_viagem");
-                    id_pedido = extrasBotao.getString("id_pedido");
+                    Log.d(TAG,"id_viagem: " + id_viagem);
+                    id_pedido = ""+extrasBotao.getInt("id_pedido");
+                    Log.d(TAG,"id_pedido: " + id_pedido);
                 }
 
                 avaliaNoBanco(aceito,id_viagem,id_pedido);
@@ -139,14 +141,16 @@ public class DetalhesPedidoRecebidoActivity extends Activity{
         btn_Recusar.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
 
-                aceito=0;
+                aceito="0";
 
                 pDialog.setMessage("Loading...");
                 pDialog.show();
                 final Bundle extrasBotao = getIntent().getExtras();
                 if (extrasBotao != null) {
                     id_viagem = extrasBotao.getString("id_viagem");
-                    id_pedido = extrasBotao.getString("id_pedido");
+                    Log.d(TAG,"id_viagem: " + id_viagem);
+                    id_pedido = ""+extrasBotao.getInt("id_pedido");
+                    Log.d(TAG,"id_pedido: " + id_pedido);
                 }
 
                 avaliaNoBanco(aceito,id_viagem,id_pedido);
@@ -156,7 +160,7 @@ public class DetalhesPedidoRecebidoActivity extends Activity{
 
     }  //fim do método onCreate()
 
-    private void avaliaNoBanco(final int avaliacao, final String id_viagem, final String id_pedido){
+    private void avaliaNoBanco(final String avaliacao, final String id_viagem, final String id_pedido){
         StringRequest pedidoReq = new StringRequest(Request.Method.POST, AppConfig.URL_AVALIAPedido,
                 new Response.Listener<String>() {
 
@@ -200,7 +204,8 @@ public class DetalhesPedidoRecebidoActivity extends Activity{
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("id_viagem", id_viagem);          //PARAMETROS SERÃO ID VIAGEM E IDE PEDIDO
                 params.put("id_pedido", id_pedido);
-                params.put("aceito", String.valueOf(avaliacao));
+                params.put("aceito", avaliacao);
+                Log.d(TAG,"aceito parameters: " + ""+avaliacao);
                 return params;
             }
 

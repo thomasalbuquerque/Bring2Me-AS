@@ -6,7 +6,7 @@ package com.example.echo.bring2me;
 
 public class Pedido {
     private String nomePedido;
-    private float valorPedido;
+    private String valorPedido;
     private String linkPedido;
     private String idViagem;
     private int idPedido;
@@ -18,7 +18,7 @@ public class Pedido {
     public Pedido() {
     }
 
-    public Pedido(String nomePedido, float valorPedido, String linkPedido, String idViagem, int correioOuPessoalPedido, String emailUsuarioPedidoi, String enderecoPedido, int naoPacotoPedido, int idPedido) {
+    public Pedido(String nomePedido, String valorPedido, String linkPedido, String idViagem, int correioOuPessoalPedido, String emailUsuarioPedidoi, String enderecoPedido, int naoPacotoPedido, int idPedido) {
         this.nomePedido = nomePedido;
         this.valorPedido = valorPedido;
         this.linkPedido = linkPedido;
@@ -85,11 +85,11 @@ public class Pedido {
         this.linkPedido = linkPedido;
     }
 
-    public float getValorPedido() {
+    public String getValorPedido() {
         return valorPedido;
     }
 
-    public void setValorPedido(float valorPedido) {
+    public void setValorPedido(String valorPedido) {
         this.valorPedido = valorPedido;
     }
 

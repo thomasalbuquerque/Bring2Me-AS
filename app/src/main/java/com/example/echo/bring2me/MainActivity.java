@@ -3,18 +3,17 @@ package com.example.echo.bring2me;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TabHost;
 import android.widget.TextView;
 
 import com.example.echo.bring2me.BD_e_Controle.SQLiteHandler;
-import com.example.echo.bring2me.MostraViajensDeOutrosViajantes.BuscaViagensActivity;
 import com.example.echo.bring2me.ControleDeSessao.LoginActivity;
 import com.example.echo.bring2me.ControleDeSessao.SessionManager;
 import com.example.echo.bring2me.MinhasViagensCadastradas.CadastroViagem;
 import com.example.echo.bring2me.MinhasViagensCadastradas.MinhasViagensCadastradasActivity;
+import com.example.echo.bring2me.MostraViajensDeOutrosViajantes.BuscaViagensActivity;
 import com.example.echo.bring2me.PedidosRecebidos.PedidosRecebidosActivity;
 
 import java.util.HashMap;
@@ -151,7 +150,6 @@ public class MainActivity extends Activity {
                 // Launching the login activity
                 Intent intent = new Intent(MainActivity.this, PedidosRecebidosActivity.class);
                 startActivity(intent);
-                Log.d(TAG, "erro btn pedidos recebidos");
                 //finish();
             }
         });

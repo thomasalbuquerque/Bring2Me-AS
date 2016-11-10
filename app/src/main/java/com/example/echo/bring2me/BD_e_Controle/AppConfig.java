@@ -26,5 +26,5 @@ public class AppConfig {
 
     public static String URL_PEDIDOSRecebidos = "http://echob2m.esy.es/bd_api/buscaPedidos.php";
 
-    public static String URL_AVALIAPedido = "http://echob2m.esy.es/avaliado.php";
+    public static String URL_AVALIAPedido = "http://echob2m.esy.es/bd_api/avaliado.php";
 }
