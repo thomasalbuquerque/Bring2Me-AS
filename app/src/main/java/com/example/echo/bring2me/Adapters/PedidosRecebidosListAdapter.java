@@ -54,7 +54,7 @@ public class PedidosRecebidosListAdapter extends BaseAdapter{
         HashMap<String, String> user = db.getUserDetails();
         final String userViagemID = user.get("uid");
 
-        View rowView = inflater.inflate(R.layout.list_row_viagens_cadastradas,null);
+        View rowView = inflater.inflate(R.layout.list_row_pedidos_recebidos,null);
 
         TextView nomePedidoTV = (TextView) rowView.findViewById(R.id.nomePedidoRecebido);
         TextView valorPedidoTV = (TextView) rowView.findViewById(R.id.valorPedidoRecebido);

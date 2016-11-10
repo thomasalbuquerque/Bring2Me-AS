@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/RowViagemCadastrada"
+    android:id="@+id/RowPedidoRecebido"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/list_row_selector"
@@ -24,7 +24,6 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="1dip"
-        android:layout_above="@+id/btn_detalhesPedidoRecebido"
         android:textSize="@dimen/title"
         android:textColor="@color/colorMostraDestino"
         android:textStyle="normal" />
@@ -34,7 +33,6 @@
         android:id="@+id/empacotadoPedidoRecebido"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/btn_detalhesPedidoRecebido"
         android:textColor="@color/btn_logut_bg"
         android:textSize="2dp" />
 
@@ -43,7 +41,6 @@
         android:id="@+id/correioOuPessoalPedidoRecebido"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/btn_detalhesPedidoRecebido"
         android:textColor="@color/btn_logut_bg"
         android:textSize="2dp" />
 
@@ -53,7 +50,6 @@
         android:id="@+id/pedidoReferenteAViagem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/btn_detalhesPedidoRecebido"
         android:textColor="@color/btn_logut_bg"
         android:textSize="2dp" />
 
@@ -62,7 +58,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dip"
-        android:text="Ver detalhes do pedido recebido"
+        android:text="Ver detalhes do pedido"
         android:textSize="11dp"
 
         android:textColor="@color/white"

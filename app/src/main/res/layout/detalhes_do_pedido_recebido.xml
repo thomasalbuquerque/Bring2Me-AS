@@ -78,7 +78,7 @@
                 android:textColor="@color/input_login"/>
 
             <TextView
-                android:text="Deseja remover a viagem?"
+                android:text="Aceitar ou recusar o pedido?"
                 android:layout_marginTop="15dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
