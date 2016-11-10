@@ -214,7 +214,7 @@ public class OrderActivity extends Activity {
                 params.put("product", product);
                 params.put("email", email);
                 params.put("id_viagem", id_viagem);
-                params.put("unpack", caixa);
+                params.put("empacotado", caixa);
                 params.put("adress", endereco);
                 params.put("entrega", entrega);
                 return params;

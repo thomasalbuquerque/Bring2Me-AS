@@ -70,7 +70,7 @@ public class ViagensCadastradasActivity extends Activity {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        Log.d(TAG, response);
+                        Log.d(TAG, "Resposta: " +response);
                         hidePDialog();
                         try {
                             JSONObject res = new JSONObject(response);
