@@ -1,4 +1,4 @@
-package com.example.echo.bring2me;
+package com.example.echo.bring2me.activity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -17,6 +17,12 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.example.echo.bring2me.AppController;
+import com.example.echo.bring2me.data.AppConfig;
+import com.example.echo.bring2me.util.DateMask;
+import com.example.echo.bring2me.util.PopulateArray;
+import com.example.echo.bring2me.R;
+import com.example.echo.bring2me.SQLiteHandler;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -25,8 +31,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class CadastroViagem extends Activity{
-    private static final String TAG = CadastroViagem.class.getSimpleName();
+public class CadastroViagemActivity extends Activity{
+    private static final String TAG = CadastroViagemActivity.class.getSimpleName();
     private ArrayList<String> paises = new ArrayList<String>();
     private Spinner spPaisesOri;
     private Spinner spPaisesDes;
@@ -52,7 +58,7 @@ public class CadastroViagem extends Activity{
         maxVal = (EditText) findViewById(R.id.txtValor) ;
         mintax = (EditText) findViewById(R.id.txtMinTax) ;
         retorno = (EditText) findViewById(R.id.txtData) ;
-        retorno.addTextChangedListener(Mask.insert("####-##-##", retorno));
+        retorno.addTextChangedListener(DateMask.insert("####-##-##", retorno));
         db = new SQLiteHandler(getApplicationContext());
 
         PopulateArray.populatePaises(paises);
@@ -127,9 +133,9 @@ public class CadastroViagem extends Activity{
 
                         Toast.makeText(getApplicationContext(), "Cadastro realizado com sucesso.", Toast.LENGTH_LONG).show();
 
-                        // Launch login activity
+                        // Launch activity_login activity
                         Intent intent = new Intent(
-                                CadastroViagem.this,
+                                CadastroViagemActivity.this,
                                 MainActivity.class);
                         startActivity(intent);
                         finish();

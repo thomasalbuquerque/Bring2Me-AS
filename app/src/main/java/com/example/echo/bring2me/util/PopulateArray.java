@@ -1,4 +1,4 @@
-package com.example.echo.bring2me;
+package com.example.echo.bring2me.util;
 
 import java.util.ArrayList;
 

@@ -1,4 +1,4 @@
-package com.example.echo.bring2me.listview.adapter;
+package com.example.echo.bring2me.adapter;
 
 /**
  * Created by thomas on 16/09/16.
@@ -17,9 +17,9 @@ import android.widget.TextView;
 import com.android.volley.toolbox.ImageLoader;
 import com.example.echo.bring2me.AppController;
 import com.example.echo.bring2me.R;
-import com.example.echo.bring2me.RemoveViagemCadastradaActivity;
+import com.example.echo.bring2me.activity.RemoveViagemCadastradaActivity;
 import com.example.echo.bring2me.SQLiteHandler;
-import com.example.echo.bring2me.listview.model.Viagem;
+import com.example.echo.bring2me.model.Viagem;
 
 import java.util.HashMap;
 import java.util.List;

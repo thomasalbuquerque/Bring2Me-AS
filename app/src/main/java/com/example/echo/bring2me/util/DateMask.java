@@ -1,10 +1,10 @@
-package com.example.echo.bring2me;
+package com.example.echo.bring2me.util;
 
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.widget.EditText;
 
-public abstract class Mask {
+public abstract class DateMask {
     public static String unmask(String s) {
         return s.replaceAll("[.]", "").replaceAll("[-]", "")
                 .replaceAll("[/]", "").replaceAll("[(]", "")
@@ -16,7 +16,7 @@ public abstract class Mask {
             boolean isUpdating;
             String old = "";
             public void onTextChanged(CharSequence s, int start, int before,int count) {
-                String str = Mask.unmask(s.toString());
+                String str = DateMask.unmask(s.toString());
                 String mascara = "";
                 if (isUpdating) {
                     old = str;

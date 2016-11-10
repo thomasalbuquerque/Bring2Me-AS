@@ -1,4 +1,4 @@
-package com.example.echo.bring2me;
+package com.example.echo.bring2me.activity;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -14,6 +14,10 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.StringRequest;
+import com.example.echo.bring2me.AppController;
+import com.example.echo.bring2me.R;
+import com.example.echo.bring2me.SQLiteHandler;
+import com.example.echo.bring2me.data.AppConfig;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -40,7 +44,7 @@ public class RemoveViagemCadastradaActivity extends Activity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.confirmacao_de_remocao_da_viagem);
+        setContentView(R.layout.activity_confirmacao_de_remocao_da_viagem);
 
 
 
@@ -111,7 +115,7 @@ public class RemoveViagemCadastradaActivity extends Activity{
 
                     @Override
                     protected Map<String, String> getParams() {
-                        // Posting parameters to login url
+                        // Posting parameters to activity_login url
                         Map<String, String> params = new HashMap<String, String>();
                         params.put("user_id", userIDfromAnterior);
                         params.put("paisAtual", paisAtual);

@@ -1,4 +1,4 @@
-package com.example.echo.bring2me;
+package com.example.echo.bring2me.activity;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -7,6 +7,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TabHost;
 import android.widget.TextView;
+
+import com.example.echo.bring2me.R;
+import com.example.echo.bring2me.SQLiteHandler;
+import com.example.echo.bring2me.SessionManager;
 
 import java.util.HashMap;
 
@@ -29,7 +33,7 @@ public class MainActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main);
+        setContentView(R.layout.activity_main);
 
         txtName = (TextView) findViewById(R.id.name);
         txtEmail = (TextView) findViewById(R.id.email);
@@ -101,7 +105,7 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View v) {
                 //Construct the Intent you want to end up at
-                Intent intent = new Intent(MainActivity.this, CadastroViagem.class);
+                Intent intent = new Intent(MainActivity.this, CadastroViagemActivity.class);
                 startActivity(intent);
                 //finish();
             }
@@ -124,7 +128,7 @@ public class MainActivity extends Activity {
 
             @Override
             public void onClick(View v) {
-                // Launching the login activity
+                // Launching the activity_login activity
                 Intent intent = new Intent(MainActivity.this, ViagensCadastradasActivity.class);
                 startActivity(intent);
                 //finish();
@@ -142,7 +146,7 @@ public class MainActivity extends Activity {
 
         db.deleteUsers();
 
-        // Launching the login activity
+        // Launching the activity_login activity
         Intent intent = new Intent(MainActivity.this, LoginActivity.class);
         startActivity(intent);
         finish();

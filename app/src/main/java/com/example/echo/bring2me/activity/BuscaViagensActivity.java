@@ -1,4 +1,4 @@
-package com.example.echo.bring2me;
+package com.example.echo.bring2me.activity;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -8,6 +8,10 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
+
+import com.example.echo.bring2me.util.PopulateArray;
+import com.example.echo.bring2me.R;
+import com.example.echo.bring2me.SQLiteHandler;
 
 import java.util.ArrayList;
 
@@ -22,7 +26,7 @@ public class BuscaViagensActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.buscaviagens);
+        setContentView(R.layout.activity_buscaviagens);
 
         btnBusca = (Button) findViewById(R.id.btnbuscar);
         inputOrigem = (Spinner) findViewById(R.id.origem);

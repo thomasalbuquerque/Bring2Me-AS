@@ -1,4 +1,4 @@
-package com.example.echo.bring2me;
+package com.example.echo.bring2me.activity;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -15,6 +15,13 @@ import com.android.volley.Request.Method;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.example.echo.bring2me.AppController;
+import com.example.echo.bring2me.data.AppConfig;
+import com.example.echo.bring2me.util.BuscarCepTask;
+import com.example.echo.bring2me.R;
+import com.example.echo.bring2me.SQLiteHandler;
+import com.example.echo.bring2me.SessionManager;
+import com.example.echo.bring2me.util.ToggleableRadioButton;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -169,7 +176,7 @@ public class OrderActivity extends Activity {
 
                         Toast.makeText(getApplicationContext(), "Pedido realizado com sucesso.", Toast.LENGTH_LONG).show();
 
-                        // Launch main activity
+                        // Launch activity_main activity
                         Intent intent = new Intent(
                                 OrderActivity.this,
                                 MainActivity.class);
@@ -235,7 +242,7 @@ public class OrderActivity extends Activity {
 
         db.deleteUsers();
 
-        // Launching the login activity
+        // Launching the activity_login activity
         Intent intent = new Intent(OrderActivity.this, LoginActivity.class);
         startActivity(intent);
         finish();

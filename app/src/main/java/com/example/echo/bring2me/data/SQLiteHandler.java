@@ -3,7 +3,7 @@
  * URL: www.androidhive.info
  * twitter: http://twitter.com/ravitamada
  * */
-package com.example.echo.bring2me;
+package com.example.echo.bring2me.data;
 
 import android.content.ContentValues;
 import android.content.Context;
