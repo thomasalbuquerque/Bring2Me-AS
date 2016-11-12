@@ -29,9 +29,9 @@ import java.util.Map;
  * Created by thomas on 27/10/16.
  */
 
-public class RemoveViagemCadastradaActivity extends Activity{
+public class DetalhesViagemCadastradaActivity extends Activity{
     // Log tag
-    private static final String TAG = RemoveViagemCadastradaActivity.class.getSimpleName();
+    private static final String TAG = DetalhesViagemCadastradaActivity.class.getSimpleName();
 
     private ProgressDialog pDialog;
     private SQLiteHandler db;

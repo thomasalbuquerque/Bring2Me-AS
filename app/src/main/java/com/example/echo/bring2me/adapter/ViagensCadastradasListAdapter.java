@@ -19,7 +19,7 @@ import com.example.echo.bring2me.R;
 import com.example.echo.bring2me.data.RequestSender;
 import com.example.echo.bring2me.data.SQLiteHandler;
 import com.example.echo.bring2me.model.Viagem;
-import com.example.echo.bring2me.activity.RemoveViagemCadastradaActivity;
+import com.example.echo.bring2me.activity.DetalhesViagemCadastradaActivity;
 
 import java.util.HashMap;
 import java.util.List;
@@ -76,7 +76,7 @@ public class ViagensCadastradasListAdapter extends BaseAdapter {
         botaoViagemCadastrada.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View view) {
-                Intent i = new Intent(activity.getApplicationContext(), RemoveViagemCadastradaActivity.class);
+                Intent i = new Intent(activity.getApplicationContext(), DetalhesViagemCadastradaActivity.class);
                 i.putExtra("user_id", userViagemID);
                 i.putExtra("paisAtual", v.getOrigem());
                 i.putExtra("paisDestino",v.getDestino());
