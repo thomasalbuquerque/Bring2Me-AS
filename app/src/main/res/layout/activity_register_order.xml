@@ -3,7 +3,7 @@
 
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.example.echo.bring2me.RegistrarPedido.OrderActivity"
+    tools:context="com.example.echo.bring2me.activity.OrderActivity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true">
@@ -85,7 +85,7 @@
             android:layout_weight="1"
             android:textColor="@color/lbl_name" />
 
-        <com.example.echo.bring2me.RegistrarPedido.ToggleableRadioButton
+        <com.example.echo.bring2me.util.ToggleableRadioButton
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Pelo correio "
@@ -93,7 +93,7 @@
         android:checked="true"
         android:layout_alignParentBottom="true"/>
 
-    <com.example.echo.bring2me.RegistrarPedido.ToggleableRadioButton
+    <com.example.echo.bring2me.util.ToggleableRadioButton
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Pessoalmente "
@@ -107,7 +107,7 @@
         android:layout_marginTop="40dip"
         android:layout_height="wrap_content">
 
-        <com.example.echo.bring2me.RegistrarPedido.ToggleableRadioButton
+        <com.example.echo.bring2me.util.ToggleableRadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Trazer Produto Fora Da Embalagem *"

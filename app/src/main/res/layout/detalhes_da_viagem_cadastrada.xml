@@ -2,7 +2,7 @@
 
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.example.echo.bring2me.MinhasViagensCadastradas.DetalhesViagemCadastradaActivity"
+    tools:context="com.example.echo.bring2me.activity.RemoveViagemCadastradaActivity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true">
