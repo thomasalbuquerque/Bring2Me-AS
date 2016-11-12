@@ -18,6 +18,7 @@ import com.example.echo.bring2me.R;
 import com.example.echo.bring2me.data.RequestSender;
 import com.example.echo.bring2me.data.SQLiteHandler;
 import com.example.echo.bring2me.SessionManager;
+import com.example.echo.bring2me.model.User;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -131,7 +132,8 @@ public class RegisterActivity extends Activity {
                                 .getString("created_at");
 
                         // Inserting row in users table
-                        db.addUser(name, email, uid, created_at);
+                        User user1 = new User(name,email,uid,created_at);
+                        db.addUser(user1);
 
                         Toast.makeText(getApplicationContext(), "Cadastro realizado com sucesso. Faça seu activity_login!", Toast.LENGTH_LONG).show();
 
