@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "336688721569",
+    "firebase_url": "https://bring2me-2b2d0.firebaseio.com",
+    "project_id": "bring2me-2b2d0",
+    "storage_bucket": "bring2me-2b2d0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:336688721569:android:87d6a341b0dc60f4",
+        "android_client_info": {
+          "package_name": "com.example.echo.bring2me"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "336688721569-e2p03h7golt5hu190fenfk179ft27svv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAiLKKg0L15pVfTUZe4HYyDKzGounRKqTY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
