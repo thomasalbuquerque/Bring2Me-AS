@@ -11,6 +11,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.StringRequest;
+import com.example.echo.bring2me.URLRequests;
 import com.example.echo.bring2me.model.Pedido;
 import com.example.echo.bring2me.adapter.PedidosRecebidosListAdapter;
 import com.example.echo.bring2me.R;

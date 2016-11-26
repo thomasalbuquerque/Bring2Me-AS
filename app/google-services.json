@@ -1,27 +1,35 @@
 {
   "project_info": {
-    "project_number": "336688721569",
-    "firebase_url": "https://bring2me-2b2d0.firebaseio.com",
-    "project_id": "bring2me-2b2d0",
-    "storage_bucket": "bring2me-2b2d0.appspot.com"
+    "project_number": "166685467616",
+    "firebase_url": "https://appfirebaseproject-77f13.firebaseio.com",
+    "project_id": "appfirebaseproject-77f13",
+    "storage_bucket": "appfirebaseproject-77f13.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:336688721569:android:87d6a341b0dc60f4",
+        "mobilesdk_app_id": "1:166685467616:android:87d6a341b0dc60f4",
         "android_client_info": {
           "package_name": "com.example.echo.bring2me"
         }
       },
       "oauth_client": [
         {
-          "client_id": "336688721569-e2p03h7golt5hu190fenfk179ft27svv.apps.googleusercontent.com",
+          "client_id": "166685467616-qfkh70210n8anugkucmmm6i8kmjsqn92.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.echo.bring2me",
+            "certificate_hash": "379840C0DE26FE6A29544BB07F82FD2E001B5DED"
+          }
+        },
+        {
+          "client_id": "166685467616-vn5evpqr419ot51te8c0fbtbsai0bjdk.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAiLKKg0L15pVfTUZe4HYyDKzGounRKqTY"
+          "current_key": "AIzaSyC8VlJAdiwOj6V9i6dulweC_7_eWwdQZfg"
         }
       ],
       "services": {
@@ -29,8 +37,13 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "166685467616-vn5evpqr419ot51te8c0fbtbsai0bjdk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         },
         "ads_service": {
           "status": 2

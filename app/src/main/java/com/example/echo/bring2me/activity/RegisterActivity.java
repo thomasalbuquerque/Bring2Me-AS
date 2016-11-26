@@ -3,6 +3,7 @@ package com.example.echo.bring2me.activity;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -14,7 +15,9 @@ import com.android.volley.Request.Method;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.example.echo.bring2me.Config;
 import com.example.echo.bring2me.R;
+import com.example.echo.bring2me.URLRequests;
 import com.example.echo.bring2me.data.RequestSender;
 import com.example.echo.bring2me.data.SQLiteHandler;
 import com.example.echo.bring2me.SessionManager;
@@ -73,9 +76,11 @@ public class RegisterActivity extends Activity {
                 String name = inputFullName.getText().toString().trim();
                 String email = inputEmail.getText().toString().trim();
                 String password = inputPassword.getText().toString().trim();
+                SharedPreferences pref = getApplicationContext().getSharedPreferences(Config.SHARED_PREF, 0);
+                String regId = pref.getString("regId", null);
 
                 if (!name.isEmpty() && !email.isEmpty() && !password.isEmpty()) {
-                    registerUser(name, email, password);
+                    registerUser(name, email, password, regId);
                 } else {
                     Toast.makeText(getApplicationContext(),
                             "Cadastro incompleto, Por favor insira seus dados!", Toast.LENGTH_LONG)
@@ -102,11 +107,11 @@ public class RegisterActivity extends Activity {
      * email, password) to register url
      * */
     private void registerUser(final String name, final String email,
-                              final String password) {
+                              final String password, final String RegId) {
         // Tag used to cancel the request
         String tag_string_req = "req_register";
 
-        pDialog.setMessage("Regitrando ...");
+        pDialog.setMessage("Registrando ...");
         showDialog();
 
         StringRequest strReq = new StringRequest(Method.POST,
@@ -114,7 +119,7 @@ public class RegisterActivity extends Activity {
 
             @Override
             public void onResponse(String response) {
-                Log.d(TAG, "Register Response: " + response.toString());
+                Log.d(TAG, "Register Response: " + response);
                 hideDialog();
 
                 try {
@@ -174,6 +179,7 @@ public class RegisterActivity extends Activity {
                 params.put("name", name);
                 params.put("email", email);
                 params.put("password", password);
+                params.put("RegId", RegId);
 
                 return params;
             }
