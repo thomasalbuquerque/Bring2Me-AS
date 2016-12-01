@@ -76,7 +76,7 @@ public class SQLiteHandler extends SQLiteOpenHelper {
                 + KEY_CREATED_AT + " TEXT" + ")";
         db.execSQL(CREATE_LOGIN_TABLE);
 
-        String CREATE_TRIP_TABLE = "CREATE TABLE" + TABLE_VIAGEM + "(" +
+        String CREATE_TRIP_TABLE = "CREATE TABLE IF NOT EXISTS " + TABLE_VIAGEM + "(" +
                 KEY_USER_ID + " TEXT NOT NULL," +
                 KEY_PAIS_ORIGEM + " TEXT NOT NULL," +
                 KEY_PAIS_DESTINO + " TEXT NOT NULL," +
@@ -86,7 +86,7 @@ public class SQLiteHandler extends SQLiteOpenHelper {
                 " PRIMARY KEY ("+ KEY_PAIS_DESTINO +","+ KEY_PAIS_ORIGEM +","+ KEY_USER_ID +"))";
         db.execSQL(CREATE_TRIP_TABLE);
 
-        String CREATE_ORDER_TABLE = "CREATE TABLE "+ TABLE_PEDIDO +" (" +
+        String CREATE_ORDER_TABLE = "CREATE TABLE IF NOT EXISTS "+ TABLE_PEDIDO +" (" +
                 KEY_VALOR + " FLOAT NOT NULL," +
                 KEY_NOME_PRODUTO + " TEXT NOT NULL," +
                 KEY_LINK + "TEXT ," +

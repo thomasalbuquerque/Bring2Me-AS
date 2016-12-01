@@ -37,6 +37,7 @@ public class DetalhesPedidoRecebidoActivity extends Activity{
     private SQLiteHandler db;
     private String id_viagem;
     private String id_pedido;
+    private String email;
 
     private int avaliado;
     private String aceito;
@@ -130,6 +131,7 @@ public class DetalhesPedidoRecebidoActivity extends Activity{
                     Log.d(TAG,"id_viagem: " + id_viagem);
                     id_pedido = ""+extrasBotao.getInt("id_pedido");
                     Log.d(TAG,"id_pedido: " + id_pedido);
+                    email = extrasBotao.getString("email_usuario");
                 }
 
                 avaliaNoBanco(aceito,id_viagem,id_pedido);
@@ -150,6 +152,7 @@ public class DetalhesPedidoRecebidoActivity extends Activity{
                     Log.d(TAG,"id_viagem: " + id_viagem);
                     id_pedido = ""+extrasBotao.getInt("id_pedido");
                     Log.d(TAG,"id_pedido: " + id_pedido);
+                    email = extrasBotao.getString("email_usuario");
                 }
 
                 avaliaNoBanco(aceito,id_viagem,id_pedido);
@@ -204,6 +207,7 @@ public class DetalhesPedidoRecebidoActivity extends Activity{
                 params.put("id_viagem", id_viagem);          //PARAMETROS SERÃO ID VIAGEM E IDE PEDIDO
                 params.put("id_pedido", id_pedido);
                 params.put("aceito", avaliacao);
+                params.put("email", email);
                 Log.d(TAG,"aceito parameters: " + ""+avaliacao);
                 return params;
             }

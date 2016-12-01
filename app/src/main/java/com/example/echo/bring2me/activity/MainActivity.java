@@ -15,14 +15,25 @@ import android.widget.TabHost;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 import com.example.echo.bring2me.Config;
 import com.example.echo.bring2me.R;
+import com.example.echo.bring2me.URLRequests;
+import com.example.echo.bring2me.data.RequestSender;
 import com.example.echo.bring2me.data.SQLiteHandler;
 import com.example.echo.bring2me.SessionManager;
+import com.example.echo.bring2me.service.FirebaseInstanceIDService;
 import com.example.echo.bring2me.util.NotificationUtil;
 import com.google.firebase.messaging.FirebaseMessaging;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.HashMap;
+import java.util.Map;
 
 public class MainActivity extends Activity {
 
@@ -102,6 +113,8 @@ public class MainActivity extends Activity {
         };
 
         Log.e(TAG, "Firebase reg id: " + regId);
+
+        sendRegistrationToServer(regId);
         // Logout button click event
         btnLogout.setOnClickListener(new View.OnClickListener() {
 
@@ -237,5 +250,46 @@ public class MainActivity extends Activity {
         Intent intent = new Intent(MainActivity.this, LoginActivity.class);
         startActivity(intent);
         finish();
+    }
+    public void sendRegistrationToServer(final String token) {
+        String tag_string_req = "update_FBID";
+        // sending gcm token to server
+        StringRequest strReq = new StringRequest(Request.Method.POST,
+                URLRequests.URL_ATUALIZA_FIREBASE_ID, new Response.Listener<String>() {
+
+            @Override
+            public void onResponse(String response) {
+                Log.d(TAG, "Response: " + response);
+
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e(TAG, "Firebase ID update error: " + error.getMessage());
+                Toast.makeText(getApplicationContext(),
+                        error.getMessage(), Toast.LENGTH_LONG).show();
+
+            }
+        }) {
+
+            @Override
+            protected Map<String, String> getParams() {
+                // Posting parameters to url
+                Map<String, String> params = new HashMap<String, String>();
+                SQLiteHandler db = new SQLiteHandler(getApplicationContext());
+                HashMap<String, String> user = db.getUserDetails();
+                final String id = user.get("uid");
+                if(id != null)params.put("uid", id);
+                if(token!=null)params.put("RegId", token);
+
+                return params;
+            }
+
+        };
+
+        // Adding request to request queue
+        RequestSender.getInstance().addToRequestQueue(strReq, tag_string_req);
+
     }
 }

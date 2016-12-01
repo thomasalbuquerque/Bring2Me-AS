@@ -121,7 +121,9 @@
                     android:id="@+id/Atividades"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp">
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -141,6 +143,8 @@
                         android:textSize="15dp"
                         android:textColor="@color/white"
                         android:background="@color/material_deep_teal_500" />
+
+
 
                     <Button
                         android:layout_width="fill_parent"

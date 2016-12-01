@@ -13,7 +13,6 @@ import com.android.volley.toolbox.StringRequest;
 import com.example.echo.bring2me.URLRequests;
 import com.example.echo.bring2me.data.RequestSender;
 import com.example.echo.bring2me.data.SQLiteHandler;
-import com.example.echo.bring2me.model.User;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.FirebaseInstanceIdService;
 
@@ -46,7 +45,7 @@ public class FirebaseInstanceIDService extends FirebaseInstanceIdService {
         LocalBroadcastManager.getInstance(this).sendBroadcast(registrationComplete);
     }
 
-    private void sendRegistrationToServer(final String token) {
+    public void sendRegistrationToServer(final String token) {
         String tag_string_req = "update_FBID";
         // sending gcm token to server
         StringRequest strReq = new StringRequest(Request.Method.POST,

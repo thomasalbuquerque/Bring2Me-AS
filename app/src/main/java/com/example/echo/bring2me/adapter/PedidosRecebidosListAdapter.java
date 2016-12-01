@@ -87,6 +87,7 @@ public class PedidosRecebidosListAdapter extends BaseAdapter{
                 Log.d(TAG,"email do pedido Adapter: " + p.getEmailUsuarioPedido());
 
                 i.putExtra("id_pedido",p.getIdPedido());
+                i.putExtra("email_usuario",p.getEmailUsuarioPedido());
                 i.putExtra("empacotadoProdutoPedido",p.getEmpacotadoPedido());
                 i.putExtra("entregaProdutoPedido",p.getCorreioOuPessoalPedido());
                 i.putExtra("AdressProdutoPedido",p.getEnderecoPedido());
