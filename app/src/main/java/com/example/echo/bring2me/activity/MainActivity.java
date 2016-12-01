@@ -9,8 +9,8 @@ import android.widget.TabHost;
 import android.widget.TextView;
 
 import com.example.echo.bring2me.R;
-import com.example.echo.bring2me.data.SQLiteHandler;
 import com.example.echo.bring2me.SessionManager;
+import com.example.echo.bring2me.data.SQLiteHandler;
 
 import java.util.HashMap;
 
@@ -25,6 +25,7 @@ public class MainActivity extends Activity {
     private Button btnRegViagem;
     private Button btnProcViagem;
     private Button btnPedido;
+    private Button btnConfig;
     private Button btnMinhasViagens;
     private Button btnPedidosRecebidos;
     private Button btnPedidosFeitos;
@@ -102,6 +103,7 @@ public class MainActivity extends Activity {
     private void instanciarIniciar(){
         btnRegViagem = (Button)findViewById(R.id.btnRegViagem);
         btnProcViagem = (Button)findViewById(R.id.btnProcViagem);
+        btnConfig = (Button) findViewById(R.id.btnConfig);
 
         btnRegViagem.setOnClickListener(new View.OnClickListener() {
 
@@ -119,6 +121,17 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, BuscaViagensActivity.class);
+                startActivity(intent);
+                //finish();
+            }
+        });
+
+        btnConfig.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                //Construct the Intent you want to end up at
+                Intent intent = new Intent(MainActivity.this, ConfiguracoesActivity.class);
                 startActivity(intent);
                 //finish();
             }

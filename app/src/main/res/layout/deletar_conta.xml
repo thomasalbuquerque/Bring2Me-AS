@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/bg_register"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="10dp"
+    android:elevation="10dp"
+    android:weightSum="1">
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="vertical"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:layout_weight="0.54">
+
+
+        <TextView
+            android:text="Para deletar a sua conta entre com a sua senha."
+            android:layout_width="match_parent"
+            android:id="@+id/textView7"
+            android:textColor="@color/input_login_hint"
+            tools:textStyle="bold"
+            android:textSize="22sp"
+            android:textAlignment="center"
+            android:textIsSelectable="true"
+            tools:textColorHighlight="@android:color/white"
+            tools:textColorHint="@color/white"
+            android:layout_weight="1"
+            android:elevation="4dp"
+            android:layout_marginTop="0dp"
+            android:layout_height="0.1dp" />
+
+        <EditText
+            android:id="@+id/txtSenha"
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_marginBottom="10dp"
+            android:background="@color/input_register_bg"
+            android:hint="@string/hint_password"
+            android:inputType="textPassword"
+            android:padding="10dp"
+            android:singleLine="true"
+            android:textColor="@color/input_register"
+            android:textColorHint="@color/input_register_hint"
+            android:layout_weight="0.65" />
+
+
+        <Button
+            android:id="@+id/btnExcluir"
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="20dip"
+            android:background="#ea4c88"
+            android:text="Excluir Conta"
+            android:textColor="@color/white"
+            android:layout_weight="0.68" />
+    </LinearLayout>
+
+</LinearLayout>

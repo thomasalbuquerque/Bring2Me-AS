@@ -89,6 +89,11 @@
             android:label="@string/app_name"
             android:launchMode="singleTop"
             android:windowSoftInputMode="adjustPan" />
+
+        <activity android:name=".activity.mudar_senha" />
+        <activity android:name=".activity.RemoveContaActivity"/>
+        <activity android:name=".activity.ConfiguracoesActivity" />
+        <activity android:name=".activity.editarPerfil" />
     </application>
 
 </manifest>
