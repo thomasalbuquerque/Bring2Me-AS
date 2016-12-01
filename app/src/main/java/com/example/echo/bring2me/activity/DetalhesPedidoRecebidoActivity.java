@@ -1,7 +1,9 @@
 package com.example.echo.bring2me.activity;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -38,6 +40,8 @@ public class DetalhesPedidoRecebidoActivity extends Activity{
     private String id_viagem;
     private String id_pedido;
     private String email;
+
+    private AlertDialog alerta;
 
     private int avaliado;
     private String aceito;
@@ -133,8 +137,8 @@ public class DetalhesPedidoRecebidoActivity extends Activity{
                     Log.d(TAG,"id_pedido: " + id_pedido);
                     email = extrasBotao.getString("email_usuario");
                 }
-
-                avaliaNoBanco(aceito,id_viagem,id_pedido);
+                Alerta(aceito,id_viagem,id_pedido);
+                //avaliaNoBanco(aceito,id_viagem,id_pedido);
 
             }
         });
@@ -155,7 +159,8 @@ public class DetalhesPedidoRecebidoActivity extends Activity{
                     email = extrasBotao.getString("email_usuario");
                 }
 
-                avaliaNoBanco(aceito,id_viagem,id_pedido);
+                Alerta(aceito,id_viagem,id_pedido);
+                //avaliaNoBanco(aceito,id_viagem,id_pedido);
 
             }
         });
@@ -175,6 +180,12 @@ public class DetalhesPedidoRecebidoActivity extends Activity{
 
                             boolean error = res.getBoolean("error");
                             if (!error) {
+                                if(avaliacao == "1") {
+                                    Toast.makeText(getApplicationContext(), "Pedido aceito com sucesso.", Toast.LENGTH_LONG).show();
+                                }
+                                else if(avaliacao == "0"){
+                                    Toast.makeText(getApplicationContext(), "Pedido recusado com sucesso.", Toast.LENGTH_LONG).show();
+                                }
                                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                                 startActivity(intent);
                                 finish();
@@ -226,5 +237,37 @@ public class DetalhesPedidoRecebidoActivity extends Activity{
             pDialog.dismiss();
             pDialog = null;
         }
+    }
+    private void Alerta(final String aceito, final String id_viagem, final String id_pedido) {
+        //Cria o gerador do AlertDialog
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        //define o titulo
+        builder.setTitle("Pedido Recebido");
+        //define a mensagem
+        Log.d(TAG,"aceito = " + aceito);
+        if(aceito == "0") {
+            builder.setMessage("Você quer mesmo recusar esse pedido?");
+        }
+        else if(aceito == "1"){
+            builder.setMessage("Tem certeza que quer aceitar esse pedido?");
+        }
+        //define um botão como positivo
+        builder.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface arg0, int arg1) {
+                //Toast.makeText(DetalhesPedidoRecebidoActivity.this, "positivo=" + arg1, Toast.LENGTH_SHORT).show();
+                avaliaNoBanco(aceito,id_viagem,id_pedido);
+            }
+        });
+        //define um botão como negativo.
+        builder.setNegativeButton("Não", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface arg0, int arg1) {
+                //Toast.makeText(DetalhesPedidoRecebidoActivity.this, "negativo=" + arg1, Toast.LENGTH_SHORT).show();
+                pDialog.cancel();
+            }
+        });
+        //cria o AlertDialog
+        alerta = builder.create();
+        //Exibe
+        alerta.show();
     }
 }

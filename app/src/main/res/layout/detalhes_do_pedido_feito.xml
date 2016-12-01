@@ -75,6 +75,26 @@
                 android:id="@+id/avaliadoaceitoPedidoFeito"
                 android:layout_marginTop="5dp"
                 android:textColor="@color/input_login"/>
+            <TextView
+                android:text=""
+                android:layout_marginTop="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textoPergunta"
+                android:textSize="15dp"
+                android:textColor="@color/input_login"/>
+
+            <LinearLayout
+                android:orientation="horizontal" android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <Button
+                    android:text=""
+                    android:layout_marginTop="2dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="37dp"
+                    android:id="@+id/btnCancelar"/>
+
+            </LinearLayout>
 
         </LinearLayout>
     </LinearLayout>

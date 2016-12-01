@@ -57,6 +57,7 @@ public class PedidosFeitosActivity extends Activity{
         db = new SQLiteHandler(getApplicationContext());
 
         final String userEmail = user.get("email");
+        Log.d(TAG, userEmail);
         buscarPedidosFeitos(userEmail);
 
     }
@@ -85,7 +86,7 @@ public class PedidosFeitosActivity extends Activity{
                                 pedido.setLinkPedido(obj.getString("link"));
                                 pedido.setEmailUsuarioPedidoi(userID);
                                 pedido.setIdPedido(obj.getInt("id_pedido"));
-                                pedido.setEmailUsuarioPedidoi(obj.getString("email_usuario"));
+                                //pedido.setEmailUsuarioPedidoi(obj.getString("email_usuario"));
                                 pedido.setEmpacotadoPedido(obj.getInt("empacotado"));
                                 pedido.setCorreioOuPessoalPedido(obj.getInt("entrega"));
                                 pedido.setEnderecoPedido(obj.getString("adress"));

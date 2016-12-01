@@ -1,7 +1,9 @@
 package com.example.echo.bring2me.activity;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -39,6 +41,8 @@ public class DetalhesViagemCadastradaActivity extends Activity{
     private String userIDfromAnterior;
     private String paisAtual;
     private String paisDestino;
+
+    private AlertDialog alerta;
 
     private Button btn_remove;
     private Button btn_NAOremove;
@@ -84,18 +88,33 @@ public class DetalhesViagemCadastradaActivity extends Activity{
                     "Insira sua origem e destino!", Toast.LENGTH_LONG).show();
         }*/
 
-        btn_remove.setOnClickListener(new View.OnClickListener() {
+         btn_remove.setOnClickListener(new View.OnClickListener() {
 
-            public void onClick(View view) {
-                pDialog.setMessage("Loading...");
-                pDialog.show();
-                final Bundle extrasBotao = getIntent().getExtras();
-                if (extrasBotao != null) {
-                    userIDfromAnterior = extrasBotao.getString("user_id");
-                    paisAtual = extrasBotao.getString("paisAtual");
-                    paisDestino = extrasBotao.getString("paisDestino");
+         public void onClick(View view) {
+         pDialog.setMessage("Loading...");
+         pDialog.show();
+         final Bundle extrasBotao = getIntent().getExtras();
+              if (extrasBotao != null) {
+                  userIDfromAnterior = extrasBotao.getString("user_id");
+                  paisAtual = extrasBotao.getString("paisAtual");
+                  paisDestino = extrasBotao.getString("paisDestino");
+              }
+             Alerta(userIDfromAnterior, paisAtual, paisDestino);
+         }
 
-                }
+         });
+
+        btn_NAOremove.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), ViagensCadastradasActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+    }
+
+            private void removeViagem(final String userIDfromAnterior, final String paisAtual, final String paisDestino){
                 StringRequest viagemReq = new StringRequest(Request.Method.POST, URLRequests.URL_REMOVEVIAGEMCadastrada,
                         new Response.Listener<String>() {
 
@@ -108,6 +127,7 @@ public class DetalhesViagemCadastradaActivity extends Activity{
 
                                     boolean error = res.getBoolean("error");
                                     if (!error) {
+                                        Toast.makeText(getApplicationContext(), "Viagem removida com sucesso.", Toast.LENGTH_LONG).show();
                                         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                                         startActivity(intent);
                                         finish();
@@ -146,18 +166,9 @@ public class DetalhesViagemCadastradaActivity extends Activity{
                 };
                 // Adding request to request queue
                 RequestSender.getInstance().addToRequestQueue(viagemReq);
-            }
-        });
+        }
 
-        btn_NAOremove.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), ViagensCadastradasActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        });
-    }
+
 
 
     public void onDestroy() {
@@ -170,6 +181,35 @@ public class DetalhesViagemCadastradaActivity extends Activity{
             pDialog.dismiss();
             pDialog = null;
         }
+    }
+
+    private void Alerta(final String userIDfromAnterior, final String paisAtual, final String paisDestino) {
+        //Cria o gerador do AlertDialog
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        //define o titulo
+        builder.setTitle("Remover viagem");
+        //define a mensagem
+
+            builder.setMessage("Você quer mesmo remover esta viagem?");
+
+        //define um botão como positivo
+        builder.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface arg0, int arg1) {
+                //Toast.makeText(DetalhesPedidoRecebidoActivity.this, "positivo=" + arg1, Toast.LENGTH_SHORT).show();
+                removeViagem(userIDfromAnterior, paisAtual, paisDestino);
+            }
+        });
+        //define um botão como negativo.
+        builder.setNegativeButton("Não", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface arg0, int arg1) {
+                //Toast.makeText(DetalhesPedidoRecebidoActivity.this, "negativo=" + arg1, Toast.LENGTH_SHORT).show();
+                pDialog.cancel();
+            }
+        });
+        //cria o AlertDialog
+        alerta = builder.create();
+        //Exibe
+        alerta.show();
     }
 
 }
