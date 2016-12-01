@@ -106,9 +106,22 @@ public class editarPerfil extends Activity {
                         Toast.makeText(getApplicationContext(),
                                 "Atualização realizada!", Toast.LENGTH_LONG)
                                 .show();
+                        db.deleteUsers();
+
+                        // Now store the user in SQLite
+                        String uid = jObj.getString("uid");
+                        JSONObject user = jObj.getJSONObject("user");
+                        String name = nome;
+                        String email = new_email;
+                        String created_at = user
+                                .getString("created_at");
+
+                        // Inserting row in users table
+                        User user1 = new User(name,email,uid,created_at);
+                        db.addUser(user1);
 
                         Intent intent = new Intent(editarPerfil.this,
-                                MainActivity.class);
+                                LoginActivity.class);
                         startActivity(intent);
                         finish();
                     }

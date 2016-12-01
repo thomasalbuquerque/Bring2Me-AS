@@ -33,7 +33,7 @@
             android:layout_height="0dp"
             android:layout_marginBottom="10dp"
             android:background="@color/input_register_bg"
-            android:inputType="textEmailAddress"
+            android:inputType="textPassword"
             android:hint="Nova senha"
             android:padding="10dp"
             android:singleLine="true"
