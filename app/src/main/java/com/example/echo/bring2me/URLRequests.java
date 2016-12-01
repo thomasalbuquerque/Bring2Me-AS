@@ -20,6 +20,8 @@ public class URLRequests {
 
     public static String URL_REMOVEVIAGEMCadastrada = "http://echob2m.esy.es/bd_api/deletaViagem.php";
 
+    public static String URL_REMOVEPEDIDOCadastrado = "http://echob2m.esy.es/bd_api/deletaPedido.php";
+
     public static String URL_IMAGEM = "http://echob2m.esy.es/verviagem.png";
 
     public static int AvaliacaoPadraoDoViajante = 5;

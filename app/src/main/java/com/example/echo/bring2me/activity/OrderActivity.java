@@ -1,7 +1,9 @@
 package com.example.echo.bring2me.activity;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -47,6 +49,7 @@ public class OrderActivity extends Activity {
     private SessionManager session;
     private SQLiteHandler db;
     private String id_viagem;
+    private AlertDialog alerta;
 
 
     public void onCreate(Bundle savedInstanceState) {
@@ -138,7 +141,7 @@ public class OrderActivity extends Activity {
                         ", "  + uf + ", "  + localidade + ", " + numresid + ", " + complemento;
                 if (!valor.isEmpty() && !product.isEmpty() && !cep.isEmpty() && !bairro.isEmpty() &&
                         !logradouro.isEmpty() && !uf.isEmpty() && !localidade.isEmpty() && !numresid.isEmpty()) {
-                    Order( valor, link , product, email, id_viagem, caixa, endereco, entrega);
+                    Alerta( valor, link , product, email, id_viagem, caixa, endereco, entrega);
                 } else {
                     Toast.makeText(getApplicationContext(),
                             "Não foi possível iniciar uma negociação. Verifique se os campos estão preenchidos!", Toast.LENGTH_LONG)
@@ -246,6 +249,35 @@ public class OrderActivity extends Activity {
         Intent intent = new Intent(OrderActivity.this, LoginActivity.class);
         startActivity(intent);
         finish();
+    }
+
+    private void Alerta(final String valor, final String link, final String product, final String email, final String id_viagem,
+                        final String caixa, final String endereco, final String entrega) {
+        //Cria o gerador do AlertDialog
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        //define o titulo
+        builder.setTitle("Pedido ao viajante");
+        //define a mensagem
+        builder.setMessage("Você tem certeza que deseja realizar este pedido?");
+
+        //define um botão como positivo
+        builder.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface arg0, int arg1) {
+                //Toast.makeText(DetalhesPedidoRecebidoActivity.this, "positivo=" + arg1, Toast.LENGTH_SHORT).show();
+                Order( valor, link , product, email, id_viagem, caixa, endereco, entrega);
+            }
+        });
+        //define um botão como negativo.
+        builder.setNegativeButton("Não", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface arg0, int arg1) {
+                //Toast.makeText(DetalhesPedidoRecebidoActivity.this, "negativo=" + arg1, Toast.LENGTH_SHORT).show();
+                pDialog.cancel();
+            }
+        });
+        //cria o AlertDialog
+        alerta = builder.create();
+        //Exibe
+        alerta.show();
     }
 
 }

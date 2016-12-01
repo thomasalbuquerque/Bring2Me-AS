@@ -1,6 +1,8 @@
 package com.example.echo.bring2me.activity;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.app.Activity;
@@ -42,6 +44,7 @@ public class CadastroViagemActivity extends Activity{
     private EditText retorno;
     private ProgressDialog pDialog;
     private SQLiteHandler db;
+    private AlertDialog alerta;
 
 
     @Override
@@ -84,7 +87,7 @@ public class CadastroViagemActivity extends Activity{
                                 "Data Invalida!", Toast.LENGTH_LONG)
                                 .show();
                     else
-                        registrarViagem(id, paisOrigem, paisDestino, maxValor, minTax, data);
+                        Alerta(id, paisOrigem, paisDestino, maxValor, minTax, data);
                 }
                  else {
                     Toast.makeText(getApplicationContext(),
@@ -183,5 +186,31 @@ public class CadastroViagemActivity extends Activity{
         if (pDialog.isShowing())
             pDialog.dismiss();
     }
+    private void Alerta(final String id, final String paisOrigem, final String paisDestino, final String maxValor,final String minTax , final String data) {
+        //Cria o gerador do AlertDialog
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        //define o titulo
+        builder.setTitle("Cadastro de Viagem");
+        //define a mensagem
+        builder.setMessage("Você tem certeza que deseja cadastrar a viagem?");
 
+        //define um botão como positivo
+        builder.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface arg0, int arg1) {
+                //Toast.makeText(DetalhesPedidoRecebidoActivity.this, "positivo=" + arg1, Toast.LENGTH_SHORT).show();
+                registrarViagem(id, paisOrigem, paisDestino, maxValor, minTax, data);
+            }
+        });
+        //define um botão como negativo.
+        builder.setNegativeButton("Não", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface arg0, int arg1) {
+                //Toast.makeText(DetalhesPedidoRecebidoActivity.this, "negativo=" + arg1, Toast.LENGTH_SHORT).show();
+                pDialog.cancel();
+            }
+        });
+        //cria o AlertDialog
+        alerta = builder.create();
+        //Exibe
+        alerta.show();
+    }
 }
