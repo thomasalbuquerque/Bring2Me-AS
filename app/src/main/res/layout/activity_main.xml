@@ -56,10 +56,21 @@
                         android:textSize="13dp" />
 
                     <Button
-                        android:id="@+id/btnLogout"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="40dip"
+                        android:text="Configurações"
+                        android:id="@+id/btnConfig"
+                        android:textSize="15dp"
+                        android:textAllCaps="false"
+                        android:textColor="@color/white"
+                        android:background="@color/material_deep_teal_500" />
+
+                    <Button
+                        android:id="@+id/btnLogout"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dip"
                         android:background="@color/btn_logut_bg"
                         android:text="@string/btn_logout"
                         android:textAllCaps="false"
@@ -149,7 +160,7 @@
                     <Button
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="40dip"
+                        android:layout_marginTop="20dip"
                         android:text="Pedidos recebidos"
                         android:id="@+id/btnPedidosRecebidos"
                         android:textSize="15dp"
@@ -158,12 +169,14 @@
                     <Button
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="40dip"
+                        android:layout_marginTop="20dip"
                         android:text="Ver Pedidos Feitos"
                         android:id="@+id/btnPedidosFeitos"
                         android:textSize="15dp"
                         android:textColor="@color/white"
                         android:background="@color/material_deep_teal_500"/>
+
+
 
                 </LinearLayout>
             </FrameLayout>

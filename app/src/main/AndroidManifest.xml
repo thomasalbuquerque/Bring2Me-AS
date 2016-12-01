@@ -89,6 +89,7 @@
             android:launchMode="singleTop"
             android:windowSoftInputMode="adjustPan" />
 
+
         <service android:name=".service.FirebaseNotificationService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
@@ -100,6 +101,12 @@
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
+
+        <activity android:name=".activity.mudar_senha" />
+        <activity android:name=".activity.RemoveContaActivity"/>
+        <activity android:name=".activity.ConfiguracoesActivity" />
+        <activity android:name=".activity.editarPerfil" />
+
     </application>
 
 

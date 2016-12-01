@@ -21,6 +21,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.example.echo.bring2me.Config;
 import com.example.echo.bring2me.R;
+
 import com.example.echo.bring2me.URLRequests;
 import com.example.echo.bring2me.data.RequestSender;
 import com.example.echo.bring2me.data.SQLiteHandler;
@@ -31,6 +32,7 @@ import com.google.firebase.messaging.FirebaseMessaging;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
 
 import java.util.HashMap;
 import java.util.Map;
@@ -46,6 +48,7 @@ public class MainActivity extends Activity {
     private Button btnRegViagem;
     private Button btnProcViagem;
     private Button btnPedido;
+    private Button btnConfig;
     private Button btnMinhasViagens;
     private Button btnPedidosRecebidos;
     private Button btnPedidosFeitos;
@@ -152,6 +155,7 @@ public class MainActivity extends Activity {
     private void instanciarIniciar(){
         btnRegViagem = (Button)findViewById(R.id.btnRegViagem);
         btnProcViagem = (Button)findViewById(R.id.btnProcViagem);
+        btnConfig = (Button) findViewById(R.id.btnConfig);
 
         btnRegViagem.setOnClickListener(new View.OnClickListener() {
 
@@ -169,6 +173,17 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, BuscaViagensActivity.class);
+                startActivity(intent);
+                //finish();
+            }
+        });
+
+        btnConfig.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                //Construct the Intent you want to end up at
+                Intent intent = new Intent(MainActivity.this, ConfiguracoesActivity.class);
                 startActivity(intent);
                 //finish();
             }

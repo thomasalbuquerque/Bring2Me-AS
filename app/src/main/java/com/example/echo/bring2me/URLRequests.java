@@ -13,6 +13,12 @@ public class URLRequests {
     // Server user register trip url
     public static String URL_VIAGENS = "http://echob2m.esy.es/bd_api/CadastraViagem.php";
 
+    public static String URL_REMOVECONTA = "http://echob2m.esy.es/bd_api/deletaUsuario.php";
+
+    public static String URL_EDITAPERFIL = "http://echob2m.esy.es/bd_api/atualizaCadastro.php";
+
+    public static String URL_MUDARSENHA = "http://echob2m.esy.es/bd_api/alteraSenha.php";
+
     // Server user search trip url
     public static String URL_BUSCAVIAGENS = "http://echob2m.esy.es/bd_api/buscaviagens.php";
 
