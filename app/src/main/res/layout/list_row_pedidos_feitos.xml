@@ -19,15 +19,6 @@
         android:layout_marginRight="2dp"/>
 
     <!-- Valor -->
-    <TextView
-        android:id="@+id/valorPedidoFeito"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="1dip"
-        android:layout_above="@+id/btn_detalhesPedidoFeito"
-        android:textSize="@dimen/title"
-        android:textColor="@color/colorMostraDestino"
-        android:textStyle="normal" />
 
     <!-- Empacotado -->
     <TextView
@@ -55,19 +46,34 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/btn_detalhesPedidoFeito"
         android:textColor="@color/btn_logut_bg"
-        android:textSize="2dp" />
+        android:textSize="2dp"
+        android:layout_toRightOf="@+id/empacotadoPedidoFeito"
+        android:layout_toEndOf="@+id/empacotadoPedidoFeito" />
+
+    <TextView
+        android:id="@+id/valorPedidoFeito"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/title"
+        android:textColor="@color/colorMostraDestino"
+        android:textStyle="normal"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
     <Button
         android:id="@+id/btn_detalhesPedidoFeito"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dip"
-        android:text="Ver detalhes do pedido feito"
+        android:text="Detalhes"
         android:textSize="11dp"
 
         android:textColor="@color/white"
-        android:background="@color/material_deep_teal_500"/>
-
+        android:background="@color/material_deep_teal_500"
+        style="@style/Widget.AppCompat.Button"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
 
 </RelativeLayout>

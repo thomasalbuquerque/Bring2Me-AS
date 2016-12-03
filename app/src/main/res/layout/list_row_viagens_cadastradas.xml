@@ -44,6 +44,7 @@
         android:layout_toRightOf="@+id/mostradestinoDasCadastradas"
         android:textColor="@color/btn_logut_bg"
         android:textSize="2dp" />
+
     <Button
         android:id="@+id/botaoViagemCadastrada"
         android:layout_width="wrap_content"

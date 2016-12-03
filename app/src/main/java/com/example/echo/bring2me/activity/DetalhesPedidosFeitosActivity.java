@@ -79,6 +79,7 @@ public class DetalhesPedidosFeitosActivity extends Activity{
             nomeProdutoPedido.setText("Produto: " + extras.getString("nomeProdutoPedido"));
             valorProdutoPedido.setText("Valor: " + extras.getString("valorProdutoPedido"));
             id_pedido = Integer.toString(extras.getInt("id_pedido"));
+            id_viagem = extras.getString("id_viagem");
             if(extras.getString("linkProdutoPedido") == null){
                 linkProdutoPedido.setText("Link do produto: ");
             }

@@ -27,6 +27,7 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * Created by thomas on 06/11/16.
@@ -117,16 +118,16 @@ public class DetalhesPedidoRecebidoActivity extends Activity{
         btn_Recusar = (Button) findViewById(R.id.btnRecusaPedido);
         btn_Comprei = (Button) findViewById(R.id.btn_compraProduto);
         btn_Enviei = (Button) findViewById(R.id.btn_envioProduto);
-
-        if(avaliado == "0"){ //não avaliado, não pago
-
+        Log.d(TAG, "VALOR AVALIADO:" + avaliado);
+        if(Objects.equals(avaliado, "0")){ //não avaliado, não pago
+            Log.d(TAG, "ENTROU");
             btn_Aceitar.setVisibility(View.VISIBLE);
             btn_Recusar.setVisibility(View.VISIBLE);
         }
-        else if(pago == "1"){ //avaliado, e pago
+        else if(Objects.equals(pago, "1")){ //avaliado, e pago
             btn_Comprei.setVisibility(View.VISIBLE);
         }
-        if(pago == "2"){ //avaliado, pago e comprado
+        if(Objects.equals(pago, "2")){ //avaliado, pago e comprado
             btn_Enviei.setVisibility(View.VISIBLE);
         }
         /*// Check for empty data in the form
@@ -236,6 +237,7 @@ public class DetalhesPedidoRecebidoActivity extends Activity{
     }  //fim do método onCreate()
 
     public void avaliaNoBanco(final String avaliacao, final String pago, final String id_viagem, final String id_pedido){
+        Log.e(TAG, "Recebido:" + avaliacao + ", " + pago + ", " + id_viagem + ", " + id_pedido);
         StringRequest pedidoReq = new StringRequest(Request.Method.POST, URLRequests.URL_AVALIAPedido,
                 new Response.Listener<String>() {
 

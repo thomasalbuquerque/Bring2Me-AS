@@ -36,7 +36,7 @@ public class URLRequests {
 
     public static String URL_PEDIDOSFeitos = "http://echob2m.esy.es/bd_api/buscaPedidoFeito.php";
 
-    public static String URL_AVALIAPedido = "http://echob2m.esy.es/bd_api/avaliado.php";
+    public static String URL_AVALIAPedido = "http://echob2m.esy.es/bd_api/pagamento.php";
 
     public static String URL_PAGARPedido = "http://echob2m.esy.es/bd_api/registroPagamento.php";
 

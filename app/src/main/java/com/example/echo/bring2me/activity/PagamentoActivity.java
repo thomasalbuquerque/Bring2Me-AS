@@ -100,7 +100,7 @@ public class PagamentoActivity extends Activity{
     }
 
 
-    private void pagarPedido(final String id_pedido, final String nomeCartao, final String numeroCartao, final String cvv,final String mesAnoExpira) {
+    private void pagarPedido(final String id_pedido, final String nomeCartao, final String Cartao, final String cvv,final String Expira) {
         // Tag used to cancel the request
         String tag_string_req = "req_pagamento";
 
@@ -162,9 +162,9 @@ public class PagamentoActivity extends Activity{
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("id_pedido", id_pedido);
                 params.put("nomeCartao", nomeCartao);
-                params.put("numeroCartao", numeroCartao);
+                params.put("numeroCartao", Cartao);
                 params.put("cvv", cvv);
-                params.put("mesAnoExpira", mesAnoExpira);
+                params.put("mesAnoExpira", Expira);
                 return params;
             }
 
@@ -189,7 +189,7 @@ public class PagamentoActivity extends Activity{
         //define o titulo
         builder.setTitle("Cadastro de Viagem");
         //define a mensagem
-        builder.setMessage("Você tem certeza que deseja cadastrar a viagem?");
+        builder.setMessage("Você tem certeza que deseja realizar o pagamento?");
 
         //define um botão como positivo
         builder.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
