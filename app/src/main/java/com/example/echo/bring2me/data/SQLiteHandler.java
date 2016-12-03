@@ -34,6 +34,7 @@ public class SQLiteHandler extends SQLiteOpenHelper {
     private static final String TABLE_USER = "user";
     private static final String TABLE_VIAGEM = "trip";
     private static final String TABLE_PEDIDO = "order";
+    private static final String TABLE_PAGAMENTO = "pagamento";
 
     // Login Table Columns names
     private static final String KEY_ID = "id";
@@ -62,6 +63,11 @@ public class SQLiteHandler extends SQLiteOpenHelper {
     private static final String KEY_ENTREGA = "entrega";
     private static final String KEY_AVALIADO = "avaliado";
     private static final String KEY_ACEITO = "aceito";
+
+    private static final String KEY_NOME_CARTAO = "nomeCartao";
+    private static final String KEY_NUMERO_CARTAO = "numeroCartao";
+    private static final String KEY_CVV = "cvv";
+    private static final String KEY_MES_ANO_EXPIRA = "mesAnoExpira";
 
     public SQLiteHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -191,6 +197,23 @@ public class SQLiteHandler extends SQLiteOpenHelper {
         db.close(); // Closing database connection
 
         Log.d(TAG, "Nova viagem inserida ");
+    }
+
+    public void addPagamento(String  id_pedido, String nomeCartao, String numeroCartao, String cvv, String mesAnoExpira) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(KEY_ID_PEDIDO, id_pedido);
+        values.put(KEY_NOME_CARTAO, nomeCartao);
+        values.put(KEY_NUMERO_CARTAO, numeroCartao);
+        values.put(KEY_CVV, cvv);
+        values.put(KEY_MES_ANO_EXPIRA, mesAnoExpira);
+
+        // Inserting Row
+        db.insert(TABLE_PAGAMENTO, null, values);
+        db.close(); // Closing database connection
+
+        Log.d(TAG, "Novo pagamento realizado ");
     }
 
     //TODO

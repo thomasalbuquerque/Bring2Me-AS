@@ -40,14 +40,16 @@ public class DetalhesPedidoRecebidoActivity extends Activity{
     private String id_viagem;
     private String id_pedido;
     private String email;
-
+    private String  pago;
+    private String  avaliado;
     private AlertDialog alerta;
 
-    private int avaliado;
     private String aceito;
 
     private Button btn_Aceitar;
     private Button btn_Recusar;
+    private Button btn_Comprei;
+    private Button btn_Enviei;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,6 +83,9 @@ public class DetalhesPedidoRecebidoActivity extends Activity{
             linkProdutoPedido.setText("Link do produto: " + extras.getString("linkProdutoPedido"));
             emailClienteProdutoPedido.setText("Email do Cliente: " + extras.getString("emailClienteProdutoPedido"));
 
+            pago = extras.getInt("pago") + "";
+            avaliado = extras.getInt("avaliado") + "";
+
             // produto Empacotado
             if(extras.getInt("empacotadoProdutoPedido") == 1){
                 empacotadoProdutoPedido.setText("Empacotado: " + "Sim");
@@ -110,7 +115,20 @@ public class DetalhesPedidoRecebidoActivity extends Activity{
 
         btn_Aceitar = (Button) findViewById(R.id.btnAceitaPedido);
         btn_Recusar = (Button) findViewById(R.id.btnRecusaPedido);
+        btn_Comprei = (Button) findViewById(R.id.btn_compraProduto);
+        btn_Enviei = (Button) findViewById(R.id.btn_envioProduto);
 
+        if(avaliado == "0"){ //não avaliado, não pago
+
+            btn_Aceitar.setVisibility(View.VISIBLE);
+            btn_Recusar.setVisibility(View.VISIBLE);
+        }
+        else if(pago == "1"){ //avaliado, e pago
+            btn_Comprei.setVisibility(View.VISIBLE);
+        }
+        if(pago == "2"){ //avaliado, pago e comprado
+            btn_Enviei.setVisibility(View.VISIBLE);
+        }
         /*// Check for empty data in the form
         if (!userIDfromAnterior.isEmpty() && !paisAtual.isEmpty() && !paisDestino.isEmpty()) {
             // busca viagem
@@ -121,11 +139,14 @@ public class DetalhesPedidoRecebidoActivity extends Activity{
                     "Insira sua origem e destino!", Toast.LENGTH_LONG).show();
         }*/
 
+
+
         btn_Aceitar.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View view) {
 
                 aceito="1";
+                pago="0";
 
                 pDialog.setMessage("Loading...");
                 pDialog.show();
@@ -137,7 +158,7 @@ public class DetalhesPedidoRecebidoActivity extends Activity{
                     Log.d(TAG,"id_pedido: " + id_pedido);
                     email = extrasBotao.getString("email_usuario");
                 }
-                Alerta(aceito,id_viagem,id_pedido);
+                Alerta(aceito,pago,id_viagem,id_pedido);
                 //avaliaNoBanco(aceito,id_viagem,id_pedido);
 
             }
@@ -147,6 +168,7 @@ public class DetalhesPedidoRecebidoActivity extends Activity{
             public void onClick(View view) {
 
                 aceito="0";
+                pago="0";
 
                 pDialog.setMessage("Loading...");
                 pDialog.show();
@@ -159,7 +181,53 @@ public class DetalhesPedidoRecebidoActivity extends Activity{
                     email = extrasBotao.getString("email_usuario");
                 }
 
-                Alerta(aceito,id_viagem,id_pedido);
+                Alerta(aceito,pago,id_viagem,id_pedido);
+                //avaliaNoBanco(aceito,id_viagem,id_pedido);
+
+            }
+        });
+
+        btn_Comprei.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+
+                pago = "2";
+                aceito="1";  //se ja estava pago, entao ele esta aceito (utilizar mesmo codigo)
+
+                pDialog.setMessage("Loading...");
+                pDialog.show();
+                final Bundle extrasBotao = getIntent().getExtras();
+                if (extrasBotao != null) {
+                    id_viagem = extrasBotao.getString("id_viagem");
+                    Log.d(TAG,"id_viagem: " + id_viagem);
+                    id_pedido = ""+extrasBotao.getInt("id_pedido");
+                    Log.d(TAG,"id_pedido: " + id_pedido);
+                    email = extrasBotao.getString("email_usuario");
+                }
+
+                Alerta(aceito,pago,id_viagem,id_pedido);
+                //avaliaNoBanco(aceito,id_viagem,id_pedido);
+
+            }
+        });
+
+        btn_Enviei.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+
+                pago = "3";
+                aceito="1";  //se ja estava pago, entao ele esta aceito (utilizar mesmo codigo)
+
+                pDialog.setMessage("Loading...");
+                pDialog.show();
+                final Bundle extrasBotao = getIntent().getExtras();
+                if (extrasBotao != null) {
+                    id_viagem = extrasBotao.getString("id_viagem");
+                    Log.d(TAG,"id_viagem: " + id_viagem);
+                    id_pedido = ""+extrasBotao.getInt("id_pedido");
+                    Log.d(TAG,"id_pedido: " + id_pedido);
+                    email = extrasBotao.getString("email_usuario");
+                }
+
+                Alerta(aceito,pago,id_viagem,id_pedido);
                 //avaliaNoBanco(aceito,id_viagem,id_pedido);
 
             }
@@ -167,7 +235,7 @@ public class DetalhesPedidoRecebidoActivity extends Activity{
 
     }  //fim do método onCreate()
 
-    private void avaliaNoBanco(final String avaliacao, final String id_viagem, final String id_pedido){
+    private void avaliaNoBanco(final String avaliacao, final String pago, final String id_viagem, final String id_pedido){
         StringRequest pedidoReq = new StringRequest(Request.Method.POST, URLRequests.URL_AVALIAPedido,
                 new Response.Listener<String>() {
 
@@ -218,6 +286,7 @@ public class DetalhesPedidoRecebidoActivity extends Activity{
                 params.put("id_viagem", id_viagem);          //PARAMETROS SERÃO ID VIAGEM E IDE PEDIDO
                 params.put("id_pedido", id_pedido);
                 params.put("aceito", avaliacao);
+                params.put("pago", pago);
                 params.put("email", email);
                 Log.d(TAG,"aceito parameters: " + ""+avaliacao);
                 return params;
@@ -238,7 +307,7 @@ public class DetalhesPedidoRecebidoActivity extends Activity{
             pDialog = null;
         }
     }
-    private void Alerta(final String aceito, final String id_viagem, final String id_pedido) {
+    private void Alerta(final String aceito, final String pago, final String id_viagem, final String id_pedido) {
         //Cria o gerador do AlertDialog
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         //define o titulo
@@ -255,7 +324,7 @@ public class DetalhesPedidoRecebidoActivity extends Activity{
         builder.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface arg0, int arg1) {
                 //Toast.makeText(DetalhesPedidoRecebidoActivity.this, "positivo=" + arg1, Toast.LENGTH_SHORT).show();
-                avaliaNoBanco(aceito,id_viagem,id_pedido);
+                avaliaNoBanco(aceito,pago,id_viagem,id_pedido);
             }
         });
         //define um botão como negativo.

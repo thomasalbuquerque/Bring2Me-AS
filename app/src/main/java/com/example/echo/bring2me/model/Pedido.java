@@ -13,6 +13,7 @@ public class Pedido {
     private int empacotadoPedido;
     private int Avaliado;
     private int Aceito;
+    private int Pago;
     private int correioOuPessoalPedido;
     private String emailUsuarioPedidoi;
     private String enderecoPedido;
@@ -110,6 +111,15 @@ public class Pedido {
     public int getAceito() {return Aceito;}
 
     public void setAceito(int aceito) {Aceito = aceito;}
+
+    public int getPago() {
+        return Pago;
+    }
+
+    public void setPago(int pago) {
+        Pago = pago;
+    }
+
 
 
 }

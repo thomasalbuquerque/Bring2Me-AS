@@ -8,11 +8,9 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 
-import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -22,7 +20,6 @@ import com.android.volley.toolbox.StringRequest;
 import com.example.echo.bring2me.SessionManager;
 import com.example.echo.bring2me.URLRequests;
 import com.example.echo.bring2me.util.DateMask;
-import com.example.echo.bring2me.util.PopulateArray;
 import com.example.echo.bring2me.R;
 import com.example.echo.bring2me.data.RequestSender;
 import com.example.echo.bring2me.data.SQLiteHandler;
@@ -34,9 +31,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class DadosPagamentoActivity extends Activity{
-    private static final String TAG = DadosPagamentoActivity.class.getSimpleName();
-    private ArrayList<String> paises = new ArrayList<String>();
+public class PagamentoActivity extends Activity{
+    private static final String TAG = PagamentoActivity.class.getSimpleName();
 
     private ProgressDialog pDialog;
     private SQLiteHandler db;
@@ -53,7 +49,7 @@ public class DadosPagamentoActivity extends Activity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_cadastro_viagens);
+        setContentView(R.layout.activity_dados_pagamento);
         db = new SQLiteHandler(getApplicationContext());
         HashMap<String, String> user = db.getUserDetails();
         final String user_id = user.get("uid");
@@ -61,11 +57,12 @@ public class DadosPagamentoActivity extends Activity{
         pDialog = new ProgressDialog(this);
         pDialog.setCancelable(false);
 
-        btnPagar = (Button) findViewById(R.id.btnRegistrarViagem);
-        nomeCartao = (EditText) findViewById(R.id.txtNomeCartao) ;
-        numeroCartao = (EditText) findViewById(R.id.txtNumeroCartao) ;
-        cvv = (EditText) findViewById(R.id.txtCvv) ;
-        mesAnoExpira = (EditText) findViewById(R.id.txtMesAnoExpira) ;
+        btnPagar = (Button) findViewById(R.id.btn_pagar);
+        nomeCartao = (EditText) findViewById(R.id.nomeCartao) ;
+        numeroCartao = (EditText) findViewById(R.id.numeroCartao) ;
+        numeroCartao.addTextChangedListener(DateMask.insert("####-####-####-####", numeroCartao));
+        cvv = (EditText) findViewById(R.id.cvv) ;
+        mesAnoExpira = (EditText) findViewById(R.id.mesAnoExpira) ;
         mesAnoExpira.addTextChangedListener(DateMask.insert("##-##", mesAnoExpira));
 
         db = new SQLiteHandler(getApplicationContext());
@@ -139,7 +136,7 @@ public class DadosPagamentoActivity extends Activity{
 
                         // Launch activity_login activity
                         Intent intent = new Intent(
-                                DadosPagamentoActivity.this,
+                                PagamentoActivity.this,
                                 MainActivity.class);
                         startActivity(intent);
                         finish();

@@ -77,31 +77,44 @@
                 android:layout_marginTop="5dp"
                 android:textColor="@color/input_login"/>
 
-            <TextView
-                android:text="Aceitar ou recusar o pedido?"
-                android:layout_marginTop="15dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/textView10"
-                android:textSize="15dp"
-                android:textColor="@color/input_login"/>
-
             <LinearLayout
-                android:orientation="horizontal" android:layout_width="match_parent"
+                android:orientation="vertical" android:layout_width="match_parent"
                 android:layout_height="match_parent">
-                <Button
-                    android:text="Aceitar"
-                    android:layout_marginTop="2dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="37dp"
-                    android:id="@+id/btnAceitaPedido"/>
+                <LinearLayout
+                    android:orientation="horizontal" android:layout_width="match_parent"
+                    android:layout_height="50dp">
 
+                    <Button
+                        android:text="Aceitar pedido"
+                        android:layout_marginTop="2dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="37dp"
+                        android:id="@+id/btnAceitaPedido"
+                        android:visibility="invisible"/>
+
+                    <Button
+                        android:text="Recusar pedido"
+                        android:layout_marginTop="2dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="37dp"
+                        android:id="@+id/btnRecusaPedido"
+                        android:visibility="invisible"/>
+
+                </LinearLayout>
                 <Button
-                    android:text="Recusar"
+                    android:text="Comprei o produto"
                     android:layout_marginTop="2dp"
                     android:layout_width="wrap_content"
                     android:layout_height="37dp"
-                    android:id="@+id/btnRecusaPedido"/>
+                    android:id="@+id/btn_compraProduto"
+                    android:visibility="invisible"/>
+                <Button
+                    android:text="Enviei o produto"
+                    android:layout_marginTop="2dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="37dp"
+                    android:id="@+id/btn_envioProduto"
+                    android:visibility="invisible"/>
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

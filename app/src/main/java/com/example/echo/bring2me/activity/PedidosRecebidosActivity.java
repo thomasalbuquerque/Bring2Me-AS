@@ -94,6 +94,8 @@ public class PedidosRecebidosActivity extends Activity{
                                 pedido.setCorreioOuPessoalPedido(obj.getInt("entrega"));
                                 pedido.setEnderecoPedido(obj.getString("Adress"));
                                 pedido.setIdViagem(obj.getString("id_viagem"));
+                                pedido.setPago(obj.getInt("pago"));
+                                pedido.setAvaliado(obj.getInt("avaliado"));
                                 /*if(pedido.getIdViagem() != userID){
                                     Log.d(TAG, "userID Viagem meu é diferente do userID viagem da tabela Pedidos do banco");
                                     Log.d(TAG, "userID Viagem meu: " + userID + ", userID da tabela: " + pedido.getIdViagem());

@@ -37,6 +37,7 @@ public class DetalhesPedidosFeitosActivity extends Activity{
     private String id_viagem;
     private String id_pedido;
     private Button btn_Cancelar;
+    private Button btn_irAoPagamento;
 
     private AlertDialog alerta;
 
@@ -48,7 +49,6 @@ public class DetalhesPedidosFeitosActivity extends Activity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.detalhes_do_pedido_feito);
-
         TextView nomeProdutoPedido = (TextView) findViewById(R.id.detalhesNomePedidoFeito);
         TextView valorProdutoPedido = (TextView) findViewById(R.id.detalhesValorPedidoFeito);
         TextView linkProdutoPedido = (TextView) findViewById(R.id.detalhesLinkPedidoFeito);
@@ -71,6 +71,7 @@ public class DetalhesPedidosFeitosActivity extends Activity{
         i.putExtra("AdressProdutoPedido",p.getEnderecoPedido());
 */
         btn_Cancelar = (Button) findViewById(R.id.btnCancelar);
+        btn_irAoPagamento = (Button) findViewById(R.id.btn_irAoPagamento);
 
         if(extras != null){
             nomeProdutoPedido.setText("Produto: " + extras.getString("nomeProdutoPedido"));
@@ -93,6 +94,7 @@ public class DetalhesPedidosFeitosActivity extends Activity{
                 AvaliadoAceitoPedido.setText("Seu pedido foi avaliado e ACEITO pelo viajante");
                 textoPergunta.setText("Este pedido foi aceito. Deseja cancelá-lo?");
                 btn_Cancelar.setText("Cancelar");
+                btn_irAoPagamento.setVisibility(View.VISIBLE);
             }
             else {
                 if(extras.getInt("avaliado") == 1 && extras.getInt("aceito") == 0){
@@ -155,6 +157,18 @@ public class DetalhesPedidosFeitosActivity extends Activity{
                 pDialog.show();
                 Alerta(id_pedido, email);
 
+            }
+        });
+        btn_irAoPagamento.setOnClickListener(new View.OnClickListener() {
+
+            public void onClick(View view) {
+
+                pDialog.setMessage("Loading...");
+                pDialog.show();
+                        Intent i = new Intent(DetalhesPedidosFeitosActivity.this, PagamentoActivity.class);
+                        i.putExtra("id_pedido", id_pedido);
+                        DetalhesPedidosFeitosActivity.this.startActivity(i);
+                        DetalhesPedidosFeitosActivity.this.finish();
             }
         });
 

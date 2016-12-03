@@ -38,5 +38,7 @@ public class URLRequests {
 
     public static String URL_AVALIAPedido = "http://echob2m.esy.es/bd_api/avaliado.php";
 
+    public static String URL_PAGARPedido = "http://echob2m.esy.es/bd_api/registroPagamento.php";
+
     public static String URL_ATUALIZA_FIREBASE_ID = "http://echob2m.esy.es/bd_api/atualizaFirebaseId.php";
 }
