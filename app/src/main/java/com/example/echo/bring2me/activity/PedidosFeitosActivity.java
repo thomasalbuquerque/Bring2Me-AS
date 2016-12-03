@@ -93,6 +93,7 @@ public class PedidosFeitosActivity extends Activity{
                                 pedido.setIdViagem(obj.getString("id_viagem"));
                                 pedido.setAvaliado(obj.getInt("avaliado"));
                                 pedido.setAceito(obj.getInt("aceito"));
+                                pedido.setPago(obj.getInt("pago"));
                                 if(pedido.getIdViagem() != userID){
                                     Log.d(TAG, "userID Viagem meu é diferente do userID viagem da tabela Pedidos do banco");
                                 }

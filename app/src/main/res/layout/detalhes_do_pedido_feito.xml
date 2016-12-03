@@ -85,15 +85,19 @@
                 android:textColor="@color/input_login"/>
 
             <LinearLayout
-                android:orientation="horizontal" android:layout_width="match_parent"
+                android:orientation="vertical" android:layout_width="match_parent"
                 android:layout_height="match_parent">
-                <Button
-                    android:text=""
-                    android:layout_marginTop="2dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="37dp"
-                    android:id="@+id/btnCancelar"/>
+                <LinearLayout
+                    android:orientation="horizontal" android:layout_width="match_parent"
+                    android:layout_height="50dp">
+                    <Button
+                        android:text=""
+                        android:layout_marginTop="2dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="37dp"
+                        android:id="@+id/btnCancelar"/>
 
+                </LinearLayout>
                 <Button
                     android:text="Pagar"
                     android:layout_marginTop="2dp"
@@ -101,9 +105,14 @@
                     android:layout_height="37dp"
                     android:id="@+id/btn_irAoPagamento"
                     android:visibility="invisible"/>
-
+                <Button
+                    android:text="Recebi o produto"
+                    android:layout_marginTop="2dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="37dp"
+                    android:id="@+id/btn_recebimento"
+                    android:visibility="invisible"/>
             </LinearLayout>
-
         </LinearLayout>
     </LinearLayout>
 </ScrollView>

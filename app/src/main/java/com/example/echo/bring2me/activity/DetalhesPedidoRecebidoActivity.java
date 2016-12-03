@@ -235,7 +235,7 @@ public class DetalhesPedidoRecebidoActivity extends Activity{
 
     }  //fim do método onCreate()
 
-    private void avaliaNoBanco(final String avaliacao, final String pago, final String id_viagem, final String id_pedido){
+    public void avaliaNoBanco(final String avaliacao, final String pago, final String id_viagem, final String id_pedido){
         StringRequest pedidoReq = new StringRequest(Request.Method.POST, URLRequests.URL_AVALIAPedido,
                 new Response.Listener<String>() {
 

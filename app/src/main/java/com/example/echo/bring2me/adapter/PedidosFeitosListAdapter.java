@@ -79,6 +79,7 @@ public class PedidosFeitosListAdapter extends BaseAdapter{
                 i.putExtra("AdressProdutoPedido",p.getEnderecoPedido());
                 i.putExtra("avaliado",p.getAvaliado());
                 i.putExtra("aceito",p.getAceito());
+                i.putExtra("pago",p.getPago());
 
                 activity.startActivity(i);
                 activity.finish();

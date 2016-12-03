@@ -38,6 +38,7 @@ public class DetalhesPedidosFeitosActivity extends Activity{
     private String id_pedido;
     private Button btn_Cancelar;
     private Button btn_irAoPagamento;
+    private Button btn_avisarRecebimento;
 
     private AlertDialog alerta;
 
@@ -72,6 +73,7 @@ public class DetalhesPedidosFeitosActivity extends Activity{
 */
         btn_Cancelar = (Button) findViewById(R.id.btnCancelar);
         btn_irAoPagamento = (Button) findViewById(R.id.btn_irAoPagamento);
+        btn_avisarRecebimento = (Button) findViewById(R.id.btn_recebimento);
 
         if(extras != null){
             nomeProdutoPedido.setText("Produto: " + extras.getString("nomeProdutoPedido"));
@@ -89,25 +91,31 @@ public class DetalhesPedidosFeitosActivity extends Activity{
             else {
                 empacotadoProdutoPedido.setText("Empacotado: " + "Não");
             }
-
-            if(extras.getInt("avaliado") == 1 && extras.getInt("aceito") == 1){
-                AvaliadoAceitoPedido.setText("Seu pedido foi avaliado e ACEITO pelo viajante");
-                textoPergunta.setText("Este pedido foi aceito. Deseja cancelá-lo?");
-                btn_Cancelar.setText("Cancelar");
-                btn_irAoPagamento.setVisibility(View.VISIBLE);
-            }
-            else {
-                if(extras.getInt("avaliado") == 1 && extras.getInt("aceito") == 0){
-                    AvaliadoAceitoPedido.setText("Seu pedido foi avaliado, mas NÃO ACEITO pelo viajante");
-                    textoPergunta.setText("Este pedido foi recusado. Deseja apagá-lo?");
-                    btn_Cancelar.setText("Apagar");
+            if(extras.getInt("pago") == 0) //(nao foi pago)
+            {
+                if(extras.getInt("avaliado") == 1 && extras.getInt("aceito") == 1){
+                    AvaliadoAceitoPedido.setText("Seu pedido foi avaliado e ACEITO pelo viajante");
+                    textoPergunta.setText("Este pedido foi aceito. Deseja cancelá-lo?");
+                    btn_Cancelar.setText("Cancelar");
+                    btn_irAoPagamento.setVisibility(View.VISIBLE);
                 }
                 else {
-                    AvaliadoAceitoPedido.setText("Seu Pedido Ainda Não Foi Avaliado");
-                    textoPergunta.setText("Deseja cancelar este pedido?");
-                    btn_Cancelar.setText("Cancelar");
+                    if(extras.getInt("avaliado") == 1 && extras.getInt("aceito") == 0){
+                        AvaliadoAceitoPedido.setText("Seu pedido foi avaliado, mas NÃO ACEITO pelo viajante");
+                        textoPergunta.setText("Este pedido foi recusado. Deseja apagá-lo?");
+                        btn_Cancelar.setText("Apagar");
+                    }
+                    else {
+                        AvaliadoAceitoPedido.setText("Seu Pedido Ainda Não Foi Avaliado");
+                        textoPergunta.setText("Deseja cancelar este pedido?");
+                        btn_Cancelar.setText("Cancelar");
+                    }
                 }
             }
+            else if(extras.getInt("pago") == 3){
+                btn_avisarRecebimento.setVisibility(View.VISIBLE);
+            }
+
 
             if(extras.getInt("empacotadoProdutoPedido") == 1){
                 empacotadoProdutoPedido.setText("Empacotado: " + "Sim");
@@ -169,6 +177,20 @@ public class DetalhesPedidosFeitosActivity extends Activity{
                         i.putExtra("id_pedido", id_pedido);
                         DetalhesPedidosFeitosActivity.this.startActivity(i);
                         DetalhesPedidosFeitosActivity.this.finish();
+            }
+        });
+        btn_avisarRecebimento.setOnClickListener(new View.OnClickListener() {
+
+            public void onClick(View view) {
+
+                pDialog.setMessage("Loading...");
+                pDialog.show();
+                Intent i = new Intent(DetalhesPedidosFeitosActivity.this, MainActivity.class);
+                DetalhesPedidoRecebidoActivity aproveitandoFuncao = new DetalhesPedidoRecebidoActivity();   //a funcao avalia no banco so altera o valor de "pago" e avaliado
+                aproveitandoFuncao.avaliaNoBanco("1","4",id_viagem,id_pedido);                              //nesse caso avaliado nao precisa ser alterado, por isso continua 1
+                                                                                                            //pago vai de 3 para 4, significando o recebimento
+                DetalhesPedidosFeitosActivity.this.startActivity(i);
+                DetalhesPedidosFeitosActivity.this.finish();
             }
         });
 
