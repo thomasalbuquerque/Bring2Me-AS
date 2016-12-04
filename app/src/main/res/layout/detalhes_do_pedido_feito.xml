@@ -91,7 +91,7 @@
                     android:orientation="horizontal" android:layout_width="match_parent"
                     android:layout_height="50dp">
                     <Button
-                        android:text=""
+                        android:text="Cancelar"
                         android:layout_marginTop="2dp"
                         android:layout_width="wrap_content"
                         android:layout_height="37dp"

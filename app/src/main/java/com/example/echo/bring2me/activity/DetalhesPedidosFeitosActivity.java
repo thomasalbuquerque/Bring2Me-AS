@@ -94,6 +94,7 @@ public class DetalhesPedidosFeitosActivity extends Activity{
             }
             if(extras.getInt("pago") == 0) //(nao foi pago)
             {
+                btn_Cancelar.setVisibility(View.VISIBLE);
                 if(extras.getInt("avaliado") == 1 && extras.getInt("aceito") == 1){
                     AvaliadoAceitoPedido.setText("Seu pedido foi avaliado e ACEITO pelo viajante");
                     textoPergunta.setText("Este pedido foi aceito. Deseja cancelá-lo?");
@@ -115,6 +116,7 @@ public class DetalhesPedidosFeitosActivity extends Activity{
             }
             else if(extras.getInt("pago") == 3){
                 btn_avisarRecebimento.setVisibility(View.VISIBLE);
+                btn_Cancelar.setVisibility(View.INVISIBLE);
             }
 
 

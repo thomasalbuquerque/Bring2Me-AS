@@ -82,7 +82,7 @@ public class PedidosFeitosListAdapter extends BaseAdapter{
                 i.putExtra("pago",p.getPago());
 
                 activity.startActivity(i);
-                activity.finish();
+                //activity.finish();
             }
         });
 

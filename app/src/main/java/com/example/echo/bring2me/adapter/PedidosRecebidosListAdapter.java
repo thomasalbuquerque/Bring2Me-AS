@@ -95,7 +95,7 @@ public class PedidosRecebidosListAdapter extends BaseAdapter{
                 i.putExtra("AdressProdutoPedido",p.getEnderecoPedido());
 
                 activity.startActivity(i);
-                activity.finish();
+                //activity.finish();
             }
         });
 
