@@ -64,6 +64,7 @@ public class DetalhesPedidoRecebidoActivity extends Activity{
         TextView empacotadoProdutoPedido = (TextView) findViewById(R.id.detalhesEmpacotadoPedido);
         TextView entregaProdutoPedido = (TextView) findViewById(R.id.detalhesCorreioOuPessoalPedido);
         TextView AdressProdutoPedido = (TextView) findViewById(R.id.detalhesEnderecoPedido);
+        TextView txtStatus = (TextView) findViewById(R.id.txtStatus);
 
         final Bundle extras = getIntent().getExtras();
 /*
@@ -130,6 +131,10 @@ public class DetalhesPedidoRecebidoActivity extends Activity{
         if(Objects.equals(pago, "2")){ //avaliado, pago e comprado
             btn_Enviei.setVisibility(View.VISIBLE);
         }
+        else if(Objects.equals(pago, "4")){
+            txtStatus.setText("O cliente recebeu o pedido e o dinheiro foi direcionado à sua conta.");
+        }
+
         /*// Check for empty data in the form
         if (!userIDfromAnterior.isEmpty() && !paisAtual.isEmpty() && !paisDestino.isEmpty()) {
             // busca viagem

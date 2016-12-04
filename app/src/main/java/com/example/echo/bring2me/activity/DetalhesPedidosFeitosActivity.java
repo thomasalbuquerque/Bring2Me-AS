@@ -39,6 +39,7 @@ public class DetalhesPedidosFeitosActivity extends Activity{
     private Button btn_Cancelar;
     private Button btn_irAoPagamento;
     private Button btn_avisarRecebimento;
+    private String email;
 
     private AlertDialog alerta;
 
@@ -80,6 +81,7 @@ public class DetalhesPedidosFeitosActivity extends Activity{
             valorProdutoPedido.setText("Valor: " + extras.getString("valorProdutoPedido"));
             id_pedido = Integer.toString(extras.getInt("id_pedido"));
             id_viagem = extras.getString("id_viagem");
+            email = extras.getString("emailClienteProdutoPedido");
             if(extras.getString("linkProdutoPedido") == null){
                 linkProdutoPedido.setText("Link do produto: ");
             }
@@ -92,12 +94,13 @@ public class DetalhesPedidosFeitosActivity extends Activity{
             else {
                 empacotadoProdutoPedido.setText("Empacotado: " + "Não");
             }
+
             if(extras.getInt("pago") == 0) //(nao foi pago)
             {
                 btn_Cancelar.setVisibility(View.VISIBLE);
                 if(extras.getInt("avaliado") == 1 && extras.getInt("aceito") == 1){
                     AvaliadoAceitoPedido.setText("Seu pedido foi avaliado e ACEITO pelo viajante");
-                    textoPergunta.setText("Este pedido foi aceito. Deseja cancelá-lo?");
+                    textoPergunta.setText("Este pedido foi aceito. O que deseja fazer?");
                     btn_Cancelar.setText("Cancelar");
                     btn_irAoPagamento.setVisibility(View.VISIBLE);
                 }
@@ -117,6 +120,10 @@ public class DetalhesPedidosFeitosActivity extends Activity{
             else if(extras.getInt("pago") == 3){
                 btn_avisarRecebimento.setVisibility(View.VISIBLE);
                 btn_Cancelar.setVisibility(View.INVISIBLE);
+            }
+            else if(extras.getInt("pago") == 4){
+                btn_Cancelar.setVisibility(View.INVISIBLE);
+                AvaliadoAceitoPedido.setText("Pedido finalizado.");
             }
 
 
@@ -188,9 +195,8 @@ public class DetalhesPedidosFeitosActivity extends Activity{
 
                 pDialog.setMessage("Loading...");
                 pDialog.show();
-                Intent i = new Intent(DetalhesPedidosFeitosActivity.this, MainActivity.class);
-                DetalhesPedidoRecebidoActivity aproveitandoFuncao = new DetalhesPedidoRecebidoActivity();   //a funcao avalia no banco so altera o valor de "pago" e avaliado
-                aproveitandoFuncao.avaliaNoBanco("1","4",id_viagem,id_pedido);                              //nesse caso avaliado nao precisa ser alterado, por isso continua 1
+                Intent i = new Intent(DetalhesPedidosFeitosActivity.this, MainActivity.class);   //a funcao avalia no banco so altera o valor de "pago" e avaliado
+                avaliaNoBanco("1","4",id_viagem,id_pedido);                        //nesse caso avaliado nao precisa ser alterado, por isso continua 1
                                                                                                             //pago vai de 3 para 4, significando o recebimento
                 DetalhesPedidosFeitosActivity.this.startActivity(i);
                 DetalhesPedidosFeitosActivity.this.finish();
@@ -291,5 +297,68 @@ public class DetalhesPedidosFeitosActivity extends Activity{
         alerta = builder.create();
         //Exibe
         alerta.show();
+    }
+
+    public void avaliaNoBanco(final String avaliacao, final String pago, final String id_viagem, final String id_pedido){
+        Log.e(TAG, "Recebido:" + avaliacao + ", " + pago + ", " + id_viagem + ", " + id_pedido);
+        StringRequest pedidoReq = new StringRequest(Request.Method.POST, URLRequests.URL_AVALIAPedido,
+                new Response.Listener<String>() {
+
+                    @Override
+                    public void onResponse(String response) {
+                        Log.d(TAG, response);
+                        hidePDialog();
+                        try {
+                            JSONObject res = new JSONObject(response);
+
+                            boolean error = res.getBoolean("error");
+                            if (!error) {
+                                if(avaliacao == "1") {
+                                    Toast.makeText(getApplicationContext(), "Pedido aceito com sucesso.", Toast.LENGTH_LONG).show();
+                                }
+                                else if(avaliacao == "0"){
+                                    Toast.makeText(getApplicationContext(), "Pedido recusado com sucesso.", Toast.LENGTH_LONG).show();
+                                }
+                                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                                startActivity(intent);
+                                finish();
+                            }
+                            else    // Error in deleting. Get the error message
+                            {
+                                String errorMsg = res.getString("error_msg");
+                                Toast.makeText(getApplicationContext(),
+                                        errorMsg, Toast.LENGTH_LONG).show();
+                            }
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.d(TAG, "Error: " + error.getMessage());
+                hidePDialog();
+
+            }
+        }) {
+
+            @Override
+            protected Map<String, String> getParams() {
+                // Posting parameters to activity_login url
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("id_viagem", id_viagem);          //PARAMETROS SERÃO ID VIAGEM E IDE PEDIDO
+                params.put("id_pedido", id_pedido);
+                params.put("aceito", avaliacao);
+                params.put("pago", pago);
+                params.put("email", email);
+                Log.d(TAG,"aceito parameters: " + ""+avaliacao);
+                return params;
+            }
+
+        };
+        // Adding request to request queue
+        RequestSender.getInstance().addToRequestQueue(pedidoReq);
     }
 }
