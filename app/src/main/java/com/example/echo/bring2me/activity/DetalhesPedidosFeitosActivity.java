@@ -155,7 +155,7 @@ public class DetalhesPedidosFeitosActivity extends Activity{
 
         HashMap<String, String> user = db.getUserDetails();
 
-        final String email = user.get("email");
+        final String emailid = user.get("email");
 
         /*// Check for empty data in the form
         if (!userIDfromAnterior.isEmpty() && !paisAtual.isEmpty() && !paisDestino.isEmpty()) {
@@ -173,7 +173,7 @@ public class DetalhesPedidosFeitosActivity extends Activity{
 
                 pDialog.setMessage("Loading...");
                 pDialog.show();
-                Alerta(id_pedido, email);
+                Alerta(id_pedido, emailid);
 
             }
         });
@@ -205,7 +205,7 @@ public class DetalhesPedidosFeitosActivity extends Activity{
 
     }  //fim do método onCreate()
 
-    private void removePedido(final String id_pedido, final String email){
+    private void removePedido(final String id_pedido, final String emailid){
         StringRequest pedidoReq = new StringRequest(Request.Method.POST, URLRequests.URL_REMOVEPEDIDOCadastrado,
                 new Response.Listener<String>() {
 
@@ -249,7 +249,7 @@ public class DetalhesPedidosFeitosActivity extends Activity{
                 // Posting parameters to activity_login url
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("id_pedido", id_pedido);
-                params.put("email", email);
+                params.put("email", emailid);
                 return params;
             }
 
@@ -270,7 +270,7 @@ public class DetalhesPedidosFeitosActivity extends Activity{
         }
     }
 
-    private void Alerta(final String id_pedido, final String email) {
+    private void Alerta(final String id_pedido, final String emailid) {
         //Cria o gerador do AlertDialog
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         //define o titulo
@@ -283,7 +283,7 @@ public class DetalhesPedidosFeitosActivity extends Activity{
         builder.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface arg0, int arg1) {
                 //Toast.makeText(DetalhesPedidoRecebidoActivity.this, "positivo=" + arg1, Toast.LENGTH_SHORT).show();
-                removePedido(id_pedido, email);
+                removePedido(id_pedido, emailid);
             }
         });
         //define um botão como negativo.
