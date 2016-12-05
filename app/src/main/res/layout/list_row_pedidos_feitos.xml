@@ -61,12 +61,17 @@
         android:id="@+id/btn_detalhesPedidoFeito"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dip"
         android:text="Ver detalhes do pedido feito"
         android:textSize="11dp"
 
         android:textColor="@color/white"
-        android:background="@color/material_deep_teal_500"/>
+        android:background="@color/material_deep_teal_500"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/nomePedidoFeito"
+        android:layout_toEndOf="@+id/nomePedidoFeito"
+        android:layout_marginTop="300dp"
+        android:layout_marginLeft="100dp"
+        android:layout_centerHorizontal="true" />
 
 
 

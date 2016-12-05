@@ -23,8 +23,7 @@
         android:id="@+id/mostradestinoDasCadastradas"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="1dip"
-        android:layout_toRightOf="@+id/mostraorigemDasCadastradas"
+        android:layout_marginTop="50dip"
         android:textSize="@dimen/title"
         android:textColor="@color/colorMostraDestino"
         android:textStyle="normal" />
@@ -48,12 +47,14 @@
         android:id="@+id/botaoViagemCadastrada"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dip"
+        android:layout_marginTop="300dp"
         android:text="Ver detalhes da viagem"
         android:textSize="11dp"
 
         android:textColor="@color/white"
-        android:background="@color/material_deep_teal_500"/>
+        android:background="@color/material_deep_teal_500"
+        android:layout_marginLeft="110dp"
+        android:layout_centerHorizontal="true" />
 
 
 
