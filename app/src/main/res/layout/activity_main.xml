@@ -116,7 +116,7 @@
                         android:textColor="@color/white"
                         android:background="@color/material_deep_teal_500"/>
 
-                    <Button
+                   <!-- <Button
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="20dip"
@@ -124,7 +124,7 @@
                         android:id="@+id/btnPedido"
                         android:textSize="15dp"
                         android:textColor="@color/white"
-                        android:background="@color/material_deep_teal_500" />
+                        android:background="@color/material_deep_teal_500" />-->
 
                 </LinearLayout>
 
@@ -166,7 +166,7 @@
                         android:textSize="15dp"
                         android:textColor="@color/white"
                         android:background="@color/material_deep_teal_500"/>
-                    <Button
+                   <Button
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="20dip"
